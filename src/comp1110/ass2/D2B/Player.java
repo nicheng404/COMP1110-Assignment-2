@@ -45,14 +45,31 @@ public class Player extends CommonArea {
 
     int getScores(int startScore, char[] floor) {
         //check whether player gets scores for each time when player places tiles into Mosaic. //Output new score based on the rules and floor.
-
-        void cleanBoard(char[] givenStorage, char[] givenFloor, char[] givenMosaic){
+    }
+        void cleanBoard(char[] givenStorage, char[] givenFloor, char[] givenMosaic)
+        {
             // clean the floor and storage after getting scores. Based on the rules, floor, storage and
             // mosaic. Operate on Char[] givenStorage and Char[] givenFloor. Output Char[] storage
             // and Char[] floor.
         }
 
+    /**
+     * For each player in the players, Count the bonus points and add them to the total points
+     * @return : Set the value for each player.score by adding the bonus;
+     */
 
-
+    public void BonusPoint()
+    {
+        //Add the bonus
     }
+
+    /**
+     * Set the state for each player
+     * @return set the value for each player.es;
+     */
+    public void setState()
+    {
+        //set the state
+    }
+
 }
