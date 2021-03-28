@@ -4,6 +4,7 @@ public class CommonArea {
 
     // the area including the Factories, Center, Bag, Discard
     // use the char to present the tiles.
+    public static final char[] colors ={'b','g','o', 'p','r','f'}; // colors for tiles
 
     static char[] factories;
     // array of arrays (2D array)randomly with outer indexes // based on players. Shared by all players.
@@ -26,7 +27,7 @@ public class CommonArea {
     }
 
 
-    boolean numberOfTilesAs100{
+    //boolean numberOfTilesAs100() {
         // check the totally number of the tiles<=101 && check the number of every tile is<=20
         // one special tile, firstplayer!!!!!!
     }
