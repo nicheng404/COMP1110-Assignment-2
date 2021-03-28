@@ -4,6 +4,7 @@ public class CommonArea {
 
     // the area including the Factories, Center, Bag, Discard
     // use the char to present the tiles.
+    public static final char[] colors ={'b','g','o', 'p','r','f'}; // colors for tiles
 
     static char[] factories;
     // array of arrays (2D array)randomly with outer indexes // based on players. Shared by all players.
@@ -17,7 +18,10 @@ public class CommonArea {
     static char[] bag= new char[100];
     // 1D array with 100 random tiles.
 
-
+    static void setBag()
+    {
+    //Set the elements of the bag to be random
+    }
 
 
     static void setFactories(int numberOfPlayers) {
