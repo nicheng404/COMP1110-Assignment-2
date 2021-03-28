@@ -13,6 +13,7 @@ public class Player extends CommonArea {
     //White space as **** to set a square.
     char[] mosaic; // 2D arrays for placing the tiles from ‘Char[] temporaryPlaceForTiles’ and
     //Char[] storage
+
     int score; // the score for each player.
 
     static void selectTilesFromCentre() {
@@ -39,8 +40,9 @@ public class Player extends CommonArea {
 
     int getScores(int startScore, char[] floor) {
         //check whether player gets scores for each time when player places tiles into Mosaic. //Output new score based on the rules and floor.
-
-        void cleanBoard(char[] givenStorage, char[] givenFloor, char[] givenMosaic){
+         return  1 ; // TO DO
+    }
+        void cleanBoard ( char[] givenStorage, char[] givenFloor, char[] givenMosaic){
             // clean the floor and storage after getting scores. Based on the rules, floor, storage and
             // mosaic. Operate on Char[] givenStorage and Char[] givenFloor. Output Char[] storage
             // and Char[] floor.
@@ -53,4 +55,4 @@ public class Player extends CommonArea {
         }
 
     }
-}
+
