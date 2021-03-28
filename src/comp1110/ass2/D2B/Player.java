@@ -44,7 +44,8 @@ public class Player extends CommonArea {
         // invoke (method) getScores(int startScore);
     }
 
-    int getScores(int startScore, char[] floor) {
+    int getScores(int startScore, char[] floor)
+    {
         //check whether player gets scores for each time when player places tiles into Mosaic. //Output new score based on the rules and floor.
          return  1 ; // TO DO
     }
@@ -72,6 +73,43 @@ public class Player extends CommonArea {
     {
         //set the state
     }
+    /**
+     * check for the rows that are full in storage.
+     */
+    public static boolean checkForTheRow() {
+        return false;
+    }
+    /**
+     * move the rightmost tile that is full row in the storage to Mosaic.
+     */
+    public static void moveTileToMosaic (){}
+
+    /**
+     * check if there are any tiles beside the tiles being moved to Mosaic.
+     */
+    public static boolean getNeighbouringTiles () {
+        return false;
+    }
+    /**
+     * count and return the number of tiles in the same column as the tile being moved.
+     */
+    public static boolean NumOfTileVertical () {
+        return false;
+    }
+    /**
+     * count and return the number of tiles in the same row as the tile being moved.
+     */
+    public static boolean NumOfTileHorizontal () {
+        return false;
+    }
+    /**
+     * count and return the number of tiles in floor.
+     */
+    public static void NumOfTileInFloor () {}
+    /**
+     * calculate and return the total score for the player.
+     */
+    public static void TotalScore() {}
 
 
 }
