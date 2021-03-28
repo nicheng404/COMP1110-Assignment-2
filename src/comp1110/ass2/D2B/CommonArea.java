@@ -18,7 +18,10 @@ public class CommonArea {
     static char[] bag= new char[100];
     // 1D array with 100 random tiles.
 
-
+    static void setBag()
+    {
+    //Set the elements of the bag to be random
+    }
 
 
     static void setFactories(int numberOfPlayers) {

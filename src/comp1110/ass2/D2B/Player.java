@@ -2,6 +2,12 @@ package comp1110.ass2.D2B;
 
 public class Player extends CommonArea {
 
+    enum EndState
+    {
+        Win,
+        Lose,
+        Draw;
+    }
     public EndState es;
 
     char[] temporaryPlaceForTiles; // tiles after selecting
@@ -46,11 +52,7 @@ public class Player extends CommonArea {
             // and Char[] floor.
         }
 
-        enum EndState {
-            Win,
-            Lose,
-            Draw;
-        }
+
 
     }
 }
