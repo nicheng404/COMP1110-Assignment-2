@@ -1,6 +1,6 @@
 package comp1110.ass2.D2B;
 
-public class Centre implements CommonAreaFunctions {
+public class Centre implements DraftingFunctions {
     public Tiles[] tiles;
 
     public Centre(Tiles[] tiles) {

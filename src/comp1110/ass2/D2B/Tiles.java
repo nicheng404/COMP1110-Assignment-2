@@ -1,4 +1,6 @@
 package comp1110.ass2.D2B;
+
+//Define a class Tiles that can be used by all the classes
 public enum Tiles {
     B("Blue","a"),
     G("Green","b"),
