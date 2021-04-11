@@ -7,7 +7,11 @@ public enum Tiles {
     R("Red","e"),
     FP("First Player","f")
         ;
-    Tiles(String Longname,String ShortName) {
+    public String longName;
+    public String encode;
+    Tiles(String longName,String encode) {
+        this.longName=longName;
+        this.encode=encode;
 
     }
 }
