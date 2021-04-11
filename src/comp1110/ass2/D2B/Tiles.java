@@ -1,13 +1,13 @@
 package comp1110.ass2.D2B;
-// Haven't decided whether to use this enum type or just use the char[]
 public enum Tiles {
-    // colors
-    BLUE,
-    GREEN,
-    ORANGE,
-    PURPLE,
-    RED,
-    FIRSTP,
-    EMPTY;
+    B("Blue","a"),
+    G("Green","b"),
+    O("Orange","c"),
+    P("Purple","d"),
+    R("Red","e"),
+    FP("First Player","f")
+        ;
+    Tiles(String Longname,String ShortName) {
 
+    }
 }
