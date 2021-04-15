@@ -5,6 +5,8 @@ public class PlayerBoard {
     public Tiles[][] mosaic;
     public Tiles[][] mosaicVariant;
     public Tiles[] floor;
+    public Player tPlayer;
+    public
     /**
      * Set the Variants for the individual player boards;
      */

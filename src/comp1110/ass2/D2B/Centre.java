@@ -1,6 +1,8 @@
 package comp1110.ass2.D2B;
 
-public class Centre implements DraftingFunctions {
+import java.util.function.Predicate;
+
+public  class Centre implements DraftingFunctions {
     public Tiles[] tiles;
 
     public Centre(Tiles[] tiles) {
@@ -14,6 +16,10 @@ public class Centre implements DraftingFunctions {
 
     @Override
     public Tiles[] getSameColour() {
-        return
+        for(Tiles t:tiles)
+        {
+
+        }
+
     }
 }
