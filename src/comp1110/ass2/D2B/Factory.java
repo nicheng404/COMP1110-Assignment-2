@@ -8,6 +8,7 @@ public class Factory implements DraftingFunctions {
 
     /**
      * Return all the tiles present in this factory
+     *
      * @return Tiles[]
      */
     public Tiles[] getTiles() {
@@ -16,6 +17,7 @@ public class Factory implements DraftingFunctions {
 
     /**
      * Return the player who makes the drafting move next
+     *
      * @return Player
      */
 

@@ -3,41 +3,131 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="290.0" y="0.0">comp1110.ass2.D2B.Tiles</node>
-    <node x="409.0" y="623.0">comp1110.ass2.D2B.Bag</node>
-    <node x="83.5" y="508.0">comp1110.ass2.D2B.DraftingFunctions</node>
-    <node x="625.0" y="508.0">comp1110.ass2.D2B.Turn</node>
-    <node x="415.5" y="508.0">comp1110.ass2.D2B.SharedBoard</node>
-    <node x="0.0" y="665.5">comp1110.ass2.D2B.Factory</node>
-    <node x="192.0" y="651.0">comp1110.ass2.D2B.Centre</node>
-    <node x="0.0" y="0.0">comp1110.ass2.D2B.Player</node>
-    <node x="14.0" y="257.0">comp1110.ass2.D2B.PlayerBoard</node>
+    <node x="161.8142839687195" y="0.0">comp1110.ass2.D2B.Tiles</node>
+    <node x="-282.4926698618552" y="221.09500986749362">comp1110.ass2.D2B.Bag</node>
+    <node x="303.425" y="505.5">comp1110.ass2.D2B.DraftingFunctions</node>
+    <node x="544.8738636363637" y="888.0">comp1110.ass2.D2B.Turn</node>
+    <node x="339.87386363636364" y="888.5">comp1110.ass2.D2B.SharedBoard</node>
+    <node x="428.77010019550346" y="701.5">comp1110.ass2.D2B.Factory</node>
+    <node x="202.5" y="687.0">comp1110.ass2.D2B.Centre</node>
+    <node x="430.8142839687195" y="70.0">comp1110.ass2.D2B.Player</node>
+    <node x="328.6516495601173" y="1089.0">comp1110.ass2.D2B.PlayerBoard</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="comp1110.ass2.D2B.PlayerBoard" target="comp1110.ass2.D2B.Player">
-      <point x="0.0" y="-103.0" />
-      <point x="0.0" y="103.5" />
+    <edge source="comp1110.ass2.D2B.Turn" target="comp1110.ass2.D2B.Factory">
+      <point x="-83.0" y="-75.5" />
+      <point x="586.3738636363637" y="863.0" />
+      <point x="567.0201001955035" y="863.0" />
+      <point x="59.25" y="61.0" />
     </edge>
-    <edge source="comp1110.ass2.D2B.Centre" target="comp1110.ass2.D2B.DraftingFunctions">
-      <point x="0.0" y="-75.0" />
-      <point x="278.0" y="626.0" />
-      <point x="231.25" y="626.0" />
-      <point x="49.25" y="46.5" />
+    <edge source="comp1110.ass2.D2B.SharedBoard" target="comp1110.ass2.D2B.Factory">
+      <point x="-23.125" y="-75.0" />
+      <point x="409.24886363636364" y="863.0" />
+      <point x="448.52010019550346" y="863.0" />
+      <point x="-59.25" y="61.0" />
+    </edge>
+    <edge source="comp1110.ass2.D2B.PlayerBoard" target="comp1110.ass2.D2B.Tiles">
+      <point x="-27.125" y="-88.5" />
+      <point x="410.0266495601173" y="1059.0" />
+      <point x="192.0" y="1059.0" />
+      <point x="192.0" y="407.0" />
+      <point x="245.26882942326498" y="407.0" />
+      <point x="-18.545454545454533" y="173.5" />
     </edge>
     <edge source="comp1110.ass2.D2B.Factory" target="comp1110.ass2.D2B.DraftingFunctions">
-      <point x="0.0" y="-60.5" />
-      <point x="86.0" y="626.0" />
-      <point x="132.75" y="626.0" />
+      <point x="-65.83333333333331" y="-61.0" />
+      <point x="441.9367668621701" y="667.0" />
+      <point x="451.175" y="667.0" />
+      <point x="49.25" y="46.5" />
+    </edge>
+    <edge source="comp1110.ass2.D2B.DraftingFunctions" target="comp1110.ass2.D2B.Tiles">
+      <point x="-49.25000000000006" y="-46.5" />
+      <point x="352.67499999999995" y="427.0" />
+      <point x="300.90519305962863" y="427.0" />
+      <point x="37.09090909090912" y="173.5" />
+    </edge>
+    <edge source="comp1110.ass2.D2B.DraftingFunctions" target="comp1110.ass2.D2B.Player">
+      <point x="49.24999999999994" y="-46.5" />
+      <point x="451.17499999999995" y="457.0" />
+      <point x="507.3767839687195" y="457.0" />
+      <point x="-45.9375" y="103.5" />
+    </edge>
+    <edge source="comp1110.ass2.D2B.Centre" target="comp1110.ass2.D2B.Tiles">
+      <point x="-32.80000000000001" y="-75.5" />
+      <point x="251.7" y="667.0" />
+      <point x="245.12386363636364" y="667.0" />
+      <point x="245.12386363636364" y="427.0" />
+      <point x="282.35973851417407" y="427.0" />
+      <point x="18.54545454545456" y="173.5" />
+    </edge>
+    <edge source="comp1110.ass2.D2B.Centre" target="comp1110.ass2.D2B.Player">
+      <point x="0.0" y="-75.5" />
+      <point x="284.5" y="667.0" />
+      <point x="281.925" y="667.0" />
+      <point x="281.925" y="437.0" />
+      <point x="446.1267839687195" y="437.0" />
+      <point x="-107.1875" y="103.5" />
+    </edge>
+    <edge source="comp1110.ass2.D2B.PlayerBoard" target="comp1110.ass2.D2B.Turn">
+      <point x="27.125" y="-88.5" />
+      <point x="464.2766495601173" y="1059.0" />
+      <point x="669.3738636363637" y="1059.0" />
+      <point x="0.0" y="75.5" />
+    </edge>
+    <edge source="comp1110.ass2.D2B.PlayerBoard" target="comp1110.ass2.D2B.Player">
+      <point x="81.375" y="-88.5" />
+      <point x="518.5266495601172" y="1069.0" />
+      <point x="804.3738636363637" y="1069.0" />
+      <point x="804.3738636363637" y="437.0" />
+      <point x="660.5017839687196" y="437.0" />
+      <point x="107.1875" y="103.5" />
+    </edge>
+    <edge source="comp1110.ass2.D2B.SharedBoard" target="comp1110.ass2.D2B.Centre">
+      <point x="-69.375" y="-75.0" />
+      <point x="362.99886363636364" y="863.0" />
+      <point x="284.5" y="863.0" />
+      <point x="0.0" y="75.5" />
+    </edge>
+    <edge source="comp1110.ass2.D2B.Centre" target="comp1110.ass2.D2B.DraftingFunctions">
+      <point x="65.60000000000002" y="-75.5" />
+      <point x="350.1" y="667.0" />
+      <point x="352.675" y="667.0" />
       <point x="-49.25" y="46.5" />
     </edge>
-    <edge source="comp1110.ass2.D2B.Bag" target="comp1110.ass2.D2B.SharedBoard">
-      <point x="0.0" y="-75.0" />
-      <point x="0.0" y="32.5" />
+    <edge source="comp1110.ass2.D2B.Factory" target="comp1110.ass2.D2B.Player">
+      <point x="65.83333333333337" y="-61.0" />
+      <point x="573.6034335288368" y="667.0" />
+      <point x="570.1129032258065" y="667.0" />
+      <point x="570.1129032258065" y="457.0" />
+      <point x="568.6267839687196" y="457.0" />
+      <point x="15.3125" y="103.5" />
+    </edge>
+    <edge source="comp1110.ass2.D2B.Bag" target="comp1110.ass2.D2B.Tiles">
+      <point x="-57.0" y="-75.0" />
+      <point x="39.0" y="377.0" />
+      <point x="189.63246578690132" y="377.0" />
+      <point x="-74.18181818181819" y="173.5" />
+    </edge>
+    <edge source="comp1110.ass2.D2B.Factory" target="comp1110.ass2.D2B.Tiles">
+      <point x="-39.5" y="-61.0" />
+      <point x="468.27010019550346" y="647.0" />
+      <point x="510.925" y="647.0" />
+      <point x="510.925" y="417.0" />
+      <point x="319.4506476050832" y="417.0" />
+      <point x="55.63636363636368" y="173.5" />
+    </edge>
+    <edge source="comp1110.ass2.D2B.Turn" target="comp1110.ass2.D2B.Player">
+      <point x="83.0" y="-75.5" />
+      <point x="753.2166666666667" y="447.0" />
+      <point x="629.8767839687196" y="447.0" />
+      <point x="76.5625" y="103.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.6088939566704675" x="-41.851123595505555" y="418.5" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="0.8088939566704675" x="305.50000000000006" y="382.08034959120386" />
+  <SelectedNodes>
+    <node>comp1110.ass2.D2B.Bag</node>
+  </SelectedNodes>
   <Categories>
     <Category>Methods</Category>
     <Category>Fields</Category>

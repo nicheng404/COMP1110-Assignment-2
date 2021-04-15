@@ -4,17 +4,17 @@ public class Turn {
     public Factory f;
     public Player p;
 
-    Turn(Player P) {
+    Turn(Player p) {
         this.p = p;
     }
 
     /**
-     * does the player pick from factory
+     * Returns true if the player picks from factory , returns false if picks from Centre
      *
      * @return true if the player picks from factory, false if he picks from centre
      */
     public boolean pickFromFactory() {
-        return false;
+
     }
 
 }
