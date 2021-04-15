@@ -1,18 +1,11 @@
 package comp1110.ass2.D2B;
 
-public class PlayerBoard {
+public class PlayerBoard extends Player{
     public Tiles[][] storage;
     public Tiles[][] mosaic;
     public Tiles[][] mosaicVariant;
     public Tiles[] floor;
-    public Player tPlayer;
-    public
-    /**
-     * Set the Variants for the individual player boards;
-     */
-    void setMosaicConf() {
-        Tiles[][] conf = new Tiles[5][5];
+    public Turn t;
 
-        this.mosaicVariant = conf;
-    }
+
 }

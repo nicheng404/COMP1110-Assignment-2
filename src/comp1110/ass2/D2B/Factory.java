@@ -1,21 +1,25 @@
 package comp1110.ass2.D2B;
 
-public  class Factory implements DraftingFunctions {
-    public Tiles[] tiles;
-    public Factory(Tiles[] tiles) {
-        this.tiles = tiles;
-    }
+import java.util.function.Predicate;
 
+public class Factory implements DraftingFunctions {
+    public Tiles[] tiles = new Tiles[4];
+    public Player tPlayer;
+
+    /**
+     * Return all the tiles present in this factory
+     * @return Tiles[]
+     */
     public Tiles[] getTiles() {
         return tiles;
     }
 
     /**
-     *
-     * @return
+     * Return the player who makes the drafting move next
+     * @return Player
      */
-    public Tiles[] getSameColour()
-    {
-        return tiles;
+
+    public Player getNextTurn() {
+        return tPlayer.nextPlayer;
     }
 }

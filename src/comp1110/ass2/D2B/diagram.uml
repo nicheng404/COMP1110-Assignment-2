@@ -3,35 +3,40 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="20.5" y="201.0">comp1110.ass2.D2B.Tiles</node>
-    <node x="262.0" y="593.0">comp1110.ass2.D2B.Bag</node>
-    <node x="371.25" y="0.0">comp1110.ass2.D2B.DraftingFunctions</node>
-    <node x="478.0" y="593.0">comp1110.ass2.D2B.SharedBoard</node>
-    <node x="290.0" y="186.0">comp1110.ass2.D2B.Factory</node>
-    <node x="479.0" y="172.0">comp1110.ass2.D2B.Centre</node>
+    <node x="290.0" y="0.0">comp1110.ass2.D2B.Tiles</node>
+    <node x="409.0" y="623.0">comp1110.ass2.D2B.Bag</node>
+    <node x="83.5" y="508.0">comp1110.ass2.D2B.DraftingFunctions</node>
+    <node x="625.0" y="508.0">comp1110.ass2.D2B.Turn</node>
+    <node x="415.5" y="508.0">comp1110.ass2.D2B.SharedBoard</node>
+    <node x="0.0" y="665.5">comp1110.ass2.D2B.Factory</node>
+    <node x="192.0" y="651.0">comp1110.ass2.D2B.Centre</node>
     <node x="0.0" y="0.0">comp1110.ass2.D2B.Player</node>
-    <node x="0.0" y="593.0">comp1110.ass2.D2B.PlayerBoard</node>
+    <node x="14.0" y="257.0">comp1110.ass2.D2B.PlayerBoard</node>
   </nodes>
   <notes />
   <edges>
+    <edge source="comp1110.ass2.D2B.PlayerBoard" target="comp1110.ass2.D2B.Player">
+      <point x="0.0" y="-103.0" />
+      <point x="0.0" y="103.5" />
+    </edge>
     <edge source="comp1110.ass2.D2B.Centre" target="comp1110.ass2.D2B.DraftingFunctions">
-      <point x="0.0" y="-61.0" />
-      <point x="565.0" y="147.0" />
-      <point x="519.0" y="147.0" />
-      <point x="49.25" y="61.0" />
+      <point x="0.0" y="-75.0" />
+      <point x="278.0" y="626.0" />
+      <point x="231.25" y="626.0" />
+      <point x="49.25" y="46.5" />
     </edge>
     <edge source="comp1110.ass2.D2B.Factory" target="comp1110.ass2.D2B.DraftingFunctions">
-      <point x="0.0" y="-47.0" />
-      <point x="374.5" y="147.0" />
-      <point x="420.5" y="147.0" />
-      <point x="-49.25" y="61.0" />
+      <point x="0.0" y="-60.5" />
+      <point x="86.0" y="626.0" />
+      <point x="132.75" y="626.0" />
+      <point x="-49.25" y="46.5" />
     </edge>
-    <edge source="comp1110.ass2.D2B.Tiles" target="comp1110.ass2.D2B.Player">
-      <point x="0.0" y="-173.5" />
-      <point x="0.0" y="75.5" />
+    <edge source="comp1110.ass2.D2B.Bag" target="comp1110.ass2.D2B.SharedBoard">
+      <point x="0.0" y="-75.0" />
+      <point x="0.0" y="32.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.6971279373368147" x="385.5" y="363.0" />
+  <settings layout="Hierarchic Group" zoom="0.6088939566704675" x="-41.851123595505555" y="418.5" />
   <SelectedNodes />
   <Categories>
     <Category>Methods</Category>

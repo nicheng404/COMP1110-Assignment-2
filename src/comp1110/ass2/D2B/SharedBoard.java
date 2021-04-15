@@ -6,6 +6,9 @@ package comp1110.ass2.D2B;
  *This will help encode the Task2 isSharedStateWellFormed because
  *
  */
-public class SharedBoard {
+public abstract class SharedBoard  {
+    public Factory f;
+    public Centre c;
+
 
 }
