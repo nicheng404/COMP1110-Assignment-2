@@ -22,8 +22,8 @@ public class ValidStates {
                 retArray.add(in.substring(i, i + 5));
             }
         } else if (isValidNextPlayer(in) && !in.startsWith("F")) {
-            for (int i = 2; !in.substring(i, i + 6).contains("C"); i += 5) {
-                retArray.add(in.substring(i, i + 6));
+            for (int i = 2; !in.substring(i, i + 5).contains("C"); i += 5) {
+                retArray.add(in.substring(i, i + 5));
             }
         }
         return retArray;
@@ -50,18 +50,17 @@ public class ValidStates {
                 s++;
         return s==0;
     }
+//    public static int getCenterIdentifier(String in)
+//    {
+//        int nFac=splitToFactories(in).size();
+//        boolean isFirstTurn = in.startsWith("");
+//    }
 
 
     public static void main(String[] args) {
-        String inP1 = "ThisShouldNotWork";
-        String inP2 = "DisShouldWork";
-        String inP3 = "F0cddf1bbbe2abde3cdee4bcceCfB1915161614D0000000000";
-        String inP4 = "AF0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000";
-        System.out.println(isValidNextPlayer(inP1));
-        System.out.println(isValidNextPlayer(inP2));
-        System.out.println(isValidNextPlayer(inP3));
-        System.out.println(validFactories(inP3));
 
+        String inP4 = "AF0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000";
+        System.out.println(validFactories(inP4));
 
     }
 }
