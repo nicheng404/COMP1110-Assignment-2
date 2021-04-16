@@ -80,7 +80,7 @@ public class ValidStates {
     }
 
     /**
-     * Get all the elemets of the center tiles as strings
+     * Get all the elements of the center tiles as strings
      * @param in
      * @return valid tiles are encoded as is <p> invalid tiles are encoded as Z</p>
      */
@@ -95,15 +95,22 @@ public class ValidStates {
         }
         return retString;
     }
+
+    /**
+     * Returns the position of the character 'B'
+     * @param in
+     * @return position of B
+     */
     public static int getBagIdentifier(String in){
-         = getCenterIdentifier(in) + getCenterTiles(in).length();
+       return getCenterIdentifier(in) + getCenterTiles(in).length() + 1;
     }
 
     public static void main(String[] args) {
 
-        String inP4 = "AF1bbbe2abde3cdee4bcceCgfB1915161614D0000000000";
-        System.out.println(validFactories(inP4));
-        System.out.println(getCenterIdentifier(inP4));
-        System.out.println(getCenterTiles(inP4));
+        String inP4 = "AF2abde3cdee4bcceCefB1915161614D0000000000";
+//        System.out.println(validFactories(inP4));
+//        System.out.println(getCenterIdentifier(inP4));
+//        System.out.println(getCenterTiles(inP4));
+        System.out.println(inP4.charAt(getBagIdentifier(inP4)));
     }
 }
