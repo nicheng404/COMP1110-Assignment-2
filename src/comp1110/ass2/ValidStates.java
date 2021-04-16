@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 public class ValidStates {
     /**
      * Checks if the Turn element in the shared state is valid
+     *
      * @param in
      * @return true if The first element is 'A' - 'D' or 'F' <p> false otherwise </p>
      */
@@ -22,6 +23,7 @@ public class ValidStates {
 
     /**
      * Split the factory tiles into their constituent factories for use further use
+     *
      * @param in
      * @return Return the String Array representing the contents of each factory tile
      */
@@ -41,6 +43,7 @@ public class ValidStates {
 
     /**
      * Check if the representation of the factory tiles is valid
+     *
      * @param in
      * @return true if all factory representations are valid,<p> false when atleast one is invalid</p>
      */
@@ -67,6 +70,7 @@ public class ValidStates {
 
     /**
      * Get the index of 'C'
+     *
      * @param in
      * @return the index of 'C' in the Shared string
      */
@@ -81,6 +85,7 @@ public class ValidStates {
 
     /**
      * Get all the elements of the center tiles as strings
+     *
      * @param in
      * @return valid tiles are encoded as is <p> invalid tiles are encoded as Z</p>
      */
@@ -98,11 +103,33 @@ public class ValidStates {
 
     /**
      * Returns the position of the character 'B'
+     *
      * @param in
      * @return position of B
      */
-    public static int getBagIdentifier(String in){
-       return getCenterIdentifier(in) + getCenterTiles(in).length() + 1;
+    public static int getBagIdentifier(String in) {
+        return getCenterIdentifier(in) + getCenterTiles(in).length() + 1;
+    }
+
+    /**
+     * Returns the elements in the bag as per the rules of encoding
+     * and is followed by 5 2-character substrings
+     * <p>0th Element of the array represents the number of 'a' tiles, from 0 - 20.</p>
+     * <p>1st Element of the array represents the number of 'b' tiles, from 0 - 20.</p>
+     * <p>2nd Element of the array represents the number of 'c' tiles, from 0 - 20.</p>
+     * <p>3re Element of the array represents the number of 'd' tiles, from 0 - 20.</p>
+     * <p>4th Element of the array represents the number of 'e' tiles, from 0 - 20.</p>
+     *
+     * @param in
+     * @return An Array List of String
+     */
+    public static ArrayList<String> getBagItems(String in) {
+        ArrayList<String> retVal = new ArrayList<>();
+        String BagElements = in.substring(getBagIdentifier(in));
+        for (int i = 1; BagElements.charAt(i) != 'D'; i += 2) {
+            retVal.add(BagElements.substring(i,i+2));
+        }
+        return retVal;
     }
 
     public static void main(String[] args) {
@@ -112,5 +139,6 @@ public class ValidStates {
 //        System.out.println(getCenterIdentifier(inP4));
 //        System.out.println(getCenterTiles(inP4));
         System.out.println(inP4.charAt(getBagIdentifier(inP4)));
+
     }
 }
