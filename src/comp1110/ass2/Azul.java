@@ -1,4 +1,6 @@
 package comp1110.ass2;
+import comp1110.ass2.ValidStates;
+
 
 public class Azul {
     /**
@@ -59,8 +61,7 @@ public class Azul {
      * TASK 2
      */
     public static boolean isSharedStateWellFormed(String sharedState) {
-        // FIXME Task 2
-        return false;
+        return ValidStates.validFactories(sharedState) && ValidStates.isValidNextPlayer(sharedState);
     }
 
     /**
