@@ -1,5 +1,6 @@
 package comp1110.ass2;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -33,15 +34,15 @@ public class ValidStates {
         boolean[] factoryTiles = new boolean[splitToFac.size()];
         Arrays.fill(factoryTiles, true);
         for (int i = 0; i < splitToFac.size(); i++) {
-            if (splitToFac.get(i).charAt(0) < '0' && splitToFac.get(i).charAt(0) > '8') {
-                for (char c : splitToFac.get(i).toCharArray()) {
+            if (splitToFac.get(i).charAt(0) >= '0' && splitToFac.get(i).charAt(0) <= '8') {
+                for (char c : splitToFac.get(i).substring(1).toCharArray()) {
                     if (!(c >= 'a' && c <= 'e')) {
-                        factoryTiles[i] = false;
-                    } else {
                         factoryTiles[i] = false;
                     }
                 }
             }
+            else
+                factoryTiles[i]=false;
         }
         int s=0;
         for(boolean f:factoryTiles)
@@ -55,11 +56,12 @@ public class ValidStates {
         String inP1 = "ThisShouldNotWork";
         String inP2 = "DisShouldWork";
         String inP3 = "F0cddf1bbbe2abde3cdee4bcceCfB1915161614D0000000000";
+        String inP4 = "AF0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000";
         System.out.println(isValidNextPlayer(inP1));
         System.out.println(isValidNextPlayer(inP2));
-        System.out.println(inP1.substring(1));
         System.out.println(isValidNextPlayer(inP3));
         System.out.println(validFactories(inP3));
+
 
     }
 }
