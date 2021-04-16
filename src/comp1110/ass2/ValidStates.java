@@ -1,6 +1,7 @@
 package comp1110.ass2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 public class ValidStates {
@@ -29,15 +30,24 @@ public class ValidStates {
 
     public static boolean validFactories(String in) {
         ArrayList<String> splitToFac = splitToFactories(in);
-        int fCounter = 0;
-        for (String s : splitToFac) {
-            if (s.charAt(0) >= '0' && s.charAt(0) <= '8') {
-                for (char c : s.substring(1).toCharArray())
-                    if (!(c >= 'a' && c <= 'e'))
-                        fCounter++;
+        boolean[] factoryTiles = new boolean[splitToFac.size()];
+        Arrays.fill(factoryTiles, true);
+        for (int i = 0; i < splitToFac.size(); i++) {
+            if (splitToFac.get(i).charAt(0) < '0' && splitToFac.get(i).charAt(0) > '8') {
+                for (char c : splitToFac.get(i).toCharArray()) {
+                    if (!(c >= 'a' && c <= 'e')) {
+                        factoryTiles[i] = false;
+                    } else {
+                        factoryTiles[i] = false;
+                    }
+                }
             }
         }
-        return fCounter==0;
+        int s=0;
+        for(boolean f:factoryTiles)
+            if(!f)
+                s++;
+        return s==0;
     }
 
 
@@ -49,7 +59,7 @@ public class ValidStates {
         System.out.println(isValidNextPlayer(inP2));
         System.out.println(inP1.substring(1));
         System.out.println(isValidNextPlayer(inP3));
-        System.out.println();
+        System.out.println(validFactories(inP3));
 
     }
 }
