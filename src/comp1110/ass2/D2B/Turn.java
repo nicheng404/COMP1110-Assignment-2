@@ -13,8 +13,6 @@ public class Turn {
      *
      * @return true if the player picks from factory, false if he picks from centre
      */
-    public boolean pickFromFactory() {
 
-    }
 
 }

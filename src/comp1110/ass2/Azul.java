@@ -1,5 +1,6 @@
 package comp1110.ass2;
 
+
 public class Azul {
     /**
      * Given a shared state string, determine if it is well-formed.
@@ -59,7 +60,6 @@ public class Azul {
      * TASK 2
      */
     public static boolean isSharedStateWellFormed(String sharedState) {
-        // FIXME Task 2
         return false;
     }
 

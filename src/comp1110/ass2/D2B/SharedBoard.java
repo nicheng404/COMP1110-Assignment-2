@@ -13,6 +13,5 @@ public abstract class SharedBoard {
     public Factory[] F = new Factory[2*nPlayers+1];
     public Centre centre;
     public Bag bag;
-    public
 
 }
