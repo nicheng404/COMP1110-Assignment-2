@@ -140,6 +140,6 @@ public class ValidStates {
 //        System.out.println(getCenterTiles(inP4));
         System.out.println(inP4.charAt(getBagIdentifier(inP4)));
         for(String s:getBagItems(inP4))
-            System.out.println(s); //eh
+            System.out.println(s); 
     }
 }
