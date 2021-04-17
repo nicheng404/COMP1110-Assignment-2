@@ -133,6 +133,11 @@ public class ValidStates {
         return retVal;
     }
 
+    /**
+     * Get the position of letter 'C' , the tiles after which indicate the centre tiles
+     * @param in input Input string
+     * @return index of letter C
+     */
     public static int getCentrePosition(String in) {
         int CentreP = 0;
         if (checkFactory(in))
@@ -140,18 +145,54 @@ public class ValidStates {
         return CentreP;
     }
 
+    /**
+     * Get all elements of the center tiles as strings
+     * @param in
+     * @return valid tiles are encoded as is <p> invalid tiles are encoded as Z</p>
+     */
+    public static String getCenterTiles(String in) {
+        String AllCentre = in.substring(getCentrePosition(in));
+        String retString = "";
+        for (int i = 1; AllCentre.charAt(i) != 'B' && AllCentre.charAt(0)=='C'; i++) {
+            if (AllCentre.charAt(i) >= 'a' && AllCentre.charAt(i) <= 'f')
+                retString += AllCentre.charAt(i);
+            else
+                retString += "Z";
+        }
+        return retString;
+    }
+
+    /**
+     * check if the  [centre] string is well formed as per the documentation. <p>The Centre string must not have
+     * any elements other than encoded tiles.</p> Also, these tiles must be in Alphabetical order.
+     * @param in Input string
+     * @return true if [centre] string is formed as per the documentation<p>false otherwise.</p>
+     */
+    public static boolean checkCentre(String in){
+        String CentreTiles = getCenterTiles(in);
+        boolean retVal=false;
+        if(!CentreTiles.contains("Z"))
+            if(isOrdered(CentreTiles))
+                retVal=true;
+        return retVal;
+    }
+
+
+
     public static void main(String[] args) {
 
         String inP6 = "AFCB0712090708D0000000000"; // Valid Config
         String inP7 = "BF0ccce1aace2aade3abde4ccdeCfB0505040402D0609040610"; // Valid config
         String inP8 = "AF0aace1acdd2abce3bbee4cdeCB1617161714D0000000000";// Valid Config
-        String inP9 = "AF0aace1acdd2abce3bbee4cdeCB1617161714D0000000000"; // Invalid factory contains 3 tiles
+        String inP9 = "AF0aace1acdd2abce3bbee4bcdeCaacdefB1617161714D0000000000"; // Valid Config
         String inP10 = "BF0aace1acdd2abce3bbeee4cdeeCB1617161714D0000000000"; // Invalid factory contains > 4 tiles.
-        String inP11 = "BF0aace1acdd2abce3bbee4ceddCB1617161714D0000000000"; // Invalid tiles in factory not alphabetical
+        String inP11 = "BF0aace1acdd2abce3bbee4ceddCB1617161714D0000000000";
+        String inP12 = "AFCaaabcfeB1108151109D0003010204";// Invalid tiles in factory not alphabetical
         System.out.println(checkFactory(inP9));
         System.out.println(checkFactory(inP10));
         System.out.println(checkFactory(inP11));
-        System.out.println(getCentrePosition(inP6));
+        System.out.println(getCentrePosition(inP9));
+        System.out.println(checkCentre(inP12));
 
 
     }
