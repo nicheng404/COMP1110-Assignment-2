@@ -77,6 +77,7 @@ public class ValidStates {
      * <p>The factory tiles are split into List of Arrays, each representing a factory.</p>
      * <p>The first element of each string represent the factory number</p>
      * <p>The next four elements represent the elements present in these factories</p>
+     *
      * @param in The input that has to be split
      * @return <p> List of String representing [factory] if number of tiles in all factory = 4 </p> <p> Empty list if the number of in even one factory not 4 </p>
      */
@@ -91,24 +92,39 @@ public class ValidStates {
 
     /**
      * Checks if the give string is sorted. Uses the String library to check if this string us sorted
+     *
      * @param substring this nomenclature because this method will be used in another method
      * @return true of sorted and false otherwise
      */
     public static boolean isOrdered(String substring) {
         char[] nString = substring.toCharArray();
         Arrays.sort(nString);
-        String t="";
-        for(char c: nString)
-            t+=c;
-        return (t.compareTo(substring))==0;
+        String t = "";
+        for (char c : nString)
+            t += c;
+        return (t.compareTo(substring)) == 0;
+    }
 
+    public static boolean checkFactory(String in) {
+        int s = 0;
+        ArrayList<String> facElements = FactoryTiles(in);
+        boolean[] checkEachFac = new boolean[facElements.size()];
+        Arrays.fill(checkEachFac, false);
+        boolean retVal = false;
+        for (int i = 0; i < facElements.size(); i++)
+            checkEachFac[i] = isOrdered(facElements.get(i).substring(1));
+        for (boolean b : checkEachFac) {
+            if (b)
+                s++;
+        }
+        retVal = s == facElements.size();
     }
 
     public static void main(String[] args) {
 
         String inP4 = "AF0abbd1abbe2adde3aabe4bddeCfB1409161110D0003010204";
         String inP5 = "AF0aace1acdd2abce3bbee4cdeCB1617161714D0000000000";
-        String inP6="cbde";
+        String inP6 = "cbde";
         System.out.println(isOrdered(inP6));
 
     }
