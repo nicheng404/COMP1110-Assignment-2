@@ -1,6 +1,5 @@
 package comp1110.ass2;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -19,11 +18,14 @@ public class ValidStates {
     }
 
     /**
-     * returns the indices of the starting of every factory tile, as mentioned in the documentation
+     * returns the indices of the starting of every factory , as mentioned in the documentation.
+     * <p>The last element of the returned ArrayList represent the index of 'C'</p>
+     * <p>
      * each factory must begin with an integer from 0-8
      *
      * @param in
-     * @return The Indices of the starting of factory as mentioned in [factory]
+     * @return The Indices of the starting of factory as mentioned in [factory] <p>The last element in the array list
+     * represents the index of 'C</p>
      */
     public static ArrayList<Integer> findFacAddr(String in) {
         Predicate pred = x -> x.toString().charAt(0) >= '0' && x.toString().charAt(0) <= '8';
@@ -42,33 +44,27 @@ public class ValidStates {
                 }
             }
         }
-        for(int i=0;i<in.length();i++)
-            if(in.charAt(i)=='C')
+        for (int i = 0; i < in.length(); i++)
+            if (in.charAt(i) == 'C')
                 retVal.add(i);
 
         return retVal;
     }
 
     /**
-     * Check if the representation of the factory tiles is valid
+     * Check if the lengths of the [factory] elements are 4. <p>In other words, check if each of the factories have
+     * exactly 4 elements</p>
      *
      * @param in
-     * @return true if all factory representations are valid,<p> false when atleast one is invalid</p>
+     * @return true if all the factories have exactly 4 tiles
      */
-    public static boolean validFactories(String in) {
-        ArrayList<String> splitToFac = splitToFactories(in);
-        boolean[] factoryTiles = new boolean[splitToFac.size()];
+    public static boolean validFactoryLengths(String in) {
+        ArrayList<Integer> FacAddr = findFacAddr(in);
+        boolean[] factoryTiles = new boolean[FacAddr.size() - 1];
         Arrays.fill(factoryTiles, true);
-        for (int i = 0; i < splitToFac.size(); i++) {
-            if (splitToFac.get(i).charAt(0) >= '0' && splitToFac.get(i).charAt(0) <= '8') {
-                for (char c : splitToFac.get(i).substring(1).toCharArray()) {
-                    if (!(c >= 'a' && c <= 'e')) {
-                        factoryTiles[i] = false;
-                    }
-                }
-            } else
+        for (int i = 0; i < FacAddr.size() - 1; i++)
+            if (FacAddr.get(i + 1) - FacAddr.get(i) - 1 != 4)
                 factoryTiles[i] = false;
-        }
         int s = 0;
         for (boolean f : factoryTiles)
             if (!f)
@@ -77,81 +73,43 @@ public class ValidStates {
     }
 
     /**
-     * Get the index of 'C'
-     *
-     * @param in
-     * @return the index of 'C' in the Shared string
+     * get the factory tiles from the input, as mentioned in the documentation.
+     * <p>The factory tiles are split into List of Arrays, each representing a factory.</p>
+     * <p>The first element of each string represent the factory number</p>
+     * <p>The next four elements represent the elements present in these factories</p>
+     * @param in The input that has to be split
+     * @return <p> List of String representing [factory] if number of tiles in all factory = 4 </p> <p> Empty list if the number of in even one factory not 4 </p>
      */
-//    public static int getCenterIdentifier(String in) {
-//        int nFac = splitToFactories(in).size();
-//        boolean isFirstTurn = in.charAt(0) == ('F');
-//        if (isFirstTurn)
-//            return (nFac * 5) + 1;
-//        else
-//            return (nFac * 5) + 2;
-//    }
+    public static ArrayList<String> FactoryTiles(String in) {
+        ArrayList<Integer> facAddr = findFacAddr(in);
+        ArrayList<String> facString = new ArrayList<>();
+        if (validFactoryLengths(in))
+            for (int i = 0; i < facAddr.size() - 1; i++)
+                facString.add(in.substring(facAddr.get(i), facAddr.get(i + 1)));
+        return facString;
+    }
 
     /**
-     * Get all the elements of the center tiles as strings
-     *
-     * @param in
-     * @return valid tiles are encoded as is <p> invalid tiles are encoded as Z</p>
+     * Checks if the give string is sorted. Uses the String library to check if this string us sorted
+     * @param substring this nomenclature because this method will be used in another method
+     * @return true of sorted and false otherwise
      */
-//    public static String getCenterTiles(String in) {
-//        String AllBag = in.substring(getCenterIdentifier(in));
-//        String retString = new String();
-//        for (int i = 1; AllBag.charAt(i) != 'B'; i++) {
-//            if (AllBag.charAt(i) >= 'a' && AllBag.charAt(i) <= 'f')
-//                retString += AllBag.charAt(i);
-//            else
-//                retString += "Z";
-//        }
-//        return retString;
-//    }
+    public static boolean isOrdered(String substring) {
+        char[] nString = substring.toCharArray();
+        Arrays.sort(nString);
+        String t="";
+        for(char c: nString)
+            t+=c;
+        return (t.compareTo(substring))==0;
 
-    /**
-     * Returns the position of the character 'B'
-     *
-     * @param in
-     * @return position of B
-     */
-//    public static int getBagIdentifier(String in) {
-//        return getCenterIdentifier(in) + getCenterTiles(in).length() + 1;
-//    }
+    }
 
-    /**
-     * Returns the elements in the bag as per the rules of encoding
-     * and is followed by 5 2-character substrings
-     * <p>0th Element of the array represents the number of 'a' tiles, from 0 - 20.</p>
-     * <p>1st Element of the array represents the number of 'b' tiles, from 0 - 20.</p>
-     * <p>2nd Element of the array represents the number of 'c' tiles, from 0 - 20.</p>
-     * <p>3re Element of the array represents the number of 'd' tiles, from 0 - 20.</p>
-     * <p>4th Element of the array represents the number of 'e' tiles, from 0 - 20.</p>
-     *
-     * @param
-     * @return An Array List of String
-     */
-//    public static ArrayList<String> getBagItems(String in) {
-//        ArrayList<String> retVal = new ArrayList<>();
-//        String BagElements = in.substring(getBagIdentifier(in));
-//        for (int i = 1; BagElements.charAt(i) != 'D'; i += 2) {
-//            retVal.add(BagElements.substring(i, i + 2));
-//        }
-//        return retVal;
-//    }
-//    public static int[] parseBagItemsToInt(String in){
-//        ArrayList<String> bagItems=getBagItems(in);
-//        int[] retVal= new int[bagItems.size()];
-//        for(int i=0;i<retVal.length;i++)
-//
-//
-//    }
     public static void main(String[] args) {
 
-        String inP4 = "AF0cdde1bbbe2abde3cdee4bceCfB1915161614D0000000000";
-        String inP5 = "BF0aace1acdd2abce3bbeee4cdeeCB1617161714D0000000000";
-        ArrayList<Integer> splitVal = findFacAddr(inP5);
-        for (Integer s : splitVal)
-            System.out.println(s);
+        String inP4 = "AF0abbd1abbe2adde3aabe4bddeCfB1409161110D0003010204";
+        String inP5 = "AF0aace1acdd2abce3bbee4cdeCB1617161714D0000000000";
+        String inP6="cbde";
+        System.out.println(isOrdered(inP6));
+
     }
 }
