@@ -1,5 +1,7 @@
 package comp1110.ass2;
-import comp1110.ass2.ValidStates;
+
+import static comp1110.ass2.ValidStates.*;
+
 
 
 public class Azul {
@@ -61,7 +63,7 @@ public class Azul {
      * TASK 2
      */
     public static boolean isSharedStateWellFormed(String sharedState) {
-        return true;
+        return isValidNextPlayer(sharedState) && checkFactory(sharedState) && checkCentre(sharedState) && checkBag(sharedState);
     }
 
     /**

@@ -235,10 +235,53 @@ public class ValidStates {
         }
         return false;
     }
-    public static void main(String[] args) {
 
-        String inP7="BF0aace1acdd2abce3bbee4cdeeCB1716171413D0000000000";
-        System.out.println(checkBag(inP7));
+    /**
+     * Determines the index of 'D' in [Discard]
+     *
+     * @param in
+     * @return Index of D
+     */
+    public static int getDiscardPosition(String in) {
+        return getBagPosition(in) + 11;
     }
+
+    /**
+     *
+     * @param in
+     * @param startIndex
+     * @param predicate
+     * @return
+     */
+    public static ArrayList<Integer> getItems(String in, int startIndex, Predicate predicate) {
+        ArrayList<String> SretVal = new ArrayList<>();
+        String BagElements = in.substring(startIndex);
+        try {
+            for (int i = 1; predicate.test(BagElements.charAt(i)); i += 2) {
+                SretVal.add(BagElements.substring(i, i + 2));
+            }
+        }
+        catch (StringIndexOutOfBoundsException e){
+            SretVal.add(null);
+            SretVal.remove(SretVal.size()-1);
+        }
+
+        ArrayList<Integer> retVal = new ArrayList<>();
+        for (String s: SretVal)
+            retVal.add(Integer.parseInt(s));
+        return retVal;
+    }
+
+    public static void main(String[] args) {
+        String inP7 = "BF0aace1acdd2abce3bbee4cdeeCB1617161413D0000000000";//Valid
+        String inP8 = "F0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000";//Valid
+        String inP9 = "AF0aace1acdd2abce3bbee4cdeeCB1617161714D00000000000";
+        for (Integer i : getItems(inP7, getDiscardPosition(inP7), x -> x.toString().charAt(0) != '\0'))
+            System.out.println(i);
+        System.out.println(inP7.charAt(getDiscardPosition(inP7)));
+        System.out.println(inP8.charAt(getDiscardPosition(inP8)));
+        System.out.println(inP9.charAt(getDiscardPosition(inP9)));
+    }
+
 
 }
