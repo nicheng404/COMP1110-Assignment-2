@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 public class ValidStates {
+
     /**
      * Checks if the Turn element in the shared state is valid
      *
@@ -105,27 +106,44 @@ public class ValidStates {
         return (t.compareTo(substring)) == 0;
     }
 
+    /**
+     * Check if the [factory] strings are ordered. A shared state is valid only if the string following the factory
+     * number is sorted. <p>Furthermore, a state is valid only if the elements of each
+     * factory have exactly a length of 4</p>
+     * <p>eg 4aced is not valid but 4acde is valid</p>
+     *
+     * @param in Input string
+     * @return true if all the factories have valid valid configurations.<p> false even if one of the factories has
+     * an invalid configuration</p>
+     */
     public static boolean checkFactory(String in) {
         int s = 0;
         ArrayList<String> facElements = FactoryTiles(in);
         boolean[] checkEachFac = new boolean[facElements.size()];
         Arrays.fill(checkEachFac, false);
         boolean retVal = false;
-        for (int i = 0; i < facElements.size(); i++)
-            checkEachFac[i] = isOrdered(facElements.get(i).substring(1));
-        for (boolean b : checkEachFac) {
-            if (b)
-                s++;
+        if (validFactoryLengths(in)) {
+            for (int i = 0; i < facElements.size(); i++)
+                checkEachFac[i] = isOrdered(facElements.get(i).substring(1));
+            for (boolean b : checkEachFac) {
+                if (b)
+                    s++;
+            }
+            retVal = s == facElements.size();
         }
-        retVal = s == facElements.size();
+        return retVal;
     }
 
     public static void main(String[] args) {
 
-        String inP4 = "AF0abbd1abbe2adde3aabe4bddeCfB1409161110D0003010204";
-        String inP5 = "AF0aace1acdd2abce3bbee4cdeCB1617161714D0000000000";
-        String inP6 = "cbde";
-        System.out.println(isOrdered(inP6));
-
+        String inP6 = "AFCB0712090708D0000000000"; // Valid Config
+        String inP7 = "BF0ccce1aace2aade3abde4ccdeCfB0505040402D0609040610"; // Valid config
+        String inP8 = "AF0aace1acdd2abce3bbee4cdeCB1617161714D0000000000";// Valid Config
+        String inP9 = "AF0aace1acdd2abce3bbee4cdeCB1617161714D0000000000"; // Invalid factory contains 3 tiles
+        String inP10 = "BF0aace1acdd2abce3bbeee4cdeeCB1617161714D0000000000"; // Invalid factory contains > 4 tiles.
+        String inP11 = "BF0aace1acdd2abce3bbee4ceddCB1617161714D0000000000"; // Invalid tiles in factory not alphabetical
+        System.out.println(checkFactory(inP9));
+        System.out.println(checkFactory(inP10));
+        System.out.println(checkFactory(inP11));
     }
 }
