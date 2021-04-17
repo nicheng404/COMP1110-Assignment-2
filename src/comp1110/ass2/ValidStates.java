@@ -31,7 +31,6 @@ public class ValidStates {
     public static ArrayList<Integer> findFacAddr(String in) {
         Predicate pred = x -> x.toString().charAt(0) >= '0' && x.toString().charAt(0) <= '8';
         ArrayList<Integer> retVal = new ArrayList<>();
-        String Subs = "";
         if (isValidNextPlayer(in) && !in.startsWith("F")) {
             for (int i = 2; in.charAt(i) != 'C'; i++) {
                 if (pred.test(in.charAt(i))) {
@@ -134,6 +133,13 @@ public class ValidStates {
         return retVal;
     }
 
+    public static int getCentrePosition(String in) {
+        int CentreP = 0;
+        if (checkFactory(in))
+            CentreP = findFacAddr(in).get(findFacAddr(in).size() - 1);
+        return CentreP;
+    }
+
     public static void main(String[] args) {
 
         String inP6 = "AFCB0712090708D0000000000"; // Valid Config
@@ -145,5 +151,8 @@ public class ValidStates {
         System.out.println(checkFactory(inP9));
         System.out.println(checkFactory(inP10));
         System.out.println(checkFactory(inP11));
+        System.out.println(getCentrePosition(inP6));
+
+
     }
 }
