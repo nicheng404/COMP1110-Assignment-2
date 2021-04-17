@@ -2,6 +2,7 @@ package comp1110.ass2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 
 public class ValidStates {
@@ -135,6 +136,7 @@ public class ValidStates {
 
     /**
      * Get the position of letter 'C' , the tiles after which indicate the centre tiles
+     *
      * @param in input Input string
      * @return index of letter C
      */
@@ -147,13 +149,14 @@ public class ValidStates {
 
     /**
      * Get all elements of the center tiles as strings
+     *
      * @param in
      * @return valid tiles are encoded as is <p> invalid tiles are encoded as Z</p>
      */
     public static String getCenterTiles(String in) {
         String AllCentre = in.substring(getCentrePosition(in));
         String retString = "";
-        for (int i = 1; AllCentre.charAt(i) != 'B' && AllCentre.charAt(0)=='C'; i++) {
+        for (int i = 1; AllCentre.charAt(i) != 'B' && AllCentre.charAt(0) == 'C'; i++) {
             if (AllCentre.charAt(i) >= 'a' && AllCentre.charAt(i) <= 'f')
                 retString += AllCentre.charAt(i);
             else
@@ -165,35 +168,77 @@ public class ValidStates {
     /**
      * check if the  [centre] string is well formed as per the documentation. <p>The Centre string must not have
      * any elements other than encoded tiles.</p> Also, these tiles must be in Alphabetical order.
+     *
      * @param in Input string
      * @return true if [centre] string is formed as per the documentation<p>false otherwise.</p>
      */
-    public static boolean checkCentre(String in){
+    public static boolean checkCentre(String in) {
         String CentreTiles = getCenterTiles(in);
-        boolean retVal=false;
-        if(!CentreTiles.contains("Z"))
-            if(isOrdered(CentreTiles))
-                retVal=true;
+        boolean retVal = false;
+        if (!CentreTiles.contains("Z"))
+            if (isOrdered(CentreTiles))
+                retVal = true;
         return retVal;
     }
 
+    /**
+     * Determines the index of 'B' in [Bag] string.
+     *
+     * @param in Input
+     * @return Index of 'B' , which represents the starting string of [Bag]
+     */
+    public static int getBagPosition(String in) {
+        int bagPos = getCenterTiles(in).length() + getCentrePosition(in) + 1;
+        return bagPos;
+    }
 
+    /**
+     * Returns the elements in the bag as per the rules of encoding
+     * and is followed by 5 2-character substrings
+     * <p>0th Element of the array represents the number of 'a' tiles, from 0 - 20.</p>
+     * <p>1st Element of the array represents the number of 'b' tiles, from 0 - 20.</p>
+     * <p>2nd Element of the array represents the number of 'c' tiles, from 0 - 20.</p>
+     * <p>3re Element of the array represents the number of 'd' tiles, from 0 - 20.</p>
+     * <p>4th Element of the array represents the number of 'e' tiles, from 0 - 20.</p>
+     *
+     * @param
+     * @return An Array List of Integers
+     */
+    public static ArrayList<Integer> getBagItems(String in) {
+        ArrayList<String> SretVal = new ArrayList<>();
+        String BagElements = in.substring(getBagPosition(in));
+        for (int i = 1; BagElements.charAt(i) != 'D'; i += 2) {
+            SretVal.add(BagElements.substring(i, i + 2));
+        }
+        ArrayList<Integer> retVal = new ArrayList<>();
+        for (String s : SretVal)
+            retVal.add(Integer.parseInt(s));
+        return retVal;
+    }
 
+    /**
+     * Checks if all the elements in [Bag] are less than 20. <p>Also checks for the length of the [Bag] String</p>
+     *
+     * @param in All the elements in the
+     * @return true if all the elements in Bag are less than 20. <p>false otherwise</p>
+     */
+    public static boolean checkBag(String in) {
+        IntPredicate pred = x -> x >= 0 && x <= 20;
+        ArrayList<Integer> BagTiles = getBagItems(in);
+        boolean[] checkBagTiles = new boolean[BagTiles.size()];
+        for (int i = 0; i < BagTiles.size(); i++)
+            checkBagTiles[i] = pred.test(BagTiles.get(i));
+        boolean[] allTrue = new boolean[BagTiles.size()];
+        if (allTrue.length == 5) {
+            Arrays.fill(allTrue, true);
+            return Arrays.equals(checkBagTiles, allTrue);
+        }
+        return false;
+    }
     public static void main(String[] args) {
 
-        String inP6 = "AFCB0712090708D0000000000"; // Valid Config
-        String inP7 = "BF0ccce1aace2aade3abde4ccdeCfB0505040402D0609040610"; // Valid config
-        String inP8 = "AF0aace1acdd2abce3bbee4cdeCB1617161714D0000000000";// Valid Config
-        String inP9 = "AF0aace1acdd2abce3bbee4bcdeCaacdefB1617161714D0000000000"; // Valid Config
-        String inP10 = "BF0aace1acdd2abce3bbeee4cdeeCB1617161714D0000000000"; // Invalid factory contains > 4 tiles.
-        String inP11 = "BF0aace1acdd2abce3bbee4ceddCB1617161714D0000000000";
-        String inP12 = "AFCaaabcfeB1108151109D0003010204";// Invalid tiles in factory not alphabetical
-        System.out.println(checkFactory(inP9));
-        System.out.println(checkFactory(inP10));
-        System.out.println(checkFactory(inP11));
-        System.out.println(getCentrePosition(inP9));
-        System.out.println(checkCentre(inP12));
-
-
+        String inP7="BF0aace1acdd2abce3bbee4cdeeCB1716171413D0000000000";
+        System.out.println(checkBag(inP7));
     }
+
 }
