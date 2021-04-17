@@ -61,7 +61,7 @@ public class Azul {
      * TASK 2
      */
     public static boolean isSharedStateWellFormed(String sharedState) {
-        return ValidStates.validFactories(sharedState) && ValidStates.isValidNextPlayer(sharedState);
+        return true;
     }
 
     /**

@@ -15,30 +15,38 @@ public class ValidStates {
     public static boolean isValidNextPlayer(String in) {
         Predicate pred = x -> x.toString().charAt(0) >= 'A' && x.toString().charAt(0) <= 'D'
                 || x.toString().charAt(0) == 'F';
-        if (pred.test(in))
-            return true;
-        else
-            return false;
+        return pred.test(in);
     }
 
     /**
-     * Split the factory tiles into their constituent factories for use further use
+     * returns the indices of the starting of every factory tile, as mentioned in the documentation
+     * each factory must begin with an integer from 0-8
      *
      * @param in
-     * @return Return the String Array representing the contents of each factory tile
+     * @return The Indices of the starting of factory as mentioned in [factory]
      */
-    public static ArrayList<String> splitToFactories(String in) {
-        ArrayList<String> retArray = new ArrayList<>();
-        if (isValidNextPlayer(in) && in.startsWith("F")) {
-            for (int i = 1; !in.substring(i, i + 5).contains("C"); i += 5) {
-                retArray.add(in.substring(i, i + 5));
+    public static ArrayList<Integer> findFacAddr(String in) {
+        Predicate pred = x -> x.toString().charAt(0) >= '0' && x.toString().charAt(0) <= '8';
+        ArrayList<Integer> retVal = new ArrayList<>();
+        String Subs = "";
+        if (isValidNextPlayer(in) && !in.startsWith("F")) {
+            for (int i = 2; in.charAt(i) != 'C'; i++) {
+                if (pred.test(in.charAt(i))) {
+                    retVal.add(i);
+                }
             }
-        } else if (isValidNextPlayer(in) && !in.startsWith("F")) {
-            for (int i = 2; !in.substring(i, i + 5).contains("C"); i += 5) {
-                retArray.add(in.substring(i, i + 5));
+        } else if (isValidNextPlayer(in) && in.startsWith("F")) {
+            for (int i = 1; in.charAt(i) != 'C'; i++) {
+                if (pred.test(in.charAt(i))) {
+                    retVal.add(i);
+                }
             }
         }
-        return retArray;
+        for(int i=0;i<in.length();i++)
+            if(in.charAt(i)=='C')
+                retVal.add(i);
+
+        return retVal;
     }
 
     /**
@@ -74,14 +82,14 @@ public class ValidStates {
      * @param in
      * @return the index of 'C' in the Shared string
      */
-    public static int getCenterIdentifier(String in) {
-        int nFac = splitToFactories(in).size();
-        boolean isFirstTurn = in.charAt(0) == ('F');
-        if (isFirstTurn)
-            return (nFac * 5) + 1;
-        else
-            return (nFac * 5) + 2;
-    }
+//    public static int getCenterIdentifier(String in) {
+//        int nFac = splitToFactories(in).size();
+//        boolean isFirstTurn = in.charAt(0) == ('F');
+//        if (isFirstTurn)
+//            return (nFac * 5) + 1;
+//        else
+//            return (nFac * 5) + 2;
+//    }
 
     /**
      * Get all the elements of the center tiles as strings
@@ -89,17 +97,17 @@ public class ValidStates {
      * @param in
      * @return valid tiles are encoded as is <p> invalid tiles are encoded as Z</p>
      */
-    public static String getCenterTiles(String in) {
-        String AllBag = in.substring(getCenterIdentifier(in));
-        String retString = new String();
-        for (int i = 1; AllBag.charAt(i) != 'B'; i++) {
-            if (AllBag.charAt(i) >= 'a' && AllBag.charAt(i) <= 'f')
-                retString += AllBag.charAt(i);
-            else
-                retString += "Z";
-        }
-        return retString;
-    }
+//    public static String getCenterTiles(String in) {
+//        String AllBag = in.substring(getCenterIdentifier(in));
+//        String retString = new String();
+//        for (int i = 1; AllBag.charAt(i) != 'B'; i++) {
+//            if (AllBag.charAt(i) >= 'a' && AllBag.charAt(i) <= 'f')
+//                retString += AllBag.charAt(i);
+//            else
+//                retString += "Z";
+//        }
+//        return retString;
+//    }
 
     /**
      * Returns the position of the character 'B'
@@ -107,9 +115,9 @@ public class ValidStates {
      * @param in
      * @return position of B
      */
-    public static int getBagIdentifier(String in) {
-        return getCenterIdentifier(in) + getCenterTiles(in).length() + 1;
-    }
+//    public static int getBagIdentifier(String in) {
+//        return getCenterIdentifier(in) + getCenterTiles(in).length() + 1;
+//    }
 
     /**
      * Returns the elements in the bag as per the rules of encoding
@@ -120,26 +128,30 @@ public class ValidStates {
      * <p>3re Element of the array represents the number of 'd' tiles, from 0 - 20.</p>
      * <p>4th Element of the array represents the number of 'e' tiles, from 0 - 20.</p>
      *
-     * @param in
+     * @param
      * @return An Array List of String
      */
-    public static ArrayList<String> getBagItems(String in) {
-        ArrayList<String> retVal = new ArrayList<>();
-        String BagElements = in.substring(getBagIdentifier(in));
-        for (int i = 1; BagElements.charAt(i) != 'D'; i += 2) {
-            retVal.add(BagElements.substring(i,i+2));
-        }
-        return retVal;
-    }
-
+//    public static ArrayList<String> getBagItems(String in) {
+//        ArrayList<String> retVal = new ArrayList<>();
+//        String BagElements = in.substring(getBagIdentifier(in));
+//        for (int i = 1; BagElements.charAt(i) != 'D'; i += 2) {
+//            retVal.add(BagElements.substring(i, i + 2));
+//        }
+//        return retVal;
+//    }
+//    public static int[] parseBagItemsToInt(String in){
+//        ArrayList<String> bagItems=getBagItems(in);
+//        int[] retVal= new int[bagItems.size()];
+//        for(int i=0;i<retVal.length;i++)
+//
+//
+//    }
     public static void main(String[] args) {
 
-        String inP4 = "AF2abde3cdee4bcceCefB1915161614D0000000000";
-//        System.out.println(validFactories(inP4));
-//        System.out.println(getCenterIdentifier(inP4));
-//        System.out.println(getCenterTiles(inP4));
-        System.out.println(inP4.charAt(getBagIdentifier(inP4)));
-        for(String s:getBagItems(inP4))
-            System.out.println(s); 
+        String inP4 = "AF0cdde1bbbe2abde3cdee4bceCfB1915161614D0000000000";
+        String inP5 = "BF0aace1acdd2abce3bbeee4cdeeCB1617161714D0000000000";
+        ArrayList<Integer> splitVal = findFacAddr(inP5);
+        for (Integer s : splitVal)
+            System.out.println(s);
     }
 }
