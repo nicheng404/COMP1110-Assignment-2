@@ -1,5 +1,6 @@
 package comp1110.ass2;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.IntPredicate;
@@ -66,11 +67,10 @@ public class ValidStates {
         for (int i = 0; i < FacAddr.size() - 1; i++)
             if (FacAddr.get(i + 1) - FacAddr.get(i) - 1 != 4)
                 factoryTiles[i] = false;
-        int s = 0;
-        for (boolean f : factoryTiles)
-            if (!f)
-                s++;
-        return s == 0;
+
+        boolean[] allTrue = new boolean[FacAddr.size() - 1];
+        Arrays.fill(allTrue, true);
+        return Arrays.equals(allTrue, factoryTiles);
     }
 
     /**
@@ -117,21 +117,22 @@ public class ValidStates {
      * an invalid configuration</p>
      */
     public static boolean checkFactory(String in) {
-        int s = 0;
         ArrayList<String> facElements = FactoryTiles(in);
         boolean[] checkEachFac = new boolean[facElements.size()];
+        boolean[] allTrue = new boolean[facElements.size()];
         Arrays.fill(checkEachFac, false);
-        boolean retVal = false;
+        Arrays.fill(allTrue, true);
+        boolean retVal;
         if (validFactoryLengths(in)) {
-            for (int i = 0; i < facElements.size(); i++)
+            for (int i = 0; i < facElements.size(); i++) {
                 checkEachFac[i] = isOrdered(facElements.get(i).substring(1));
-            for (boolean b : checkEachFac) {
-                if (b)
-                    s++;
             }
-            retVal = s == facElements.size();
+            retVal = Arrays.equals(checkEachFac, allTrue);
+        } else {
+            retVal = false;
         }
         return retVal;
+
     }
 
     /**
@@ -253,7 +254,13 @@ public class ValidStates {
      * @return Index of D
      */
     public static int getDiscardPosition(String in) {
-        return getBagPosition(in) + 11;
+        int ind = 0;
+        if (in.charAt(0) == 'F' && isValidNextPlayer(in)) {
+            ind = in.indexOf('D');
+        } else if (in.charAt(0) != 'F' && isValidNextPlayer(in)) {
+            ind = in.substring(1).indexOf('D') + 1;
+        }
+        return ind;
     }
 
     /**
@@ -286,14 +293,8 @@ public class ValidStates {
      */
     static boolean checkContentsDiscard(String in) {
         int sIndex = getDiscardPosition(in);
-        Predicate predicate = x -> x.toString().charAt(0) != '\0';
+        IntPredicate predicate = x -> x
         return checkContents(in, sIndex, predicate) && checkDiscardLength(in);
-    }
-
-    static boolean checkDelimiters(String in) {
-        return in.indexOf("F") == 2 || in.indexOf("F") == 1 && in.charAt(in.length() - 11) == 'D'
-                && in.charAt(in.length() - 22) == 'B' && in.charAt(getCentrePosition(in)) == 'C';
-
     }
 
 
@@ -303,7 +304,10 @@ public class ValidStates {
         String inP9 = "AF0aace1acdd2abce3bbee4cdeeCB1617161714D00000000000";// greater than 11 characters in discard
         String inP10 = "BF0aace1acdd2abce3bbee4cdeeCB161716171413D0000000000";// 11 characters in bag string
         String inP11 = "A!0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000";// Delimiters
-        System.out.println(inP8.charAt(inP8.length() - 22));
+        String inP12 = "AF0aace1acdd2abce3bbee4cdeCB1617161714D0000000000"; // Unordered therefore invalid
+        String inP13 = "AFCB1006100707D0607040610"; // Valid;
+        System.out.println(inP7.charAt(getDiscardPosition(inP7) + 1));
+
 
     }
 
