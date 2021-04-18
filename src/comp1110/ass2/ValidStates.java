@@ -271,7 +271,6 @@ public class ValidStates {
 
     /**
      * Checks if the length of Discard string is exactly 10
-     *
      * @param in Input string
      * @return true if 10.
      */
