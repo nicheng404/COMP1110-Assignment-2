@@ -193,23 +193,32 @@ public class ValidStates {
     }
 
     /**
-     * Returns the elements in the bag as per the rules of encoding
-     * and is followed by 5 2-character substrings
+     * Generic functions that elements as per the rules of encoding
+     * and is followed by 5 two digit  Integers
      * <p>0th Element of the array represents the number of 'a' tiles, from 0 - 20.</p>
      * <p>1st Element of the array represents the number of 'b' tiles, from 0 - 20.</p>
      * <p>2nd Element of the array represents the number of 'c' tiles, from 0 - 20.</p>
      * <p>3re Element of the array represents the number of 'd' tiles, from 0 - 20.</p>
      * <p>4th Element of the array represents the number of 'e' tiles, from 0 - 20.</p>
      *
-     * @param
+     * @param in         Input String
+     * @param startIndex the index of B in [Bag] or D in [Discard]
+     * @param predicate  condition for the termination of for loop <p>x -> x.toString().charAt(0) != '\0' in case of D</p>
+     *                   <p>x -> x.toString().charAt(0) != 'D' in case of B</p>
      * @return An Array List of Integers
      */
-    public static ArrayList<Integer> getBagItems(String in) {
+    public static ArrayList<Integer> getItems(String in, int startIndex, Predicate predicate) {
         ArrayList<String> SretVal = new ArrayList<>();
-        String BagElements = in.substring(getBagPosition(in));
-        for (int i = 1; BagElements.charAt(i) != 'D'; i += 2) {
-            SretVal.add(BagElements.substring(i, i + 2));
+        String BagElements = in.substring(startIndex);
+        try {
+            for (int i = 1; predicate.test(BagElements.charAt(i)); i += 2) {
+                SretVal.add(BagElements.substring(i, i + 2));
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            SretVal.add(null);
+            SretVal.remove(SretVal.size() - 1);
         }
+
         ArrayList<Integer> retVal = new ArrayList<>();
         for (String s : SretVal)
             retVal.add(Integer.parseInt(s));
@@ -222,9 +231,9 @@ public class ValidStates {
      * @param in All the elements in the
      * @return true if all the elements in Bag are less than 20. <p>false otherwise</p>
      */
-    public static boolean checkBag(String in) {
+    public static boolean checkContents(String in, int startIndex, Predicate predicate) {
         IntPredicate pred = x -> x >= 0 && x <= 20;
-        ArrayList<Integer> BagTiles = getBagItems(in);
+        ArrayList<Integer> BagTiles = getItems(in, startIndex, predicate);
         boolean[] checkBagTiles = new boolean[BagTiles.size()];
         for (int i = 0; i < BagTiles.size(); i++)
             checkBagTiles[i] = pred.test(BagTiles.get(i));
@@ -232,6 +241,7 @@ public class ValidStates {
         if (allTrue.length == 5) {
             Arrays.fill(allTrue, true);
             return Arrays.equals(checkBagTiles, allTrue);
+
         }
         return false;
     }
@@ -247,40 +257,54 @@ public class ValidStates {
     }
 
     /**
+     * Checks if the length of Discard string is exactly 10
+     *
+     * @param in Input string
+     * @return true if 10.
+     */
+    public static boolean checkDiscardLength(String in) {
+        return in.substring(getDiscardPosition(in) + 1).length() == 10;
+    }
+
+    /**
+     * Unifying methods for checking the contents of bag
      *
      * @param in
-     * @param startIndex
-     * @param predicate
+     * @return true if the Bag String is well formed
+     */
+    static boolean checkContentsBag(String in) {
+        int sIndex = getBagPosition(in);
+        Predicate pred = x -> x.toString().charAt(0) != 'D';
+        return checkContents(in, sIndex, pred);
+    }
+
+    /**
+     * Unifying methods for checking if the contents of Discard are well formed
+     *
+     * @param in
      * @return
      */
-    public static ArrayList<Integer> getItems(String in, int startIndex, Predicate predicate) {
-        ArrayList<String> SretVal = new ArrayList<>();
-        String BagElements = in.substring(startIndex);
-        try {
-            for (int i = 1; predicate.test(BagElements.charAt(i)); i += 2) {
-                SretVal.add(BagElements.substring(i, i + 2));
-            }
-        }
-        catch (StringIndexOutOfBoundsException e){
-            SretVal.add(null);
-            SretVal.remove(SretVal.size()-1);
-        }
-
-        ArrayList<Integer> retVal = new ArrayList<>();
-        for (String s: SretVal)
-            retVal.add(Integer.parseInt(s));
-        return retVal;
+    static boolean checkContentsDiscard(String in) {
+        int sIndex = getDiscardPosition(in);
+        Predicate predicate = x -> x.toString().charAt(0) != '\0';
+        return checkContents(in, sIndex, predicate) && checkDiscardLength(in);
     }
+
+    static boolean checkDelimiters(String in) {
+        return in.indexOf("F") == 2 || in.indexOf("F") == 1 && in.charAt(in.length() - 11) == 'D'
+                && in.charAt(in.length() - 22) == 'B' && in.charAt(getCentrePosition(in)) == 'C';
+
+    }
+
 
     public static void main(String[] args) {
         String inP7 = "BF0aace1acdd2abce3bbee4cdeeCB1617161413D0000000000";//Valid
         String inP8 = "F0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000";//Valid
-        String inP9 = "AF0aace1acdd2abce3bbee4cdeeCB1617161714D00000000000";
-        for (Integer i : getItems(inP7, getDiscardPosition(inP7), x -> x.toString().charAt(0) != '\0'))
-            System.out.println(i);
-        System.out.println(inP7.charAt(getDiscardPosition(inP7)));
-        System.out.println(inP8.charAt(getDiscardPosition(inP8)));
-        System.out.println(inP9.charAt(getDiscardPosition(inP9)));
+        String inP9 = "AF0aace1acdd2abce3bbee4cdeeCB1617161714D00000000000";// greater than 11 characters in discard
+        String inP10 = "BF0aace1acdd2abce3bbee4cdeeCB161716171413D0000000000";// 11 characters in bag string
+        String inP11 = "A!0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000";// Delimiters
+        System.out.println(inP8.charAt(inP8.length() - 22));
+
     }
 
 
