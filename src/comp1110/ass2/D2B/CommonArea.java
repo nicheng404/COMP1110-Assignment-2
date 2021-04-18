@@ -26,9 +26,10 @@ public class CommonArea {
     }
 
 
-    boolean numberOfTilesAs100{
+    boolean numberOfTilesAs100(){
         // check the totally number of the tiles<=101 && check the number of every tile is<=20
         // one special tile, firstplayer!!!!!!
+    return false;
     }
 
 
