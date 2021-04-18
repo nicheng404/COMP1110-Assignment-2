@@ -36,4 +36,8 @@
 #    numberOfPlayer++;
 #  }
 #    return numberOfPlayer;
+<<<<<<< HEAD
 #  }
+=======
+#  }
+>>>>>>> 37d09e8588a4ae1b86c7a849ec64c02236324ef2
