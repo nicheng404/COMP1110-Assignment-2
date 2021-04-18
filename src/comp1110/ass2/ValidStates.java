@@ -274,6 +274,18 @@ public class ValidStates {
     }
 
     /**
+     * Unifying methods for checking if the contents of Discard are well formed
+     *
+     * @param in
+     * @return
+     */
+    static boolean checkContentsDiscard(String in) {
+        int sIndex = getDiscardPosition(in);
+        Predicate predicate = x -> x.toString().charAt(0) != '\0';
+        return checkContents(in, sIndex, predicate) && checkDiscardLength(in);
+    }
+
+    /**
      * Unifying methods for checking the contents of bag
      *
      * @param in
@@ -285,31 +297,21 @@ public class ValidStates {
         return checkContents(in, sIndex, pred);
     }
 
-    /**
-     * Unifying methods for checking if the contents of Discard are well formed
-     *
-     * @param in
-     * @return
-     */
-    static boolean checkContentsDiscard(String in) {
-        int sIndex = getDiscardPosition(in);
-        IntPredicate predicate = x -> x
-        return checkContents(in, sIndex, predicate) && checkDiscardLength(in);
-    }
-
 
     public static void main(String[] args) {
-        String inP7 = "BF0aace1acdd2abce3bbee4cdeeCB1617161413D0000000000";//Valid
-        String inP8 = "F0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000";//Valid
-        String inP9 = "AF0aace1acdd2abce3bbee4cdeeCB1617161714D00000000000";// greater than 11 characters in discard
-        String inP10 = "BF0aace1acdd2abce3bbee4cdeeCB161716171413D0000000000";// 11 characters in bag string
-        String inP11 = "A!0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000";// Delimiters
-        String inP12 = "AF0aace1acdd2abce3bbee4cdeCB1617161714D0000000000"; // Unordered therefore invalid
-        String inP13 = "AFCB1006100707D0607040610"; // Valid;
-        System.out.println(inP7.charAt(getDiscardPosition(inP7) + 1));
+        String[] invalid_States = {
+                "AF0aace1acdd2abce3bbee4cdeCB1617161714D0000000000", // factory contains 3 tiles
+                "BF0aace1acdd2abce3bbeee4cdeeCB1617161714D0000000000", // factory contains > 4 tiles.
+                "BF0aace1acdd2abce3bbee4ceddCB1617161714D0000000000", // tiles in factory not alphabetical
+                "AF0aace1acdd2abce3bbee4cdeCB3117163714D0000000000", // greater than 20 tiles (one colour) in bag.
+                "BF0aace1acdd2abce3bbee4cdeeCB161716171413D0000000000", // greater than 11 characters in bag string
+                "AF0aace1acdd2abce3bbee4cdeeCB1617161714D00000000000", // greater than 11 characters in discard string
+                "AFCaaabcfeB1108151109D0003010204" // tiles in centre not in alphabetical order.
 
+        };
+
+        for (String s : invalid_States)
+            System.out.println(checkFactory(s) && checkCentre(s) && checkContentsDiscard(s) && checkContentsBag(s));
 
     }
-
-
 }

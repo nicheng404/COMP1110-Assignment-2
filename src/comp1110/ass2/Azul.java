@@ -63,7 +63,8 @@ public class Azul {
      * TASK 2
      */
     public static boolean isSharedStateWellFormed(String sharedState) {
-        return checkFactory(sharedState) && checkContentsDiscard(sharedState) && checkContentsBag(sharedState);
+        return checkFactory(sharedState) && checkContentsDiscard(sharedState) && checkContentsBag(sharedState) &&
+                checkCentre(sharedState);
 
     }
 
