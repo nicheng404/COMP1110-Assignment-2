@@ -4,6 +4,8 @@ import comp1110.ass2.ValidStates;
 
 import java.util.Random;
 
+import java.util.Random;
+
 public class Azul {
     /**
      * Given a shared state string, determine if it is well-formed.
