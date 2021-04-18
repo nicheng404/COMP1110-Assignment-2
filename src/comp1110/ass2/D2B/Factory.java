@@ -9,4 +9,9 @@ public class Factory implements DraftingFunctions {
     public Tiles[] getTiles() {
         return tiles;
     }
+
+    @Override
+    public Tiles[] getSameColour() {
+        return new Tiles[0];
+    }
 }

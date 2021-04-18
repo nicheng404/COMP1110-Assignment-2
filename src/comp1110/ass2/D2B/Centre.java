@@ -14,6 +14,6 @@ public class Centre implements DraftingFunctions {
 
     @Override
     public Tiles[] getSameColour() {
-        return
+        return null;
     }
 }

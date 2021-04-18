@@ -5,6 +5,6 @@ public class Bag {
     public static final Tiles FirstPlayer=Tiles.FP;
     public int CountTiles;
     public Bag() {
-        tiles[0]=
+        tiles[0]= null;
     }
 }

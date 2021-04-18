@@ -349,7 +349,6 @@ public class Azul {
      * TASK 5
      */
     public static char drawTileFromBag(String[] gameState) {
-        // FIXME Task 5
         String[] draw = new String[2];
         String gs0 = gameState[0];
         String gs1 = gameState[1];
@@ -411,14 +410,14 @@ public class Azul {
 
     }
 
-    //-------------------------------------------------------------------------------------------------//
+   // to get an element of 'abcde' by random.
     public static char getRandomElement() {
         Random rand = new Random();
         String characters = "abcde";
         char randomChar = characters.charAt(rand.nextInt(characters.length()));
         return randomChar;
     }
-
+   // to get a tile which exists inside the bag.
     public static char getReasonableRandomTile(String bagString) { // from string
         // a -> index 0&1 ->substring -> ==0?
         // do - while
