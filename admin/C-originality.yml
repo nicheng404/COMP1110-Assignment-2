@@ -31,9 +31,9 @@ collaboration:
 # Add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external code)
 code:
-  - comment:
-    url:
-    licence:
+  - comment: Task5, getRandomElement's codes.
+    url: https://stackoverflow.com/questions/43140311/how-to-randomly-select-letters-in-java
+    licence: CC-BY-SA 3.0
 
 # Use this to list any assets (artwork, sound, etc) that you used.
 # Provide a comment explaining your use of that asset and the URL
@@ -50,9 +50,9 @@ assets:
 # Sign *your* name and uids here. (Remove entries if you have fewer
 # than three members.)
 signatures:
-  - name:
-    uid:
-  - name:
-    uid:
+  - name: Yanyan Liu
+    uid: u7189727
+  - name: ke Ning
+    uid: u7175553
   - name:
     uid:

@@ -12,11 +12,13 @@ public interface DraftingFunctions {
     Tiles[] getTiles();
 
     /**
-     * Return the name of the player who plays next
+     * Return all the tiles of the same colour
      *
-     * @return One from {A,B,C,D} for a 4 player game  , representing whose move it is.
+     * @return Tiles
      */
-    Player getNextTurn();
+    Tiles[] getSameColour();
 
+    default void setTiles() {
 
+    }
 }
