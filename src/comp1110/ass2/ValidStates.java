@@ -125,7 +125,8 @@ public class ValidStates {
         boolean retVal;
         if (validFactoryLengths(in)) {
             for (int i = 0; i < facElements.size(); i++) {
-                checkEachFac[i] = isOrdered(facElements.get(i).substring(1));
+                checkEachFac[i] = isOrdered(facElements.get(i).substring(1))
+                        && (facElements.get(i).charAt(0) >= '0' && facElements.get(i).charAt(0) <= '8');
             }
             retVal = Arrays.equals(checkEachFac, allTrue);
         } else {
@@ -221,8 +222,13 @@ public class ValidStates {
         }
 
         ArrayList<Integer> retVal = new ArrayList<>();
-        for (String s : SretVal)
-            retVal.add(Integer.parseInt(s));
+        for (String s : SretVal) {
+            try {
+                retVal.add(Integer.parseInt(s));
+            } catch (NumberFormatException e) {
+                    retVal.add(100);
+            }
+        }
         return retVal;
     }
 
@@ -297,6 +303,15 @@ public class ValidStates {
         return checkContents(in, sIndex, pred);
     }
 
+    /**
+     * returns true
+     * @param in
+     * @return
+     */
+    static boolean getAddrEncode(String in) {
+        return in.substring(0, 2).contains("F");
+
+    }
 
     public static void main(String[] args) {
         String[] invalid_States = {
