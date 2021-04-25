@@ -26,5 +26,33 @@ public class Player {
         return this.pName;
     }
 
+    public static int getNUmberOfPlayer(String playerState) {
+        // get number of players -> extend for 4 players
+        int numberOfPlayer = 0;
+        int indexA = playerState.indexOf("A");
+        int indexB = playerState.indexOf("B");
+        int indexC = playerState.indexOf("C");
+        int indexD = playerState.indexOf("D");
+        int[] player = {indexA, indexB, indexC, indexD};
+        StringBuilder sb = new StringBuilder(playerState);
+        int numberOfOperations = 0;
+        for (int v : player) {
+            //在sb中插入“-”,第一位不插，没有的不插
+            if (v != -1 && v != 0) {
+                sb.insert(v + numberOfOperations, "-");
+                numberOfOperations++;
+            }
+        }
+        String newString = sb.toString();
+        //split 新string-> String[]。array包含每个playerString
+        String[] string1Array = newString.split("-");
+        //key result
+        int wellFormedPlayer = 0;
+        for (String playerString : string1Array) {
+            numberOfPlayer++;
+        }
+        return numberOfPlayer;
+    }
+
 
 }
