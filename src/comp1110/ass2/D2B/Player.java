@@ -3,9 +3,14 @@ package comp1110.ass2.D2B;
 public class Player {
 
     public Player nextPlayer;
-    public String pName;
-    public boolean isFirstPlayer;
-    public boolean isTurn;
+    public pNames pName;
+    public boolean isLastPlayer;
+    Player(boolean isLastPlayer,Player nextPlayer){
+        if(isLastPlayer)
+            this.nextPlayer=null;
+        else
+            this.setNextPlayer(nextPlayer);
+    }
 
     /**
      * Set the next player, who should be playing after the present player
@@ -21,9 +26,18 @@ public class Player {
      *
      * @return The name of this player from "A-D"
      */
-    public String getpName() {
+    public pNames getpName() {
         return this.pName;
     }
+
+    /**
+     * Get the the player who gets to play next
+     * @return Player class variable who gets to play next
+     */
+    public Player getNextPlayer(){
+        return this.nextPlayer;
+    }
+
 
     enum pNames{
         A("A"),

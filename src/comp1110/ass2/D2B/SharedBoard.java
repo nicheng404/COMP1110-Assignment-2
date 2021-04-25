@@ -6,12 +6,6 @@ package comp1110.ass2.D2B;
  * This will help encode the Task2 isSharedStateWellFormed because
  */
 public abstract class SharedBoard {
-    public int nPlayers;
-    SharedBoard(int nPlayers) {
-        this.nPlayers = nPlayers;
-    }
-    public Factory[] F = new Factory[2*nPlayers+1];
-    public Centre centre;
-    public Bag bag;
+
 
 }
