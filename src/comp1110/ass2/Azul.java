@@ -1,9 +1,5 @@
 package comp1110.ass2;
 
-import static comp1110.ass2.ValidStates.*;
-
-
-
 public class Azul {
     /**
      * Given a shared state string, determine if it is well-formed.

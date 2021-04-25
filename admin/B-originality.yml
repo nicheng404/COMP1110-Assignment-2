@@ -49,9 +49,9 @@ declaration: >-
 # Sign *your* name and uids here. (Remove entries if you have fewer
 # than three members.)
 signatures:
-  - name: Ke Ning
-    uid: u7175553
-  - name: Yanyan Liu
-    uid: u7189727
   - name: Mukund Balaji Srinivas
     uid: u7274095
+  - name: Yanyan Liu
+    uid: u7189727
+  - name: Ke Ning
+    uid: u7175553
