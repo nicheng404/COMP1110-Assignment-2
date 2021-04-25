@@ -1,6 +1,5 @@
 package comp1110.ass2;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.IntPredicate;
@@ -11,7 +10,7 @@ public class ValidStates {
     /**
      * Checks if the Turn element in the shared state is valid
      *
-     * @param in
+     * @param in sharedState
      * @return true if The first element is 'A' - 'D' or 'F' <p> false otherwise </p>
      */
     public static boolean isValidNextPlayer(String in) {
@@ -26,7 +25,7 @@ public class ValidStates {
      * <p>
      * each factory must begin with an integer from 0-8
      *
-     * @param in
+     * @param in sharedState
      * @return The Indices of the starting of factory as mentioned in [factory] <p>The last element in the array list
      * represents the index of 'C</p>
      */
@@ -57,7 +56,7 @@ public class ValidStates {
      * Check if the lengths of the [factory] elements are 4. <p>In other words, check if each of the factories have
      * exactly 4 elements</p>
      *
-     * @param in
+     * @param in sharedState
      * @return true if all the factories have exactly 4 tiles
      */
     public static boolean validFactoryLengths(String in) {
@@ -79,7 +78,7 @@ public class ValidStates {
      * <p>The first element of each string represent the factory number</p>
      * <p>The next four elements represent the elements present in these factories</p>
      *
-     * @param in The input that has to be split
+     * @param in sharedState
      * @return <p> List of String representing [factory] if number of tiles in all factory = 4 </p> <p> Empty list if the number of in even one factory not 4 </p>
      */
     public static ArrayList<String> FactoryTiles(String in) {
@@ -112,7 +111,7 @@ public class ValidStates {
      * factory have exactly a length of 4</p>
      * <p>eg 4aced is not valid but 4acde is valid</p>
      *
-     * @param in Input string
+     * @param in sharedState
      * @return true if all the factories have valid valid configurations.<p> false even if one of the factories has
      * an invalid configuration</p>
      */
@@ -139,7 +138,7 @@ public class ValidStates {
     /**
      * Get the position of letter 'C' , the tiles after which indicate the centre tiles
      *
-     * @param in input Input string
+     * @param in sharedState
      * @return index of letter C
      */
     public static int getCentrePosition(String in) {
@@ -152,7 +151,7 @@ public class ValidStates {
     /**
      * Get all elements of the center tiles as strings
      *
-     * @param in
+     * @param in sharedState
      * @return valid tiles are encoded as is <p> invalid tiles are encoded as Z</p>
      */
     public static String getCenterTiles(String in) {
@@ -171,7 +170,7 @@ public class ValidStates {
      * check if the  [centre] string is well formed as per the documentation. <p>The Centre string must not have
      * any elements other than encoded tiles.</p> Also, these tiles must be in Alphabetical order.
      *
-     * @param in Input string
+     * @param in sharedState
      * @return true if [centre] string is formed as per the documentation<p>false otherwise.</p>
      */
     public static boolean checkCentre(String in) {
@@ -186,7 +185,7 @@ public class ValidStates {
     /**
      * Determines the index of 'B' in [Bag] string.
      *
-     * @param in Input
+     * @param in sharedState
      * @return Index of 'B' , which represents the starting string of [Bag]
      */
     public static int getBagPosition(String in) {
@@ -203,7 +202,7 @@ public class ValidStates {
      * <p>3re Element of the array represents the number of 'd' tiles, from 0 - 20.</p>
      * <p>4th Element of the array represents the number of 'e' tiles, from 0 - 20.</p>
      *
-     * @param in         Input String
+     * @param in         sharedState
      * @param startIndex the index of B in [Bag] or D in [Discard]
      * @param predicate  condition for the termination of for loop <p>x -> x.toString().charAt(0) != '\0' in case of D</p>
      *                   <p>x -> x.toString().charAt(0) != 'D' in case of B</p>
@@ -234,8 +233,7 @@ public class ValidStates {
 
     /**
      * Checks if all the elements in [Bag] are less than 20. <p>Also checks for the length of the [Bag] String</p>
-     *
-     * @param in All the elements in the
+     * @param in sharedState
      * @return true if all the elements in Bag are less than 20. <p>false otherwise</p>
      */
     public static boolean checkContents(String in, int startIndex, Predicate predicate) {
@@ -256,7 +254,7 @@ public class ValidStates {
     /**
      * Determines the index of 'D' in [Discard]
      *
-     * @param in
+     * @param in shaedState
      * @return Index of D
      */
     public static int getDiscardPosition(String in) {
@@ -271,7 +269,7 @@ public class ValidStates {
 
     /**
      * Checks if the length of Discard string is exactly 10
-     * @param in Input string
+     * @param in sharedState
      * @return true if 10.
      */
     public static boolean checkDiscardLength(String in) {
@@ -281,7 +279,7 @@ public class ValidStates {
     /**
      * Unifying methods for checking if the contents of Discard are well formed
      *
-     * @param in
+     * @param in sharedState
      * @return
      */
     static boolean checkContentsDiscard(String in) {
@@ -293,7 +291,7 @@ public class ValidStates {
     /**
      * Unifying methods for checking the contents of bag
      *
-     * @param in
+     * @param in sharedState
      * @return true if the Bag String is well formed
      */
     static boolean checkContentsBag(String in) {
@@ -303,9 +301,9 @@ public class ValidStates {
     }
 
     /**
-     * returns true
-     * @param in
-     * @return
+     * Check if the Factory tile is rightly encoded.
+     * @param in sharedState
+     * @return True if rightly encoded and false if not
      */
     static boolean getAddrEncode(String in) {
         return in.substring(0, 2).contains("F");
@@ -323,9 +321,6 @@ public class ValidStates {
                 "AFCaaabcfeB1108151109D0003010204" // tiles in centre not in alphabetical order.
 
         };
-
-        for (String s : invalid_States)
-            System.out.println(checkFactory(s) && checkCentre(s) && checkContentsDiscard(s) && checkContentsBag(s));
 
     }
 }
