@@ -53,4 +53,65 @@ public class Player {
 
 
 
+
+    public static String[] getEachPlayerStateString (String totalPlayerState){
+        // get number of players -> extend for 4 players
+        int numberOfPlayer = 0;
+        int indexA = totalPlayerState.indexOf("A");
+        int indexB = totalPlayerState.indexOf("B");
+        int indexC = totalPlayerState.indexOf("C");
+        int indexD = totalPlayerState.indexOf("D");
+        int[] player = {indexA, indexB, indexC, indexD};
+        StringBuilder sb = new StringBuilder(totalPlayerState);
+        int numberOfOperations = 0;
+        for (int v : player) {
+            //在sb中插入“-”,第一位不插，没有的不插
+            if (v != -1 && v != 0) {
+                sb.insert(v + numberOfOperations, "-");
+                numberOfOperations++;
+            }
+        }
+        String newString = sb.toString();
+        //split 新string-> String[]。array包含每个playerString
+        String[] playerStringArray = newString.split("-");
+        //key result
+
+        return playerStringArray;
+    }
+
+
+    /**
+     * check get the number of players with the given String playerState
+     * @param totalPlayerState
+     * @return
+     */
+    public static int getNUmberOfPlayer(String totalPlayerState) {
+        // get number of players -> extend for 4 players
+        int numberOfPlayer = 0;
+        int indexA = totalPlayerState.indexOf("A");
+        int indexB = totalPlayerState.indexOf("B");
+        int indexC = totalPlayerState.indexOf("C");
+        int indexD = totalPlayerState.indexOf("D");
+        int[] player = {indexA, indexB, indexC, indexD};
+        StringBuilder sb = new StringBuilder(totalPlayerState);
+        int numberOfOperations = 0;
+        for (int v : player) {
+            //在sb中插入“-”,第一位不插，没有的不插
+            if (v != -1 && v != 0) {
+                sb.insert(v + numberOfOperations, "-");
+                numberOfOperations++;
+            }
+        }
+        String newString = sb.toString();
+        //split 新string-> String[]。array包含每个playerString
+        String[] string1Array = newString.split("-");
+        //key result
+
+        for (String playerString : string1Array) {
+            numberOfPlayer++;
+        }
+        return numberOfPlayer;
+    }
+
+
 }
