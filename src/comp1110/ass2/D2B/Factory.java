@@ -5,7 +5,7 @@ public class Factory {
     public int Number;
 
     /**
-     * Set the
+     * Set the value of tiles to something that is m
      * @param n
      */
     public void setFacNumber(int n){
