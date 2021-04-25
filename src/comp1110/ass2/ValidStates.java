@@ -322,8 +322,5 @@ public class ValidStates {
 
         };
 
-        for (String s : invalid_States)
-            System.out.println(checkFactory(s) && checkCentre(s) && checkContentsDiscard(s) && checkContentsBag(s));
-
     }
 }
