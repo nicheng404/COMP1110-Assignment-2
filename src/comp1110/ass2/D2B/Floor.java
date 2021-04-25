@@ -2,12 +2,12 @@ package comp1110.ass2.D2B;
 
 public class Floor {
 
-        //------------------------------------------Ke Ning fields----------------------------------------------------//
+
         public static final char HEAD = 'F';
         public String floorTilesString; // floor string in state1 without 'M'
-        //------------------------------------------Ke Ning fields----------------------------------------------------//
 
-        //------------------------------------------Ke Ning Methods----------------------------------------------------//
+
+
 
         /**
          * Check whether floor for a certain player is well formed with
@@ -60,5 +60,5 @@ public class Floor {
             }
     }
 
-//------------------------------------------Ke Ning Methods----------------------------------------------------//
+
     }

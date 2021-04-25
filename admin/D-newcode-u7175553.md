@@ -7,20 +7,25 @@ For Deliverable D2D, I contributed the following new statements of original code
 - Added the [makeControls()](https://gitlab.cecs.anu.edu.au/comp1110/comp1110-ass2/-/blob/master/src/comp1110/ass2/gui/Viewer.java#L47-72) function to Viewer class
 - Added the [MAGIC_NUMBERS](https://gitlab.cecs.anu.edu.au/comp1110/comp1110-ass2/-/blob/master/src/comp1110/ass2/Azul.java#L250-307) array.
 
-
 - Added the field char symbol to tile enum class.
 - Added the Mosic class.
+- Added the DraftingFunctions interface.
+- Added the enum values to Tiles class.
+- Added the public static final HEAD to the Mosaic   
 - Added the  [getNUmberOfPlayer()]() function to Player class.
-- Added the GetNUmberOfPlayerTest class as test.
 - Added the  [getEachPlayerStateString]() function to Player class.
-- Added the GetEachPlayerStateStringTest class as test.
 - Added [mosaicTilesWellFormed]() function to mosaic class.
-- Added the MosaicTilesWellFormedTest class as test.
+- Added the getReasonableRandomTile(int[] intBagTiles) to the Player class. 
 - Added Storage class.
 - Added [storageTilesWellFormed]() function to the storage class.
+- Added floor class.
+- Added floorTilesWellFormed to the floor class.
 - 
--
--
+  
+- Added the GetNUmberOfPlayerTest class as test.
+- Added the GetEachPlayerStateStringTest class as test.
+- Added the MosaicTilesWellFormedTest class as test.
+- 
 -
 - etc.
 

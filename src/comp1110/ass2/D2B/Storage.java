@@ -2,12 +2,10 @@ package comp1110.ass2.D2B;
 
 public class Storage {
 
-    //------------------------------------------Ke Ning fields----------------------------------------------------//
+
     public static final char HEAD = 'S';
     public String storageTilesString; // storage string in state1 without 'M'
-    //------------------------------------------Ke Ning fields----------------------------------------------------//
 
-    //------------------------------------------Ke Ning Methods----------------------------------------------------//
 
     /**
      * Check whether storage for a certain player is well formed with
@@ -73,5 +71,5 @@ public class Storage {
         }
 }
 
-//------------------------------------------Ke Ning Methods----------------------------------------------------//
+
 }
