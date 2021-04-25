@@ -7,13 +7,12 @@ For Deliverable D2D, I contributed the following new statements of original code
 - Added the [makeControls()](https://gitlab.cecs.anu.edu.au/comp1110/comp1110-ass2/-/blob/master/src/comp1110/ass2/gui/Viewer.java#L47-72) function to Viewer class
 - Added the [MAGIC_NUMBERS](https://gitlab.cecs.anu.edu.au/comp1110/comp1110-ass2/-/blob/master/src/comp1110/ass2/Azul.java#L250-307) array.
 
-
-- Added the field char symbol to Tiles enum class.
-- Added the Mosic class.
-- Added the Mosic instance field to player class.  
-- Added the DraftingFunctions interface.
-- Added the enum values to Tiles class.
-- Added the public static final HEAD to the Mosaic   
+- Added the [enum values](https://gitlab.cecs.anu.edu.au/u7274095/comp1110-ass2-tue12t/-/blob/master/src/comp1110/ass2/D2B/Tiles.java#L5-10) to Tiles class.
+- Added the [field symbol](https://gitlab.cecs.anu.edu.au/u7274095/comp1110-ass2-tue12t/-/blob/master/src/comp1110/ass2/D2B/Tiles.java#L13) to Tiles enum class.
+- Added the [Mosic class](https://gitlab.cecs.anu.edu.au/u7274095/comp1110-ass2-tue12t/-/blob/master/src/comp1110/ass2/D2B/Mosaic.java).
+- Added the [Mosic instance field](https://gitlab.cecs.anu.edu.au/u7274095/comp1110-ass2-tue12t/-/blob/master/src/comp1110/ass2/D2B/Player.java#L12) to player class.  
+- Added the [DraftingFunctions interface](https://gitlab.cecs.anu.edu.au/u7274095/comp1110-ass2-tue12t/-/blob/master/src/comp1110/ass2/D2B/DraftingFunctions.java).
+- Added the public static final HEAD to the Mosaic.   
 - Added the [getNUmberOfPlayer()]() function to Player class.
 - Added the [getEachPlayerStateString]() function to Player class.
 - Added [mosaicTilesWellFormed]() function to mosaic class.
