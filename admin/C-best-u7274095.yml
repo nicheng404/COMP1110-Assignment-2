@@ -29,20 +29,20 @@ collaboration:
 #
 # Add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external code)
-code:
-  - comment:
-    url:
-    licence:
+#code:
+#  - comment:
+#    url:
+#    licence:
 
 # I wish to submit the following classes as entirely my own (remove this if
 # you want to just submit methods):
-class:
-   - ValidStates
+#class:
+#   - ValidStates
 
 # I wish to submit the following methods as entirely my own (remove this if
 # you want to just submit classes):
-method:
-   - boolean checkContents(String in)
+#method:
+#   - boolean checkContents(String in)
 
 # sign *your* name and uid here
 name: Mukund Balaji Srinivas
