@@ -4,7 +4,7 @@
 #
 # With the given string of the total playerState, the player character A-D are tracked and made to an indexArray.
 # If the character of player exist in the string, the play will be in the game.
-// Except the first playString, an "-" is inserted before each playerState.
+# Except the first playString, an "-" is inserted before each playerState.
 # After that, the total playerState string is split for each player and the number of player can be get.
 # The number of players are counted.
 #
