@@ -394,8 +394,6 @@ public class Azul {
 
             char y = getReasonableRandomTile(newBag);
             return y;
-
-
         }
         // if bag is empty && discard!=0
         else if (bagValue == 0 && discardValue != 0) {
@@ -406,16 +404,12 @@ public class Azul {
 
             char y = getReasonableRandomTile(newBag);
             return y;
-
-
         }
         // if bag is empty && discard=0 -> done
         else if (bagValue == 0 && discardValue == 0) {
             return 'Z';
         }
         return getRandomElement();
-
-
     }
 
     // to get an element of 'abcde' by random.
