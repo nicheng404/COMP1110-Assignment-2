@@ -48,8 +48,8 @@ public abstract class ReadSharedState {
     }
 
     /**
-     * A getter to get address of Delimiters
-     * @return
+     * get addresses of Delimiters for finding all the delimiters in this string
+     * @return Get all the
      */
     public int[] getDelAddr() {
         return DelAddr;

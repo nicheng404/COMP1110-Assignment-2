@@ -1,5 +1,7 @@
 package comp1110.ass2.D2B;
 
+import java.util.ArrayList;
+
 /**
  * @author Mukund Balaji Srinivas
  * <p>Each instance of this class consists of two parts</p>
@@ -10,32 +12,46 @@ package comp1110.ass2.D2B;
  */
 
 public class Factory {
-    public Tiles[] tiles = new Tiles[4];
+    public ArrayList<Tiles> tiles = new ArrayList<>();
     public int Number;
-    boolean isValid;
+    public boolean isValid;
+    public String tileStr;
 
+    Factory(String tileStr){
+        this.tileStr=tileStr;
+    }
     /**
-     * @param tileStr referring to each factory
      * @author Mukund Balaji Srinivas
      * Set the address of each factory
      */
-    public void setFacNumber(String tileStr) {
+    public void setFacNumber() {
         String AddR = tileStr.substring(0, 1);
         this.Number = Integer.parseInt(AddR);
     }
 
     /**
-     * @param tileStr referring to each factory
      * @author Mukund Balaji Srinivas
-     * Takes string and splits it into all the
+     * Takes a string and splits it into all the tiles
      */
-    public void setFacTiles(String tileStr) {
+    public void setFacTiles() {
         for (int i = 0; i < tileStr.substring(1).length(); i++)
             for (Tiles Tile : Tiles.values())
-                if (tileStr.charAt(i) == Tile.symbol)
-                    tiles[i] = Tile;
+                if (tileStr.substring(1).charAt(i) == Tile.symbol)
+                    tiles.add(Tile);
 
     }
 
+    /**
+     * Set the validity of a given factory
+     */
+    public void setIsValid() {
+        setFacTiles();
+        setFacNumber();
+        isValid = tiles.size() == 4 && Number <=8;
+    }
 
+    @Override
+    public String toString() {
+        return "Validity: " + isValid;
+    }
 }
