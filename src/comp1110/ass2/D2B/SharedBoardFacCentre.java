@@ -8,6 +8,7 @@ import java.util.Arrays;
  */
 public class SharedBoardFacCentre extends ReadSharedState {
     public ArrayList<Factory> factories = new ArrayList<>();
+    public Centre centre;
     public boolean isValid;
 
     public SharedBoardFacCentre(String inP) {
@@ -46,6 +47,7 @@ public class SharedBoardFacCentre extends ReadSharedState {
         return retVal;
     }
 
+
     /**
      * @author Mukund Balaji Srinivas
      * Set each factory string to factory
@@ -60,7 +62,9 @@ public class SharedBoardFacCentre extends ReadSharedState {
     }
 
     /**
-     * @return
+     * A getter for factories
+     *
+     * @return factories
      * @author Mukund Balaji Srinivas
      */
     public ArrayList<Factory> getFacs() {
@@ -69,22 +73,28 @@ public class SharedBoardFacCentre extends ReadSharedState {
     }
 
     /**
-     * Check the validity of this factory <p>true if each and every element is valid</p>
      * @return true if each element is valid, false otherwise
+     * @author Mukund Balaji Srinivas
+     * Check the validity of this factory <p>true if each and every element is valid</p>
      */
     public boolean validFac() {
         ArrayList<Factory> Facs = getFacs();
         boolean[] retVal = new boolean[Facs.size()];
-        for (int f=0;f<Facs.size();f++) {
-            if(!Facs.get(f).isValid)
-                retVal[f]=false;
+        for (int f = 0; f < Facs.size(); f++) {
+            if (!Facs.get(f).isValid)
+                retVal[f] = false;
         }
-        boolean[] checkVal=new boolean[Facs.size()];
-        Arrays.fill(checkVal,true);
-        return Arrays.equals(checkVal,retVal);
+        boolean[] checkVal = new boolean[Facs.size()];
+        Arrays.fill(checkVal, true);
+        return Arrays.equals(checkVal, retVal);
     }
 
-
+    public void setCentre() {
+        int stCentre = getDelAddr()[1] + 1;
+        int endCentre = getDelAddr()[2] + 1;
+        Centre c = new Centre(SharedState.substring(stCentre,endCentre));
+        c.setIsValid();
+    }
 
     public static void main(String[] args) {
         String[] invalid_States = {

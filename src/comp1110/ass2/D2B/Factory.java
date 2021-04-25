@@ -1,6 +1,7 @@
 package comp1110.ass2.D2B;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author Mukund Balaji Srinivas
@@ -42,12 +43,27 @@ public class Factory {
     }
 
     /**
+     * @author Mukund Balaji Srinivas
+     * Check if a substring is ordered
+     * @return true if ordered , false otherwise
+     */
+    public boolean isOrdered() {
+        char[] nString = tileStr.substring(1).toCharArray();
+        Arrays.sort(nString);
+        String t = "";
+        for (char c : nString)
+            t += c;
+        return (t.compareTo(tileStr.substring(1))) == 0;
+    }
+
+
+    /**
      * Set the validity of a given factory
      */
     public void setIsValid() {
         setFacTiles();
         setFacNumber();
-        isValid = tiles.size() == 4 && Number <=8;
+        isValid = tiles.size() == 4 && Number <=8 & isOrdered();
     }
 
     @Override
