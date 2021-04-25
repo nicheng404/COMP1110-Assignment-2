@@ -8,10 +8,7 @@ public class Player {
     public boolean isFirstPlayer;
     public boolean isTurn;
 
-    //------KE Ning fields----//
 
-
-    //------KE Ning fields----//
 
     /**
      * Set the next player, who should be playing after the present player
@@ -31,7 +28,7 @@ public class Player {
         return this.pName;
     }
 
-//------------------------------------------------------KE NING---------------------------------------//
+
 
     /**
      * Split the total combined state string of all players into a String[]. The members in String[]
@@ -110,7 +107,7 @@ public class Player {
         return numberOfPlayer;
     }
 
-    //----------------------------------------------Ke Ning----------------------------------------------//
+
 
 
 }

@@ -27,7 +27,7 @@ public class Factory implements DraftingFunctions {
         return tPlayer.nextPlayer;
     }
 
-//---------------------------------------Ke Ning methods----------------------------------------------//
+
 
     /**
      * Get new factory string and new bag string after filling factory from bag (bag is adequate).

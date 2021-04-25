@@ -10,6 +10,8 @@ For Deliverable D2D, I contributed the following new statements of original code
 
 - Added the field char symbol to tile enum class.
 - Added the Mosic class.
+- 
+- Added the public static final HEAD to the Mosaic   
 - Added the  [getNUmberOfPlayer()]() function to Player class.
 - Added the GetNUmberOfPlayerTest class as test.
 - Added the  [getEachPlayerStateString]() function to Player class.
