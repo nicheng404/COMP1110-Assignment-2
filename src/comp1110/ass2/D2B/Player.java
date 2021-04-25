@@ -2,7 +2,6 @@ package comp1110.ass2.D2B;
 
 public class Player {
 
-    public static final String[] Names = {"A", "B", "C", "D"};
     public Player nextPlayer;
     public String pName;
     public boolean isFirstPlayer;
@@ -25,6 +24,19 @@ public class Player {
     public String getpName() {
         return this.pName;
     }
+
+    enum pNames{
+        A("A"),
+        B("B"),
+        C("C"),
+        D("D");
+
+        public String lName;
+        pNames(String lName) {
+            this.lName=lName;
+        }
+    }
+
 
 
 }
