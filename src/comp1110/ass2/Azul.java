@@ -1,5 +1,7 @@
 package comp1110.ass2;
 
+import comp1110.ass2.D2B.Player;
+
 import java.util.Random;
 
 import static comp1110.ass2.ValidStates.*;
@@ -122,43 +124,15 @@ public class Azul {
         // [player][score][mosaic][storage][floor]
         // [A][20][M a02 a13 b00 e42][S 2a1 3e4 4a1][F aabbe]
 
-        //得到每个playerString
 
-        int indexA = playerState.indexOf("A");
-        int indexB = playerState.indexOf("B");
-        int indexC = playerState.indexOf("C");
-        int indexD = playerState.indexOf("D");
-        int[] player = {indexA, indexB, indexC, indexD};
-
-        StringBuilder sb = new StringBuilder(playerState);
-        //插入“-”的次数
-        int numberOfOperations = 0;
-
-        for (int v : player) {
-            //在sb中插入“-”,第一位不插，没有的不插
-            if (v != -1 && v != 0) {
-                sb.insert(v + numberOfOperations, "-");
-                numberOfOperations++;
-            }
-        }
-        //插入“-”后的新string
-        String newString = sb.toString();
-
-        //split 新string-> String[]。array包含每个playerString
-        String[] stringArray = newString.split("-");
-// this is what we want
-
-        int numberOfPlayer = 0;
-
-        for (String playerString : stringArray) {
-            numberOfPlayer++;
-        }
+        int numberOfPlayer = Player.getNUmberOfPlayer(playerState);
+        String[] playerStringArray = Player.getEachPlayerStateString(playerState);
 
         //key result
         int wellFormedPlayer = 0;
 //____________________________________________________________________________________________________//
 
-        for (String playerString : stringArray) {
+        for (String playerString : playerStringArray) {
 
 
             int indexM = playerString.indexOf("M");
