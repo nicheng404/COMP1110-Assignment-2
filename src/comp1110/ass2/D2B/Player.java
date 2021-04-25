@@ -9,6 +9,9 @@ public class Player {
     public String pName;
     public boolean isFirstPlayer;
     public boolean isTurn;
+    public Mosaic playerMosaic;
+    public Storage PlayerStorage;
+    public Floor playerFloor;
 
 
 

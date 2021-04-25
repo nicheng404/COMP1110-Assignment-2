@@ -2,14 +2,14 @@ package comp1110.ass2.D2B;
 
 public class Mosaic {
 
-    //------------------------------------------Ke Ning fields----------------------------------------------------//
+
     public static final char HEAD = 'M';
     public String mosaicTilesString; // mosaic string in state1 without 'M'
-    //------------------------------------------Ke Ning fields----------------------------------------------------//
 
 
 
-    //------------------------------------------Ke Ning methods----------------------------------------------------//
+
+
 
     /**
      * Check whether mosaic for a certain player is well formed with
@@ -77,5 +77,5 @@ public class Mosaic {
     }
 
 
-//------------------------------------------Ke Ning methods----------------------------------------------------//
+
 }
