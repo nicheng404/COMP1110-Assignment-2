@@ -2,13 +2,18 @@ package comp1110.ass2.D2B;
 
 public class Mosaic {
 
-    //------------------------------------------Ke Ning fields----------------------------------------------------//
+
     public static final char HEAD = 'M';
     public String mosaicTilesString; // mosaic string in state1 without 'M'
-    //------------------------------------------Ke Ning fields----------------------------------------------------//
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> c1a31c2aaebfc67e7f15a38371af9dc0bbc60534
     /**
      * Check whether mosaic for a certain player is well formed with
      *  a given certain player mosaic string in state1 without 'M'.
@@ -76,6 +81,7 @@ public class Mosaic {
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -130,6 +136,8 @@ public class Mosaic {
 //            if(tiles)
 // }
 
+=======
+>>>>>>> c1a31c2aaebfc67e7f15a38371af9dc0bbc60534
 }
 
 
