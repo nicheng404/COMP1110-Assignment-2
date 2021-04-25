@@ -10,12 +10,12 @@ public class Centre implements DraftingFunctions {
         this.tiles = tiles;
     }
 
-    @Override
+    //@Override
     public Tiles[] getTiles() {
         return tiles;
     }
 
-    @Override
+    //@Override
     public Player getNextTurn() {
         return tPlayer.nextPlayer;
     }
