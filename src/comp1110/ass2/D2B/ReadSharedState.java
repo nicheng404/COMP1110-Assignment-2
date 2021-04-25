@@ -3,10 +3,11 @@ package comp1110.ass2.D2B;
 import java.util.Arrays;
 
 /**
+ * @author Mukund Balaji Srinivas
  * This class reads the text from the shared state and finds delimiters to split them into
  * [Turn][Factory][Center][Bag][Discard]
  */
-public class ReadSharedState {
+public abstract class ReadSharedState {
     public String SharedState;
     public int[] DelAddr = new int[4];
     static final char[] chString = new char[]{'F', 'C', 'B', 'D'};
@@ -16,8 +17,8 @@ public class ReadSharedState {
     }
 
     /**
+     * @author Mukund Balaji Srinivas
      * Check if all the delimiters are present and there is only one Occurrence of each them.
-     *
      * @return true if all the delimiters are present and there is only one occurrence <p>else false
      */
     public boolean ValidDelimiters() {
@@ -33,6 +34,7 @@ public class ReadSharedState {
     }
 
     /**
+     * @author Mukund Balaji Srinivas
      * Set all the delimiters of the starting all strings
      */
     public void setDelAddr() {
@@ -45,4 +47,11 @@ public class ReadSharedState {
             Arrays.fill(DelAddr, -1);
     }
 
+    /**
+     * A getter to get address of Delimiters
+     * @return
+     */
+    public int[] getDelAddr() {
+        return DelAddr;
+    }
 }
