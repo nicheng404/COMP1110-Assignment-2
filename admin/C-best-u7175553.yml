@@ -10,7 +10,7 @@
 #
 #
 # The codes:( in Java style )
-#
+code:
 #  public static int getNUmberOfPlayer(String playerState) {
 #    // get number of players -> extend for 4 players
 #    int numberOfPlayer = 0;
