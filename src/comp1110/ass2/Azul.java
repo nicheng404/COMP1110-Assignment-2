@@ -2,15 +2,22 @@ package comp1110.ass2;
 
 import java.util.Random;
 
+import static comp1110.ass2.ValidStates.*;
+
 public class Azul {
     /**
      * Given a shared state string, determine if it is well-formed.
      * Note: you don't need to consider validity for this task.
      * A sharedState is well-formed if it satisfies the following conditions.
      * <p>
-     * [factories][centre][bag][discard]
-     * where [factories], [centre], [bag] and [discard] are replaced by the
+     * [turn][factories][centre][bag][discard]
+     * where [turn][factories], [centre], [bag] and [discard] are replaced by the
      * corresponding small string as described below.
+     * <p>
+     * 0. [turn] The Turn substring is one character 'A'-'D' representing a
+     * player, which indicates that it is this player's turn to make the next
+     * drafting move. (In a two-player game, the turn substring can only take
+     * the values 'A' or 'B').
      * <p>
      * 1. [factories] The factories substring begins with an 'F'
      * and is followed by a collection of *up to* 5 5-character factory strings
@@ -56,8 +63,9 @@ public class Azul {
      * TASK 2
      */
     public static boolean isSharedStateWellFormed(String sharedState) {
-        // FIXME Task 2
-        return false;
+        return checkFactory(sharedState) && checkContentsDiscard(sharedState) && checkContentsBag(sharedState) &&
+                checkCentre(sharedState) && getAddrEncode(sharedState);
+
     }
 
     /**
@@ -138,7 +146,7 @@ public class Azul {
 
         //split 新string-> String[]。array包含每个playerString
         String[] stringArray = newString.split("-");
-
+// this is what we want
 
         int numberOfPlayer = 0;
 
@@ -349,7 +357,6 @@ public class Azul {
      * TASK 5
      */
     public static char drawTileFromBag(String[] gameState) {
-        // FIXME Task 5
         String[] draw = new String[2];
         String gs0 = gameState[0];
         String gs1 = gameState[1];
@@ -411,14 +418,14 @@ public class Azul {
 
     }
 
-    //-------------------------------------------------------------------------------------------------//
+    // to get an element of 'abcde' by random.
     public static char getRandomElement() {
         Random rand = new Random();
         String characters = "abcde";
         char randomChar = characters.charAt(rand.nextInt(characters.length()));
         return randomChar;
     }
-
+    // to get a tile which exists inside the bag.
     public static char getReasonableRandomTile(String bagString) { // from string
         // a -> index 0&1 ->substring -> ==0?
         // do - while
