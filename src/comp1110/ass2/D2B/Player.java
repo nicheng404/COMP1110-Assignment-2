@@ -8,6 +8,11 @@ public class Player {
     public boolean isFirstPlayer;
     public boolean isTurn;
 
+    //------KE Ning fields----//
+
+
+    //------KE Ning fields----//
+
     /**
      * Set the next player, who should be playing after the present player
      *
@@ -26,9 +31,18 @@ public class Player {
         return this.pName;
     }
 
+//------------------------------------------------------KE NING---------------------------------------//
 
+    /**
+     * Split the total combined state string of all players into a String[]. The members in String[]
+     * are the state string for each player.
+     *
+     * @param totalPlayerState the total combined player state string for all players, state1
+     * @return String[] playerStringArray. A String array with every player state string for each index
+     * in alphabet order of player.
+     */
 
-    public static String[] getEachPlayerStateString (String totalPlayerState){
+    public static String[] getEachPlayerStateString(String totalPlayerState) {
         // get number of players -> extend for 4 players
         int numberOfPlayer = 0;
         int indexA = totalPlayerState.indexOf("A");
@@ -55,9 +69,10 @@ public class Player {
 
 
     /**
-     * check get the number of players with the given String playerState
-     * @param totalPlayerState
-     * @return
+     * check get the number of players with the given combined total playerState string for all players.
+     *
+     * @param totalPlayerState the total combined player state string for all players, state1
+     * @return int numberOfPlayer. return 999 if the number of player >=5.
      */
     public static int getNUmberOfPlayer(String totalPlayerState) {
         // get number of players -> extend for 4 players
@@ -66,26 +81,36 @@ public class Player {
         int indexB = totalPlayerState.indexOf("B");
         int indexC = totalPlayerState.indexOf("C");
         int indexD = totalPlayerState.indexOf("D");
-        int[] player = {indexA, indexB, indexC, indexD};
-        StringBuilder sb = new StringBuilder(totalPlayerState);
-        int numberOfOperations = 0;
-        for (int v : player) {
-            //在sb中插入“-”,第一位不插，没有的不插
-            if (v != -1 && v != 0) {
-                sb.insert(v + numberOfOperations, "-");
-                numberOfOperations++;
-            }
-        }
-        String newString = sb.toString();
-        //split 新string-> String[]。array包含每个playerString
-        String[] string1Array = newString.split("-");
-        //key result
+        int indexE = totalPlayerState.indexOf("E");
 
-        for (String playerString : string1Array) {
-            numberOfPlayer++;
+        int[] player = {indexA, indexB, indexC, indexD};
+        if (indexA == -1 && indexB == -1 && indexC == -1 && indexD == -1) {
+            numberOfPlayer=0;
+        } else if (indexE!=-1) {
+            numberOfPlayer=999;
+        } else {
+            StringBuilder sb = new StringBuilder(totalPlayerState);
+            int numberOfOperations = 0;
+            for (int v : player) {
+                //在sb中插入“-”,第一位不插，没有的不插
+                if (v != -1 && v != 0) {
+                    sb.insert(v + numberOfOperations, "-");
+                    numberOfOperations++;
+                }
+            }
+            String newString = sb.toString();
+            //split 新string-> String[]。array包含每个playerString
+            String[] string1Array = newString.split("-");
+            //key result
+
+            for (String playerString : string1Array) {
+                numberOfPlayer++;
+            }
         }
         return numberOfPlayer;
     }
+
+    //----------------------------------------------Ke Ning----------------------------------------------//
 
 
 }

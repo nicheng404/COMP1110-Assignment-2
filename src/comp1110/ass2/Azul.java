@@ -1,11 +1,9 @@
 package comp1110.ass2;
 
-import comp1110.ass2.D2B.Player;
+import comp1110.ass2.D2B.*;
 
 import java.util.Random;
-
 import static comp1110.ass2.ValidStates.*;
-
 public class Azul {
     /**
      * Given a shared state string, determine if it is well-formed.
@@ -126,7 +124,8 @@ public class Azul {
 
 
         int numberOfPlayer = Player.getNUmberOfPlayer(playerState);
-        String[] playerStringArray = Player.getEachPlayerStateString(playerState);
+        String[] playerStringArray;
+        playerStringArray = Player.getEachPlayerStateString(playerState);
 
         //key result
         int wellFormedPlayer = 0;
@@ -157,152 +156,20 @@ public class Azul {
                     // before that, get the substring before Storage
                     //int indexS = playerString.indexOf("S");
                     String playerMosaic = playerString.substring(indexM + 1, indexS);
-                    int mosaicLength = playerMosaic.length();
-                    char[] mosaicArray = new char[mosaicLength];
-                    // mosaic -> char[]
-                    mosaicArray = playerMosaic.toCharArray();
-
-                    //criteria : lengthIs3, mosaicChar1Well, mosaicChar2Well, mosaicChar3Well, mosaicOrderWell
-                    boolean mosaiclengthIs3 = false;
-                    boolean mosaicChar1Well = true;
-                    boolean mosaicChar2Well = true;
-                    boolean mosaicChar3Well = true;
-                    boolean mosaicOrderWell = true;
-
-                    //mosaic criteria 1 : check length 是3的倍数
-                    if (mosaicLength % 3 == 0) {
-                        mosaiclengthIs3 = true;
-
-                        //mosaic criteria 2 :1st well
-                        for (int i = 0; i < mosaicLength; i = i + 3) {
-                            if (mosaicArray[i] == 'a' || mosaicArray[i] == 'b'
-                                    || mosaicArray[i] == 'c' || mosaicArray[i] == 'd' || mosaicArray[i] == 'e') {
-                            } else {
-                                mosaicChar1Well = false;
-                            }
-                        }
-                        //mosaic criteria 3 : 2nd well
-                        for (int i = 1; i < mosaicLength; i = i + 3) {
-                            if (mosaicArray[i] == '0' || mosaicArray[i] == '1'
-                                    || mosaicArray[i] == '2' || mosaicArray[i] == '3' || mosaicArray[i] == '4') {
-                            } else {
-                                mosaicChar2Well = false;
-                            }
-                        }
-                        //mosaic criteria 4 : 3rd well
-                        for (int i = 2; i < mosaicLength; i = i + 3) {
-                            if (mosaicArray[i] == '0' || mosaicArray[i] == '1'
-                                    || mosaicArray[i] == '2' || mosaicArray[i] == '3' || mosaicArray[i] == '4') {
-                            } else {
-                                mosaicChar3Well = false;
-                            }
-                        }
-                        //mosaic criteria 5 : order well
-                        for (int i = 1; i + 3 < mosaicLength; i = i + 3) {
-                            if (mosaicArray[i] > mosaicArray[i + 3]) {
-                                mosaicOrderWell = false;
-                            }
-                        }
-                    }
-                    //checking criteria : lengthIs3, mosaicChar1Well, mosaicChar2Well, mosaicChar3Well, mosaicOrderWell
-                    // 0 <= length of the mosaic <= 75.
-                    if (mosaicLength <= 75 && mosaiclengthIs3 && mosaicChar1Well && mosaicChar2Well && mosaicChar3Well && mosaicOrderWell) {
+                    if (Mosaic.mosaicTilesWellFormed(playerMosaic)) {
 
 
                         // check [storage]
                         //得到 storage的substring
                         //int indexF = playerString.indexOf("F");
                         String playerStorage = playerString.substring(indexS + 1, indexF);
-                        int storageLength = playerStorage.length();
-                        char[] storageArray = new char[storageLength];
-                        // storage -> char[]
-                        storageArray = playerStorage.toCharArray();
-
-                        // [storage] criteria:
-                        // 1.length 是3的倍数，0<=length <=15
-                        // 2.row顺序
-                        // 3.char 3rd 最大=char 1st +1
-                        // 4.中间2 a-e
-
-                        boolean storagelengthIs3 = false;
-                        boolean storageOrderWell = true;
-                        boolean storageChar13Well = true;
-                        boolean storageChar2Well = true;
-
-                        //storage criteria 1 : check length 是3的倍数
-                        if (storageLength % 3 == 0) {
-                            storagelengthIs3 = true;
-
-                            //4.中间2 a-e
-                            for (int i = 1; i < storageLength; i = i + 3) {
-                                if (storageArray[i] == 'a' || storageArray[i] == 'b' || storageArray[i] == 'c'
-                                        || storageArray[i] == 'd' || storageArray[i] == 'e') {
-                                } else {
-                                    storageChar2Well = false;
-                                }
-                            }
-
-                            //2.row顺序
-                            for (int i = 0; i + 3 < storageLength; i = i + 3) {
-                                if (storageArray[i] > storageArray[i + 3]) {
-                                    storageOrderWell = false;
-                                }
-                            }
-
-                            //3.char 3rd 最大=char 1st +1
-                            for (int i = 0; i < storageLength; i = i + 3) {
-                                if ((storageArray[i] == '0' || storageArray[i] == '1' || storageArray[i] == '2'
-                                        || storageArray[i] == '3' || storageArray[i] == '4')
-                                        && (storageArray[i + 2] == '0' || storageArray[i + 2] == '1' || storageArray[i + 2] == '2'
-                                        || storageArray[i + 2] == '3' || storageArray[i + 2] == '4' || storageArray[i + 2] == '5')
-                                        && (storageArray[i + 2] <= storageArray[i] + 1)) {
-                                } else {
-                                    storageChar13Well = false;
-                                }
-                            }
-
-                            //check [storage] criteria
-                            if (storageLength <= 15 && storagelengthIs3 && storageOrderWell && storageChar13Well && storageChar2Well) {
+                            if (Storage.storageTilesWellFormed(playerStorage)) {
 
                                 // check [floor]
                                 //得到 floor substring
                                 String playerFloor = playerString.substring(indexF + 1);
-                                int floorLength = playerFloor.length();
-                                char[] floorArray = new char[floorLength];
-                                //string -> char[]
-                                floorArray = playerFloor.toCharArray();
-
-                                // floor criteria:
-                                // 1.length<=7
-                                // 2.order
-                                // 3.a-f
-                                // 4.f <=1
-                                boolean floorOrderWell = true;
-                                boolean floorCharWell = true;
-                                int numberOff = 0;
-
-                                // 3.a-f
-                                for (int i = 0; i < floorLength; i++) {
-                                    if (floorArray[i] == 'f') {
-                                        numberOff++;
-                                    }
-
-                                    if (floorArray[i] == 'a' || floorArray[i] == 'b' || floorArray[i] == 'c'
-                                            || floorArray[i] == 'd' || floorArray[i] == 'e' || floorArray[i] == 'f') {
-                                    } else {
-                                        floorCharWell = false;
-                                    }
-                                }
-
-                                //2.order
-                                for (int i = 0; i + 1 < floorLength; i++) {
-                                    if (floorArray[i] > floorArray[i + 1]) {
-                                        floorOrderWell = false;
-                                    }
-                                }
-
                                 //check criteria
-                                if (floorLength <= 7 && floorOrderWell && floorCharWell && numberOff <= 1) {
+                                if (Floor.floorTilesWellFormed(playerFloor)) {
                                     wellFormedPlayer++;
                                 }
                             }
@@ -310,7 +177,6 @@ public class Azul {
                     }
                 }
             }
-        }
 
 
         if (numberOfPlayer == wellFormedPlayer) {
@@ -543,7 +409,6 @@ public class Azul {
         int bagOfc = Integer.parseInt(bag.substring(4, 6));
         int bagOfd = Integer.parseInt(bag.substring(6, 8));
         int bagOfe = Integer.parseInt(bag.substring(8));
-
         int tileInBag = bagOfa + bagOfb + bagOfc + bagOfd + bagOfe;
 
         //string discard -> int
@@ -582,7 +447,6 @@ public class Azul {
                     shootBack = true;
                 }
             }
-
         }
 
 
@@ -602,55 +466,19 @@ public class Azul {
             //bag adequate
             if (tileInBag >= numberOfTileInFactory) {
 
-                int[] numberOfTilesInBag = {bagOfa, bagOfb, bagOfc, bagOfd, bagOfe};
 
-                for (int i = 0; i < factoryArray.length; i++) {
-                    if (i % 5 == 0) {
-                        factoryArray[i] = (char) ('0' + i / 5);
-                    } else {
+                String[] newFactoryBagArray = Factory.getNewFactoryBagArrayAfterFillingFactoryFromBag_Adequate
+                        (factoryArray, bagOfa, bagOfb, bagOfc, bagOfd, bagOfe);
 
-                        char tile = Azul.getReasonableRandomTile(numberOfTilesInBag);
-
-                        factoryArray[i] = tile;
-                        // check if a/b/c/d/e, operate on array
-                        switch (tile) {
-                            case 'a':
-                                numberOfTilesInBag[0]--;
-                                break;
-                            case 'b':
-                                numberOfTilesInBag[1]--;
-                                break;
-                            case 'c':
-                                numberOfTilesInBag[2]--;
-                                break;
-                            case 'd':
-                                numberOfTilesInBag[3]--;
-                                break;
-                            case 'e':
-                                numberOfTilesInBag[4]--;
-                                break;
-                        }
-                    }
-                }
-
-
-                // char[] factoryarray -> string
-                String newFactoryString = String.valueOf(factoryArray);
+                // get new factory string
+                String newFactoryString = newFactoryBagArray[0];
 
                 // get new discard string
                 //String newDiscardString = "" + (discardOfa * 100000000 + discardOfb * 1000000 + discardOfc * 10000 + discardOfd * 100 + discardOfe);
                 String newDiscardString = discard;
 
                 // get new bag string
-                // 9-> 09
-                String newBagString = "";
-                for (int v : numberOfTilesInBag) {
-                    if (v < 10) {
-                        newBagString = newBagString + "0" + v;
-                    } else {
-                        newBagString = newBagString + v;
-                    }
-                }
+                String newBagString = newFactoryBagArray[1];
 
                 //get centre
                 String center = string0.substring(index0C + 1, index0B);
@@ -680,54 +508,19 @@ public class Azul {
                     discardOfd = 0;
                     discardOfe = 0;
 
-                    int[] numberOfTilesInBagNew = {bagOfa, bagOfb, bagOfc, bagOfd, bagOfe};
+                    String[] newFactoryBagArray = Factory.getNewFactoryBagArrayAfterFillingFactoryFromBag_Adequate
+                            (factoryArray, bagOfa, bagOfb, bagOfc, bagOfd, bagOfe);
 
-                    for (int i = 0; i < factoryArray.length; i++) {
-                        if (i % 5 == 0) {
-                            factoryArray[i] = (char) ('0' + i / 5);
-                        } else {
 
-                            char tile = Azul.getReasonableRandomTile(numberOfTilesInBagNew);
-
-                            factoryArray[i] = tile;
-                            // check if a/b/c/d/e, operate on array
-                            switch (tile) {
-                                case 'a':
-                                    numberOfTilesInBagNew[0]--;
-                                    break;
-                                case 'b':
-                                    numberOfTilesInBagNew[1]--;
-                                    break;
-                                case 'c':
-                                    numberOfTilesInBagNew[2]--;
-                                    break;
-                                case 'd':
-                                    numberOfTilesInBagNew[3]--;
-                                    break;
-                                case 'e':
-                                    numberOfTilesInBagNew[4]--;
-                                    break;
-                            }
-                        }
-                    }
-
-                    // char[] factoryarray -> string
-                    String newFactoryString = String.valueOf(factoryArray);
+                    // get new factory string
+                    String newFactoryString = newFactoryBagArray[0];
 
                     // get new discard string
                     //String newDiscardString = "" + (discardOfa * 100000000 + discardOfb * 1000000 + discardOfc * 10000 + discardOfd * 100 + discardOfe);
                     String newDiscardString = "0000000000";
 
                     // get new bag string
-                    // 9-> 09
-                    String newBagString = "";
-                    for (int v : numberOfTilesInBagNew) {
-                        if (v < 10) {
-                            newBagString = newBagString + "0" + v;
-                        } else {
-                            newBagString = newBagString + v;
-                        }
-                    }
+                    String newBagString = newFactoryBagArray[1];
 
                     //get centre
                     String center = string0.substring(index0C + 1, index0B);
