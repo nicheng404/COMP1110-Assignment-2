@@ -1,8 +1,7 @@
 package comp1110.ass2;
 
+import comp1110.ass2.D2B.Bag;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 

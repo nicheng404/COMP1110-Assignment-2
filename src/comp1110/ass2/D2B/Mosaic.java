@@ -9,8 +9,6 @@ public class Mosaic {
 
 
 
-    //------------------------------------------Ke Ning methods----------------------------------------------------//
-
     /**
      * Check whether mosaic for a certain player is well formed with
      *  a given certain player mosaic string in state1 without 'M'.
@@ -77,7 +75,61 @@ public class Mosaic {
     }
 
 
-//------------------------------------------Ke Ning methods----------------------------------------------------//
+
+
+
+
+    /**
+     * An entire playerState for 2 players might look like this:
+     * "A20 Ma02a13b00e42 S2a13e44a1 Faabbe B30 Mc01b11d21 S0e12b2F"
+     * If we split player A's string into its substrings, we get:
+     * [A][20][Ma02a13b00e42][S2a13e44a1][Faabbe].
+     *
+     * @param playerState the player state string
+     * @return True if the playerState is well-formed,
+     * false if the playerState is not well-formed
+     */
+
+
+    // get the tiles in mosaic.
+    public static String getTilesFromMosaic(String[] playerState) {
+        String[] subStrings = new String[2];
+        String plyst0 = playerState[0];
+        String plyst1 = playerState[1];
+
+        //get substrings
+        int index0A = plyst0.indexOf("A", 1);
+        int index0M = plyst0.indexOf("M", index0A);
+        int index0S = plyst0.indexOf("S", index0M);
+        int index0F = plyst0.indexOf("F", index0S);
+        return plyst0.substring(index0M+1, index0S);
+    }
+
+
+
+    // arrange tiles to place in the mosaic (incomplete function)
+    public void arrangeMosaicTo2DArray(String [] tiles){
+        String [][] string_mosaic = new String [5] [5];
+        for(int j = 0; j < 5; j++)
+        {
+            for(int i = 0; i < 5; i++)
+            {
+                string_mosaic[j][i] = null;
+            }
+        }
+
+    }
+
+//[Ma02a13b00e42] -> rowNumber,color of tiles, number of tiles in the row.
+// arrange tiles to place in the storage
+//   public void arrangeStorageTo2DArray(String [] tiles){
+//       String [][] string_storage = new String [5] [5];
+//    }
+
+//        for(int i=0; i< tiles.length;i++){
+//            if(tiles)
+// }
+
 }
 
 
