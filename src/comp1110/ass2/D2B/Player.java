@@ -1,5 +1,7 @@
 package comp1110.ass2.D2B;
 
+import static comp1110.ass2.Azul.getRandomElement;
+
 public class Player {
 
     public static final String[] Names = {"A", "B", "C", "D"};
@@ -108,6 +110,48 @@ public class Player {
     }
 
 
+    /**
+     *
+     * @param intBagTiles
+     * @return
+     */
+    public static char getReasonableRandomTile(int[] intBagTiles) { // from int[5]
+        // do - while
+        char wanted = '!';
+        boolean bagHasNot = true;
+        do {
+            char x = getRandomElement();
+            int index = 999;
+            //get index of x
+            switch (x) {
+                case 'a':
+                    index = 0;
+                    break;
+                case 'b':
+                    index = 1;
+                    break;
+                case 'c':
+                    index = 2;
+                    break;
+                case 'd':
+                    index = 3;
+                    break;
+                case 'e':
+                    index = 4;
+                    break;
+            }
+            //check bag with x
+            int numberOfx = intBagTiles[index];
+
+            if (numberOfx != 0) {
+                bagHasNot = false;
+                wanted = x;
+            }
+        } while (bagHasNot);
+
+        // char x-> wanted
+        return wanted;
+    }
 
 
 }
