@@ -1,6 +1,6 @@
 # New Code for Deliverable D2D
 
-## < uid > < name >
+ u7175553 Ke Ning
 
 For Deliverable D2D, I contributed the following new statements of original code:
 
