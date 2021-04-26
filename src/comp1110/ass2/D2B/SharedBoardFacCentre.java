@@ -73,11 +73,11 @@ public class SharedBoardFacCentre extends ReadSharedState {
     }
 
     /**
-     * @return true if each element is valid, false otherwise
+     * @return true if each element in factory is valid, false otherwise
      * @author Mukund Balaji Srinivas
      * Check the validity of this factory <p>true if each and every element is valid</p>
      */
-    public boolean validFac() {
+    public boolean getFacValid() {
         ArrayList<Factory> Facs = getFacs();
         boolean[] retVal = new boolean[Facs.size()];
         for (int f = 0; f < Facs.size(); f++) {
@@ -89,11 +89,41 @@ public class SharedBoardFacCentre extends ReadSharedState {
         return Arrays.equals(checkVal, retVal);
     }
 
+    /**
+     * @author Mukund Balaji Srinivas
+     * Set the centre tiles
+     */
     public void setCentre() {
         int stCentre = getDelAddr()[1] + 1;
         int endCentre = getDelAddr()[2] + 1;
-        Centre c = new Centre(SharedState.substring(stCentre,endCentre));
-        c.setIsValid();
+        try {
+            centre = new Centre(SharedState.substring(stCentre, endCentre));
+            centre.setIsValid();
+        } catch (Exception e) {
+            isValid=false;
+
+        }
+    }
+
+    public boolean getCentreValid() {
+        this.setCentre();
+        return centre.isValid;
+    }
+
+    /**
+     * Check the validity of all the tiles from factory to centre
+     */
+    public void setIsValid() {
+        boolean cenVal = getCentreValid();
+        boolean facVal = getFacValid();
+        isValid = cenVal && facVal && super.isValidDelimiter;
+    }
+
+    @Override
+    public String toString() {
+        setIsValid();
+        return "SharedBoardFacCentre " +
+                "isValid= " + isValid;
     }
 
     public static void main(String[] args) {
@@ -104,12 +134,13 @@ public class SharedBoardFacCentre extends ReadSharedState {
                 "AF0aace1acdd2abce3bbee4cdeCB3117163714D0000000000", // greater than 20 tiles (one colour) in bag.
                 "BF0aace1acdd2abce3bbee4cdeeCB161716171413D0000000000", // greater than 11 characters in bag string
                 "AF0aace1acdd2abce3bbee4cdeeCB1617161714D00000000000", // greater than 11 characters in discard string
-                "AFCaaabcfeB1108151109D0003010204" // tiles in centre not in alphabetical order.
+                "AFCaaabcfeB1108151109D0003010204", // tiles in centre not in alphabetical order.
+                "A!0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000" // Totally valid
 
         };
-        SharedBoardFacCentre shBd = new SharedBoardFacCentre(invalid_States[0]);
-        for (Factory f : shBd.getFacs())
-            System.out.println(f);
+        SharedBoardFacCentre shBd = new SharedBoardFacCentre(invalid_States[7]);
+        shBd.setIsValid();
+        System.out.println(shBd);
     }
 
 }

@@ -3,7 +3,7 @@ package comp1110.ass2.D2B;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Centre  {
+public class Centre {
     public ArrayList<Tiles> tiles = new ArrayList<>();
     public boolean isValid;
     public String tileStr;
@@ -16,25 +16,28 @@ public class Centre  {
      * @author Mukund Balaji Srinivas
      * Takes a string and splits it into all the tiles
      */
-    public void setCentreTiles(){
-        for (int i = 0; i < tileStr.length(); i++)
-            for (Tiles Tile : Tiles.values())
-                if (tileStr.charAt(i) == Tile.symbol)
+    public void setCentreTiles() {
+        for (int i = 0; i < tileStr.substring(1).length(); i++) {
+            for (Tiles Tile : Tiles.values()) {
+                if (tileStr.substring(1).charAt(i) == Tile.symbol)
                     tiles.add(Tile);
+            }
+        }
     }
 
+
     /**
+     * @return true if ordered , false otherwise
      * @author Mukund Balaji Srinivas
      * Check if a substring is ordered
-     * @return true if ordered , false otherwise
      */
     public boolean isOrdered() {
-        char[] nString = tileStr.toCharArray();
+        char[] nString = tileStr.substring(1).toCharArray();
         Arrays.sort(nString);
         String t = "";
         for (char c : nString)
             t += c;
-        return (t.compareTo(tileStr)) == 0;
+        return (t.compareTo(tileStr.substring(1))) == 0;
     }
 
     /**
@@ -45,13 +48,11 @@ public class Centre  {
         isValid = isOrdered();
     }
 
+
     @Override
     public String toString() {
         return "Centre{" +
                 "isValid=" + isValid +
                 '}';
     }
-    /**
-     * Induced some changes
-     */
 }

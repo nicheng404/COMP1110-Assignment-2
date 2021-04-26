@@ -18,9 +18,10 @@ public class Factory {
     public boolean isValid;
     public String tileStr;
 
-    Factory(String tileStr){
-        this.tileStr=tileStr;
+    Factory(String tileStr) {
+        this.tileStr = tileStr;
     }
+
     /**
      * @author Mukund Balaji Srinivas
      * Set the address of each factory
@@ -43,9 +44,9 @@ public class Factory {
     }
 
     /**
-     * @author Mukund Balaji Srinivas
      * Check if a substring is ordered
      * @return true if ordered , false otherwise
+     * @author Mukund Balaji Srinivas
      */
     public boolean isOrdered() {
         char[] nString = tileStr.substring(1).toCharArray();
@@ -53,7 +54,7 @@ public class Factory {
         String t = "";
         for (char c : nString)
             t += c;
-        return (t.compareTo(tileStr.substring(1))) == 0;
+        return (t.compareTo(tileStr.substring(1).substring(1))) == 0;
     }
 
 
@@ -63,14 +64,12 @@ public class Factory {
     public void setIsValid() {
         setFacTiles();
         setFacNumber();
-        isValid = tiles.size() == 4 && Number <=8 & isOrdered();
+        isValid = tiles.size() == 4 && Number <= 8 && isOrdered();
     }
 
     @Override
     public String toString() {
         return "Validity: " + isValid;
     }
-    /**
-     * Made some changes that have been asesome
-     */
+
 }

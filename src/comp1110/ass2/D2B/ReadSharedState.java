@@ -11,17 +11,18 @@ public abstract class ReadSharedState {
     public String SharedState;
     public int[] DelAddr = new int[4];
     static final char[] chString = new char[]{'F', 'C', 'B', 'D'};
+    public boolean isValidDelimiter;
 
     public ReadSharedState(String sharedState) {
         this.SharedState = sharedState;
     }
 
     /**
+     * @return true if all the delimiters are present and there is only one occurrence <p>else false
      * @author Mukund Balaji Srinivas
      * Check if all the delimiters are present and there is only one Occurrence of each them.
-     * @return true if all the delimiters are present and there is only one occurrence <p>else false
      */
-    public boolean ValidDelimiters() {
+    public void setValidDelimiters() {
         String tString = this.SharedState.substring(1);
         boolean[] retVal = new boolean[4];
         Arrays.fill(retVal, false);
@@ -30,7 +31,7 @@ public abstract class ReadSharedState {
             if (tString.indexOf(chString[i]) == tString.lastIndexOf(chString[i]) && (tString.indexOf(chString[i]) != -1))
                 retVal[i] = true;
         }
-        return Arrays.equals(retVal, chVal);
+        isValidDelimiter = Arrays.equals(retVal, chVal);
     }
 
     /**
@@ -39,7 +40,8 @@ public abstract class ReadSharedState {
      */
     public void setDelAddr() {
         String tString = this.SharedState.substring(1);
-        if (this.ValidDelimiters()) {
+        this.setValidDelimiters();
+        if (this.isValidDelimiter) {
             for (int i = 0; i < chString.length; i++) {
                 DelAddr[i] = tString.indexOf(chString[i]);
             }
@@ -48,9 +50,9 @@ public abstract class ReadSharedState {
     }
 
     /**
+     * @return Get all the
      * @author Mukund Balaji Srinivas
      * get addresses of Delimiters for finding all the delimiters in this string
-     * @return Get all the
      */
     public int[] getDelAddr() {
         return DelAddr;
