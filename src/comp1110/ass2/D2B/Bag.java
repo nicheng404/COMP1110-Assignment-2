@@ -41,6 +41,8 @@ public class Bag {
         } else return false;
     }
 
+
+
     // return a random element from 'abcde'.
     public static char getRandomElement () {
         Random rand = new Random();
