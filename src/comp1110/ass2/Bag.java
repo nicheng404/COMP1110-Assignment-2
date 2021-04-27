@@ -1,4 +1,4 @@
-package comp1110.ass2.D2B;
+package comp1110.ass2;
 
 
 import java.util.Random;
