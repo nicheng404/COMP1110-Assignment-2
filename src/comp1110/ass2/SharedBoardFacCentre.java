@@ -123,8 +123,9 @@ public class SharedBoardFacCentre extends ReadSharedState {
     public String toString() {
         setIsValid();
         return "SharedBoardFacCentre " +
-                "isValid= " + isValid;
+                "isValid = " + isValid;
     }
+
 
     public static void main(String[] args) {
         String[] invalid_States = {
