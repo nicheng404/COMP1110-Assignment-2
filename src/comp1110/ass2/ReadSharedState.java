@@ -18,12 +18,11 @@ public abstract class ReadSharedState {
     }
 
     /**
-     * @return true if all the delimiters are present and there is only one occurrence <p>else false
      * @author Mukund Balaji Srinivas
      * Check if all the delimiters are present and there is only one Occurrence of each them.
      */
     public void setValidDelimiters() {
-        String tString = this.SharedState.substring(1);
+        String tString = SharedState.substring(1);
         boolean[] retVal = new boolean[4];
         Arrays.fill(retVal, false);
         final boolean[] chVal = new boolean[]{true, true, true, true};
@@ -40,8 +39,8 @@ public abstract class ReadSharedState {
      */
     public void setDelAddr() {
         String tString = this.SharedState.substring(1);
-        this.setValidDelimiters();
-        if (this.isValidDelimiter) {
+        setValidDelimiters();
+        if (isValidDelimiter) {
             for (int i = 0; i < chString.length; i++) {
                 DelAddr[i] = tString.indexOf(chString[i]);
             }

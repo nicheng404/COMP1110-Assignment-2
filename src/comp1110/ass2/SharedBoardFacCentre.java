@@ -13,86 +13,48 @@ public class SharedBoardFacCentre extends ReadSharedState {
 
     public SharedBoardFacCentre(String inP) {
         super(inP);
-        this.setDelAddr();
+        super.setDelAddr();
+        setFac();
+        setCentre();
+        setValid();
     }
 
-    /**
-     * @return ArrayList of indices representing the starting of each factory
-     * @author Mukund Balaji Srinivas
-     * The list of indices of starting of each factory i.e the index within the input string
-     */
-    public ArrayList<Integer> getAllNums() {
-        ArrayList<Integer> numAddr = new ArrayList<>();
-        int stFac = getDelAddr()[0] + 1;
-        int eFac = getDelAddr()[1] + 1;
-        for (int i = stFac; i < eFac; i++) {
-            if ((super.SharedState.charAt(i) >= '0' && super.SharedState.charAt(i) <= '8'))
-                numAddr.add(i);
+
+    public void setFac() {
+        int stF = getDelAddr()[0] + 1;
+        int endF = getDelAddr()[1] + 1;
+        String Facs = super.SharedState;
+        ArrayList<Integer> FacAddr = new ArrayList<>();
+        for (int c = stF; c < endF; c++) {
+            if (Facs.charAt(c) >= '0' && Facs.charAt(c) <= '8') {
+                FacAddr.add(c);
+            }
+
         }
-        numAddr.add(eFac);
-        return numAddr;
-    }
-
-    /**
-     * @return Array of strings that can be input to generate factories
-     * @author Mukund Balaji Srinivas
-     * The number Get all the Factory strings
-     */
-    public ArrayList<String> getFacString() {
-        ArrayList<Integer> numAddr = getAllNums();
-        ArrayList<String> retVal = new ArrayList<>();
-        for (int i = 0; i < getAllNums().size() - 1; i++) {
-            retVal.add(super.SharedState.substring(numAddr.get(i), numAddr.get(i + 1)));
+        FacAddr.add(endF);
+        ArrayList<String> FacStrings = new ArrayList<>();
+        for(int i=0;i<FacAddr.size()-1;i++){
+            FacStrings.add(super.SharedState.substring(FacAddr.get(i),FacAddr.get(i+1)));
         }
-        return retVal;
-    }
-
-
-    /**
-     * @author Mukund Balaji Srinivas
-     * Set each factory string to factory
-     */
-    public void setFacs() {
-        ArrayList<String> getFacStrings = getFacString();
-        for (String s : getFacStrings) {
+        for(String s:FacStrings){
             Factory f = new Factory(s);
-            f.setIsValid();
             factories.add(f);
         }
     }
 
-    /**
-     * A getter for factories
-     *
-     * @return factories
-     * @author Mukund Balaji Srinivas
-     */
-    public ArrayList<Factory> getFacs() {
-        setFacs();
-        return factories;
-    }
-
-    /**
-     * @return true if each element in factory is valid, false otherwise
-     * @author Mukund Balaji Srinivas
-     * Check the validity of this factory <p>true if each and every element is valid</p>
-     */
-    public boolean getFacValid() {
-        ArrayList<Factory> Facs = getFacs();
-        boolean[] retVal = new boolean[Facs.size()];
-        for (int f = 0; f < Facs.size(); f++) {
-            if (!Facs.get(f).isValid)
-                retVal[f] = false;
+    public void setValid(){
+        boolean [] refValFac = new boolean[factories.size()];
+        boolean  refValCentre = centre.isValid;
+        for(int i=0;i<factories.size();i++){
+            refValFac[i]=factories.get(i).isValid;
         }
-        boolean[] checkVal = new boolean[Facs.size()];
-        Arrays.fill(checkVal, true);
-        return Arrays.equals(checkVal, retVal);
+        boolean [] chkValFac = new boolean[factories.size()];
+        Arrays.fill(chkValFac,true);
+        isValid = Arrays.equals(chkValFac,refValFac) && refValCentre  ;
+
     }
 
-    /**
-     * @author Mukund Balaji Srinivas
-     * Set the centre tiles
-     */
+
     public void setCentre() {
         int stCentre = getDelAddr()[1] + 1;
         int endCentre = getDelAddr()[2] + 1;
@@ -100,30 +62,14 @@ public class SharedBoardFacCentre extends ReadSharedState {
             centre = new Centre(SharedState.substring(stCentre, endCentre));
             centre.setIsValid();
         } catch (Exception e) {
-            isValid=false;
+            isValid = false;
 
         }
     }
 
-    public boolean getCentreValid() {
-        this.setCentre();
-        return centre.isValid;
-    }
-
-    /**
-     * Check the validity of all the tiles from factory to centre
-     */
-    public void setIsValid() {
-        boolean cenVal = getCentreValid();
-        boolean facVal = getFacValid();
-        isValid = cenVal && facVal && super.isValidDelimiter;
-    }
-
     @Override
     public String toString() {
-        setIsValid();
-        return "SharedBoardFacCentre " +
-                "isValid = " + isValid;
+        return "Validity " + isValid ;
     }
 
 
@@ -140,8 +86,8 @@ public class SharedBoardFacCentre extends ReadSharedState {
 
         };
         SharedBoardFacCentre shBd = new SharedBoardFacCentre(invalid_States[7]);
-        shBd.setIsValid();
         System.out.println(shBd);
+
     }
 
 }

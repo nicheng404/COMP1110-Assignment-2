@@ -20,6 +20,7 @@ public class Factory {
 
     Factory(String tileStr) {
         this.tileStr = tileStr;
+        setIsValid();
     }
 
     /**
@@ -51,10 +52,10 @@ public class Factory {
     public boolean isOrdered() {
         char[] nString = tileStr.substring(1).toCharArray();
         Arrays.sort(nString);
-        String t = "";
+        StringBuilder t = new StringBuilder();
         for (char c : nString)
-            t += c;
-        return (t.compareTo(tileStr.substring(1).substring(1))) == 0;
+            t.append(c);
+        return tileStr.substring(1).compareTo(t.toString()) == 0;
     }
 
 
@@ -69,7 +70,7 @@ public class Factory {
 
     @Override
     public String toString() {
-        return "Validity: " + isValid;
+        return "" + Number + tileStr.substring(1) + "\n";
     }
 
 }
