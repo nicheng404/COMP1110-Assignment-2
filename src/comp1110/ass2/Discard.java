@@ -1,32 +1,46 @@
 package comp1110.ass2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Discard {
-    public Tiles[] dTiles;
-
-    /**
-     * Get all the tiles in Discard
-     *
-     * @return dTiles
-     */
-    public Tiles[] getdTiles() {
-        return dTiles;
-    }
+    public static final Tiles[] names = {Tiles.B, Tiles.G, Tiles.O, Tiles.P, Tiles.R};
+    public ArrayList<Integer> TileCount = new ArrayList<>();
+    public int nElements;
+    public boolean isValid;
+    public String gameStr;
 
 
     /**
-     * Push tiles to discard at the end of the array
+     * Set the elements of the bag from its gamestate
      *
-     * @param pushTiles
      */
-    public void pushToDiscard(Tiles[] pushTiles) {
-        Tiles[] newArr = Arrays.copyOf(dTiles, dTiles.length + pushTiles.length);
-        int j = 0;
-        for (int i = dTiles.length; i < newArr.length && j < pushTiles.length; i++) {
-            newArr[i] = pushTiles[j];
-            j++;
+    public void setDiscard() {
+        if (isValid) {
+            for (int i = 0; i < gameStr.substring(1).length() - 2; i += 2) {
+                TileCount.add(Integer.parseInt(gameStr.substring(1).substring(i, i + 2)));
+            }
         }
+
     }
+
+    /**
+     * Check if the given gamestate is valid
+     */
+    public void isValid() {
+        isValid = gameStr.substring(1).length() == 10;
+    }
+
+    /**
+     * Count the number of elements in the given bag
+     */
+    public void setnElements(){
+        int count=0;
+        for(Integer i:TileCount){
+            count+=i;
+        }
+        nElements=count;
+    }
+
 
 }
