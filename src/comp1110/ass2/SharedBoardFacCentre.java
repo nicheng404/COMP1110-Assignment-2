@@ -33,24 +33,24 @@ public class SharedBoardFacCentre extends ReadSharedState {
         }
         FacAddr.add(endF);
         ArrayList<String> FacStrings = new ArrayList<>();
-        for(int i=0;i<FacAddr.size()-1;i++){
-            FacStrings.add(super.SharedState.substring(FacAddr.get(i),FacAddr.get(i+1)));
+        for (int i = 0; i < FacAddr.size() - 1; i++) {
+            FacStrings.add(super.SharedState.substring(FacAddr.get(i), FacAddr.get(i + 1)));
         }
-        for(String s:FacStrings){
+        for (String s : FacStrings) {
             Factory f = new Factory(s);
             factories.add(f);
         }
     }
 
-    public void setValid(){
-        boolean [] refValFac = new boolean[factories.size()];
-        boolean  refValCentre = centre.isValid;
-        for(int i=0;i<factories.size();i++){
-            refValFac[i]=factories.get(i).isValid;
+    public void setValid() {
+        boolean[] refValFac = new boolean[factories.size()];
+        boolean refValCentre = centre.isValid;
+        for (int i = 0; i < factories.size(); i++) {
+            refValFac[i] = factories.get(i).isValid;
         }
-        boolean [] chkValFac = new boolean[factories.size()];
-        Arrays.fill(chkValFac,true);
-        isValid = Arrays.equals(chkValFac,refValFac) && refValCentre  ;
+        boolean[] chkValFac = new boolean[factories.size()];
+        Arrays.fill(chkValFac, true);
+        isValid = Arrays.equals(chkValFac, refValFac) && refValCentre;
 
     }
 
@@ -69,7 +69,7 @@ public class SharedBoardFacCentre extends ReadSharedState {
 
     @Override
     public String toString() {
-        return "Validity " + isValid ;
+        return "Validity " + isValid;
     }
 
 
@@ -82,7 +82,7 @@ public class SharedBoardFacCentre extends ReadSharedState {
                 "BF0aace1acdd2abce3bbee4cdeeCB161716171413D0000000000", // greater than 11 characters in bag string
                 "AF0aace1acdd2abce3bbee4cdeeCB1617161714D00000000000", // greater than 11 characters in discard string
                 "AFCaaabcfeB1108151109D0003010204", // tiles in centre not in alphabetical order.
-                "A!0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000" // Totally valid
+                "AF0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000" // Totally valid
 
         };
         SharedBoardFacCentre shBd = new SharedBoardFacCentre(invalid_States[7]);

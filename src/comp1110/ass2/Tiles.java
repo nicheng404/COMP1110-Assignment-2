@@ -2,11 +2,11 @@ package comp1110.ass2;
 
 //Define a class Tiles that can be used by all the classes
 public enum Tiles {
-    B("Blue", "a",'a'),
+    B("Blue", "a", 'a'),
     G("Green", "b", 'b'),
     O("Orange", "c", 'c'),
     P("Purple", "d", 'd'),
-    R("Red", "e",'e'),
+    R("Red", "e", 'e'),
     FP("First Player", "f", 'f');
     public String longName;
     public String encode;
@@ -21,6 +21,6 @@ public enum Tiles {
 
     @Override
     public String toString() {
-        return "" + encode ;
+        return "" + encode;
     }
 }

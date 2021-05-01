@@ -13,7 +13,6 @@ public class Discard {
 
     /**
      * Set the elements of the bag from its gamestate
-     *
      */
     public void setDiscard() {
         if (isValid) {
@@ -34,12 +33,12 @@ public class Discard {
     /**
      * Count the number of elements in the given bag
      */
-    public void setnElements(){
-        int count=0;
-        for(Integer i:TileCount){
-            count+=i;
+    public void setnElements() {
+        int count = 0;
+        for (Integer i : TileCount) {
+            count += i;
         }
-        nElements=count;
+        nElements = count;
     }
 
 

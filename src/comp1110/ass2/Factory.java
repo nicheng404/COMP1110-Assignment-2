@@ -46,6 +46,7 @@ public class Factory {
 
     /**
      * Check if a substring is ordered
+     *
      * @return true if ordered , false otherwise
      * @author Mukund Balaji Srinivas
      */
