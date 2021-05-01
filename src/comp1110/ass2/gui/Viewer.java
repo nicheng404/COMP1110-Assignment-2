@@ -8,62 +8,31 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+public class Viewer extends Application {
 
-    public class Viewer extends Application {
+    private static final int VIEWER_WIDTH = 1200;
+    private static final int VIEWER_HEIGHT = 700;
 
-        private static final int VIEWER_WIDTH = 1200;
-        private static final int VIEWER_HEIGHT = 700;
-
-        private final Group root = new Group();
-        private final Group controls = new Group();
-        private TextField playerTextField;
-        private TextField boardTextField;
+    private final Group root = new Group();
+    private final Group controls = new Group();
+    private TextField playerTextField;
+    private TextField boardTextField;
 
 
-        /**
-         * Draw a placement in the window, removing any previously drawn placements
-         *
-         * @param state an array of two strings, representing the current game state
-         *              TASK 4
-         */
+    /**
+     * Draw a placement in the window, removing any previously drawn placements
+     *
+     * @param state an array of two strings, representing the current game state
+     *              TASK 4
+     */
+    void displayState(String[] state) {
+        // FIXME Task 4: implement the simple state viewer
+    }
 
-        void displayState(String[] state) {
-            // FIXME Task 4: implement the simple state viewer
-            //creating the image object
-            try{
-                Image image = this.drawImage("assets/drafting_c.png");
-                displayImage(image);
-            }catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-        }
-        private Image drawImage(String imagePath) throws FileNotFoundException {
-            InputStream stream = new FileInputStream(imagePath);
-            Image image = new Image(stream);
-            return image;
-        }
-
-        private void displayImage(Image image) throws FileNotFoundException {
-            ImageView imageView = new ImageView();
-            imageView.setImage(image);
-            //Setting the image view parameters
-            imageView.setX(10);
-            imageView.setY(10);
-            imageView.setFitWidth(100);
-            imageView.setPreserveRatio(true);
-            controls.getChildren().add(imageView);
-        }
-
-        /**
+    /**
      * Create a basic text field for input and a refresh button.
      */
     private void makeControls() {
@@ -103,5 +72,4 @@ import java.io.InputStream;
         primaryStage.show();
     }
 }
-
 
