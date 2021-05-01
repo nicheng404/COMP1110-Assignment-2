@@ -13,7 +13,7 @@ public abstract class ReadSharedState {
     static final char[] chString = new char[]{'F', 'C', 'B', 'D'};
     public boolean isValidDelimiter;
 
-    public ReadSharedState(String sharedState) {
+    public ReadSharedState(String inString) {
         this.SharedState = sharedState;
     }
 
@@ -46,6 +46,20 @@ public abstract class ReadSharedState {
             }
         } else
             Arrays.fill(DelAddr, -1);
+    }
+
+    /**
+     * Set the sharedState that can be used to get all the shared state variables
+     * @param inString The value that needs to be checked for the presence of [Turn]
+     * @return
+     */
+    public String setSharedState(String inString) {
+        String retVal = "";
+        if (inString.charAt(0) >= 'A' && inString.charAt(0) <= 'D')
+            retVal = inString.substring(1);
+        else
+            retVal = inString;
+        return retVal;
     }
 
     /**

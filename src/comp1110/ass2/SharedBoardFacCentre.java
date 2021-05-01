@@ -54,7 +54,6 @@ public class SharedBoardFacCentre extends ReadSharedState {
 
     }
 
-
     public void setCentre() {
         int stCentre = getDelAddr()[1] + 1;
         int endCentre = getDelAddr()[2] + 1;
@@ -65,6 +64,11 @@ public class SharedBoardFacCentre extends ReadSharedState {
             isValid = false;
 
         }
+    }
+
+    public String whereToMove(String move){
+        if(move.charAt(2)>='0' && move.charAt(1)<='8')
+            factories[(int) move.charAt(1)].move();
     }
 
     @Override

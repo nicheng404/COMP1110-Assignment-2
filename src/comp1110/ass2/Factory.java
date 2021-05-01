@@ -69,6 +69,10 @@ public class Factory {
         isValid = tiles.size() == 4 && Number <= 8 && isOrdered();
     }
 
+    public String move(){
+        return Tiles.B.encode;
+    }
+
     @Override
     public String toString() {
         return "" + Number + tileStr.substring(1) + "\n";
