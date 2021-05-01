@@ -13,8 +13,9 @@ public abstract class ReadSharedState {
     static final char[] chString = new char[]{'F', 'C', 'B', 'D'};
     public boolean isValidDelimiter;
 
+
     public ReadSharedState(String inString) {
-        this.SharedState = sharedState;
+        this.SharedState = setSharedState(inString);
     }
 
     /**
@@ -22,7 +23,7 @@ public abstract class ReadSharedState {
      * Check if all the delimiters are present and there is only one Occurrence of each them.
      */
     public void setValidDelimiters() {
-        String tString = SharedState.substring(1);
+        String tString = SharedState;
         boolean[] retVal = new boolean[4];
         Arrays.fill(retVal, false);
         final boolean[] chVal = new boolean[]{true, true, true, true};
@@ -38,7 +39,7 @@ public abstract class ReadSharedState {
      * Set all the delimiters of the starting all strings
      */
     public void setDelAddr() {
-        String tString = this.SharedState.substring(1);
+        String tString = this.SharedState;
         setValidDelimiters();
         if (isValidDelimiter) {
             for (int i = 0; i < chString.length; i++) {
@@ -51,10 +52,10 @@ public abstract class ReadSharedState {
     /**
      * Set the sharedState that can be used to get all the shared state variables
      * @param inString The value that needs to be checked for the presence of [Turn]
-     * @return
+     * @return Return the version of the string that has to be used as an Input
      */
     public String setSharedState(String inString) {
-        String retVal = "";
+        String retVal ;
         if (inString.charAt(0) >= 'A' && inString.charAt(0) <= 'D')
             retVal = inString.substring(1);
         else

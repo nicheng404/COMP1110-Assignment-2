@@ -9,7 +9,8 @@ public class Centre {
     public String tileStr;
 
     public Centre(String tileStr) {
-        this.tileStr = tileStr;
+        this.tileStr = tileStr.substring(1);
+        setCentreTiles();
     }
 
     /**
@@ -17,42 +18,34 @@ public class Centre {
      * Takes a string and splits it into all the tiles
      */
     public void setCentreTiles() {
-        for (int i = 0; i < tileStr.substring(1).length(); i++) {
+        for (int i = 0; i < tileStr.length(); i++) {
             for (Tiles Tile : Tiles.values()) {
-                if (tileStr.substring(1).charAt(i) == Tile.symbol)
+                if (tileStr.charAt(i) == Tile.symbol)
                     tiles.add(Tile);
             }
+            isValid=isOrdered();
         }
     }
 
 
     /**
-     * @return true if ordered , false otherwise
      * @author Mukund Balaji Srinivas
      * Check if a substring is ordered
+     * @return true if ordered , false otherwise
      */
     public boolean isOrdered() {
-        char[] nString = tileStr.substring(1).toCharArray();
+        char[] nString = tileStr.toCharArray();
         Arrays.sort(nString);
-        String t = "";
+        StringBuilder t = new StringBuilder();
         for (char c : nString)
-            t += c;
-        return (t.compareTo(tileStr.substring(1))) == 0;
-    }
-
-    /**
-     * Set the validity of a given Centre
-     */
-    public void setIsValid() {
-        setCentreTiles();
-        isValid = isOrdered();
+            t.append(c);
+        return (t.toString().compareTo(tileStr)) == 0;
     }
 
 
     @Override
     public String toString() {
-        return "Centre{" +
-                "isValid=" + isValid +
-                '}';
+        return "Centre " +  isValid;
+
     }
 }
