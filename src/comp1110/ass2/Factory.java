@@ -74,7 +74,12 @@ public class Factory {
 
     @Override
     public String toString() {
-        return "" + Number + tileStr.substring(1) + "\n";
+        StringBuilder retString = new StringBuilder();
+        for(Tiles t:tiles){
+            retString.append(t.encode);
+        }
+        retString.insert(0,Number);
+        return retString.toString();
     }
 
 }

@@ -45,7 +45,10 @@ public class Centre {
 
     @Override
     public String toString() {
-        return "Centre " +  isValid;
-
+        StringBuilder retString = new StringBuilder();
+        for(Tiles t:tiles){
+            retString.append(t.encode);
+        }
+        return retString.toString();
     }
 }

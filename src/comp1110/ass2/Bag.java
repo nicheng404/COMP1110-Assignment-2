@@ -1,6 +1,7 @@
 package comp1110.ass2;
 
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -75,9 +76,11 @@ public class Bag {
 
     @Override
     public String toString() {
-        return "Bag " +
-                  isValid +
-                " gameStr= " + gameStr;
-
+        StringBuilder retString= new StringBuilder();
+        DecimalFormat formatter = new DecimalFormat("00");
+        for(Integer i:TileCount)
+            retString.append(formatter.format(i));
+        retString.insert(0,"B");
+        return retString.toString();
     }
 }
