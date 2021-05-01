@@ -1,7 +1,6 @@
 package comp1110.ass2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Discard {
     public static final Tiles[] names = {Tiles.B, Tiles.G, Tiles.O, Tiles.P, Tiles.R};
@@ -10,24 +9,22 @@ public class Discard {
     public boolean isValid;
     public String gameStr;
 
+    Discard(String gameStr){
+        this.gameStr=gameStr;
+        setDiscard();
+    }
 
     /**
      * Set the elements of the bag from its gamestate
      */
     public void setDiscard() {
+        isValid = gameStr.length()==10;
         if (isValid) {
-            for (int i = 0; i < gameStr.substring(1).length() - 2; i += 2) {
-                TileCount.add(Integer.parseInt(gameStr.substring(1).substring(i, i + 2)));
+            for (int i = 0; i < gameStr.length() ; i += 2) {
+                TileCount.add(Integer.parseInt(gameStr.substring(i, i + 2)));
             }
         }
 
-    }
-
-    /**
-     * Check if the given gamestate is valid
-     */
-    public void isValid() {
-        isValid = gameStr.substring(1).length() == 10;
     }
 
     /**
@@ -39,6 +36,14 @@ public class Discard {
             count += i;
         }
         nElements = count;
+    }
+
+    @Override
+    public String toString() {
+        return "Discard " +
+                isValid +
+                " gameStr= " + gameStr;
+
     }
 
 

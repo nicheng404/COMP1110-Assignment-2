@@ -12,6 +12,7 @@ public class SharedBoardBagDiscard extends ReadSharedState {
         super(inP);
         super.setDelAddr();
         setBag();
+        setDiscard();
     }
 
     /**
@@ -22,6 +23,15 @@ public class SharedBoardBagDiscard extends ReadSharedState {
         int eBag = getDelAddr()[3] + 1;
         bag = new Bag(super.SharedState.substring(stBag, eBag).substring(1));
     }
+
+    /**
+     * Set the contents of Discard
+     */
+    public void setDiscard(){
+        int stDis=getDelAddr()[3]+1;
+        discard = new Discard(super.SharedState.substring(stDis+1));
+    }
+
 
     public static void main(String[] args) {
         String[] invalid_States = {
@@ -37,6 +47,7 @@ public class SharedBoardBagDiscard extends ReadSharedState {
         };
         SharedBoardBagDiscard shBd=new SharedBoardBagDiscard(invalid_States[7]);
         System.out.println(shBd.bag);
+        System.out.println(shBd.discard);
     }
 
 }
