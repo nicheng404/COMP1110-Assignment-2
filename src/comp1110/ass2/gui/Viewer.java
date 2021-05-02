@@ -7,9 +7,13 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
 
 public class Viewer extends Application {
 
@@ -18,19 +22,25 @@ public class Viewer extends Application {
 
     private final Group root = new Group();
     private final Group controls = new Group();
+    Button button = new Button("Refresh");
+    TextArea textArea = new TextArea();
     private TextField playerTextField;
     private TextField boardTextField;
 
 
     /**
-     * Draw a placement in the window, removing any previously drawn placements
-     *
-     * @param state an array of two strings, representing the current game state
-     *              TASK 4
+     * @author Yanyan-Lui
      */
     void displayState(String[] state) {
-        // FIXME Task 4: implement the simple state viewer
+        String playerState = playerTextField.getText();
+        String boardState = boardTextField.getText();
+        StringBuilder stateVal = new StringBuilder();
+        for(String s:state){
+            stateVal.append(s);
+        }
+        textArea.appendText(stateVal.toString());
     }
+
 
     /**
      * Create a basic text field for input and a refresh button.
@@ -43,12 +53,9 @@ public class Viewer extends Application {
         boardTextField = new TextField();
         boardTextField.setPrefWidth(100);
         Button button = new Button("Refresh");
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
+        button.setOnAction(event -> {
                 displayState(new String[]{playerTextField.getText(),
                         boardTextField.getText()});
-            }
         });
         HBox hb = new HBox();
         hb.getChildren().addAll(playerLabel, playerTextField, boardLabel,

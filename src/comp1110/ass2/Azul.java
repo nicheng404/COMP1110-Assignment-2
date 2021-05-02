@@ -59,8 +59,8 @@ public class Azul {
      * TASK 2
      */
     public static boolean isSharedStateWellFormed(String sharedState) {
-        // FIXME Task 2
-        return false;
+        SharedBoard ShBd = new SharedBoard(sharedState);
+        return ShBd.getValidity();
     }
 
     /**

@@ -23,8 +23,8 @@ public class Centre {
                 if (tileStr.charAt(i) == Tile.symbol)
                     tiles.add(Tile);
             }
-            isValid=isOrdered();
         }
+        isValid=isOrdered() ;
     }
 
 
@@ -39,7 +39,7 @@ public class Centre {
         StringBuilder t = new StringBuilder();
         for (char c : nString)
             t.append(c);
-        return (t.toString().compareTo(tileStr)) == 0;
+        return (t.toString().compareTo(tileStr)) == 0 ;
     }
 
 
