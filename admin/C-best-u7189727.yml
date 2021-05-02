@@ -1,9 +1,43 @@
-<<<<<<< HEAD
-# My best code is 'int bagValue = Integer.parseInt(bag); '
-# This code ables me to change from a string to an integer so that it will be so much
-# easier for me to do my remaining work such as comparing.
-=======
-# The following codes are my best code.
+# Here are my best codes (in Java style) as a method of checking the number of players.
+# This may extend the capability of number of plays in game although
+# only 2 players are mentioned in these tasks' requirements.
+#
+# With the given string of the total playerState, the player character A-D are tracked and made to an indexArray.
+# If the character of player exist in the string, the play will be in the game.
+# Except the first playString, an "-" is inserted before each playerState.
+# After that, the total playerState string is split for each player and the number of player can be get.
+# The number of players are counted.
+#
+#
+# The codes:( in Java style )
+
+#  public static int getNUmberOfPlayer(String playerState) {
+#    // get number of players -> extend for 4 players
+#    int numberOfPlayer = 0;
+#    int indexA = playerState.indexOf("A");
+#    int indexB = playerState.indexOf("B");
+#    int indexC = playerState.indexOf("C");
+#    int indexD = playerState.indexOf("D");
+#    int[] player = {indexA, indexB, indexC, indexD};
+#    StringBuilder sb = new StringBuilder(playerState);
+#    int numberOfOperations = 0;
+#  for (int v : player) {
+#    if (v != -1 && v != 0) {
+#    sb.insert(v + numberOfOperations, "-");
+#    numberOfOperations++;
+#    }
+#  }
+#    String newString = sb.toString();
+#
+#    String[] string1Array = newString.split("-");
+#    //key result
+#    int wellFormedPlayer = 0;
+#  for (String playerString : string1Array) {
+#    numberOfPlayer++;
+#  }
+#    return numberOfPlayer;
+#  }
+
 # IMPORTANT: It is very important that you correctly complete this originality
 # statement.
 #

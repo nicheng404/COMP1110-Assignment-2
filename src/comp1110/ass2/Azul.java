@@ -1,5 +1,12 @@
 package comp1110.ass2;
 
+<<<<<<< HEAD
+import comp1110.ass2.*;
+
+import java.util.Random;
+import static comp1110.ass2.ValidStates.*;
+=======
+>>>>>>> origin/developmentbranchqw
 public class Azul {
     /**
      * Given a shared state string, determine if it is well-formed.
@@ -177,6 +184,64 @@ public class Azul {
      */
     public static String[] nextRound(String[] gameState) {
         // FIXME TASK 8
+        // FIXME TASK 8
+
+        String str0=gameState[0];
+        String str1=gameState[1];
+        //get number of players
+        int numberOfPlayer = Player.getNUmberOfPlayer(str1);
+
+        //get discard string(without 'D')
+        String originalDiscard=Discard.getDiscardString(str0);
+        //get centre string(without 'S')
+
+        //string discard -> int[] discardArr
+
+
+        int discardOfa = Integer.parseInt(originalDiscard.substring(0, 2));
+        int discardOfb = Integer.parseInt(originalDiscard.substring(2, 4));
+        int discardOfc = Integer.parseInt(originalDiscard.substring(4, 6));
+        int discardOfd = Integer.parseInt(originalDiscard.substring(6, 8));
+        int discardOfe = Integer.parseInt(originalDiscard.substring(8));
+        int[] discardArr = {discardOfa, discardOfb, discardOfc, discardOfd, discardOfe};
+
+        //Split the playerState for each.
+        String[] allPlayerState = Player.getEachPlayerStateString(str1);
+
+        //get all scores[] for now
+        int[] allPlayerScore=new int[numberOfPlayer];
+        for(int i=0;i<allPlayerScore.length;i++){
+            allPlayerScore[i]=Score.getScore(allPlayerState[i]);
+        }
+
+        //Get all floor strings[].If a floor is empty, allFloors[i]="".
+        String[] allFloors= new String[numberOfPlayer];
+        for (int i=0;i<allFloors.length;i++){
+            if (!(Floor.floorIsEmpty(allPlayerState[i]))){
+                allFloors[i]=Floor.getFloorString(allPlayerState[i]);
+            } else {
+                allFloors[i]="";
+            }
+        }
+
+        // lose marks from floor.-> new allPlayerScore[]
+        for (int i=0;i<allFloors.length;i++){
+            if (allFloors[i].equals("")){
+            }else{
+                allPlayerScore[i]=allPlayerScore[i]+Floor.getMarksFromFloor(allFloors[i]);
+            }
+        }
+
+        // Empty floor->centre/discard
+
+
+
+
+
+
+
+
+
         return null;
     }
 
