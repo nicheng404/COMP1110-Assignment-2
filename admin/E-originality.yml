@@ -30,8 +30,8 @@ declaration: >-
 #
 # Add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external code)
-#code:
-#  - comment:
+code:
+  - comment: Some codes from Board.java, GameTile.java are from Dinosaur.java which was the past year Ass1 and it is the material given by tutor.
 #    url:
 #    licence:
 

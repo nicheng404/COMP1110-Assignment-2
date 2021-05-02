@@ -61,7 +61,7 @@ Reviewing code written by: Mukund Balaji Srinivas, u7274095
 
 ### Comments
 
-<The above codes connects the object Factory with a given state String. 
+The above codes connects the object Factory with a given state String. 
 The tile String was stored as a Field 'public String tileStr'. 
 The best features of the above codes: 
 An ArrayList of 'Tiles' is built to represent the tile information, instead of using pure String or Array. 
@@ -71,6 +71,6 @@ What's more, by treated as an Object and Fields, many methods could be generated
 The class and method structure are also appropriate. A certain proper style is also well consistent throughout.
 While it still has a potential error when the game is running: 
 In the setFacNumber() method, the 'f' tile should not be assigned to factory's tiles. 
-It does not have a check procedure for this condition, which might generated some errors about 'f' in game running.>
+It does not have a check procedure for this condition, which might generated some errors about 'f' in game running.
 
 
