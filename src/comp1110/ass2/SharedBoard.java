@@ -1,4 +1,4 @@
-package comp1110.ass2.D2B;
+package comp1110.ass2;
 
 /**
  * This is an abstract representation of the Shared board components which are Factory,Center,Discard.

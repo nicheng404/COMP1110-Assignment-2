@@ -1,4 +1,4 @@
-package comp1110.ass2.D2B;
+package comp1110.ass2;
 
 //Define a class Tiles that can be used by all the classes
 public enum Tiles {

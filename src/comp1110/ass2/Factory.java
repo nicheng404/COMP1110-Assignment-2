@@ -1,8 +1,4 @@
-package comp1110.ass2.D2B;
-
-import comp1110.ass2.Azul;
-
-import java.util.function.Predicate;
+package comp1110.ass2;
 
 public class Factory implements DraftingFunctions {
     public Tiles[] tiles = new Tiles[4];

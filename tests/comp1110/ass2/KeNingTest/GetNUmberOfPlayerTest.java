@@ -1,9 +1,7 @@
 package comp1110.ass2.KeNingTest;
-import comp1110.ass2.D2B.Player;
-import org.junit.jupiter.api.Assertions;
+import comp1110.ass2.Player;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

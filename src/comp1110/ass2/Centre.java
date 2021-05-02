@@ -1,6 +1,4 @@
-package comp1110.ass2.D2B;
-
-import java.util.function.Predicate;
+package comp1110.ass2;
 
 public class Centre implements DraftingFunctions {
     public Tiles[] tiles;

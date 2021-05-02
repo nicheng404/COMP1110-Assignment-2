@@ -1,4 +1,4 @@
-package comp1110.ass2.D2B;
+package comp1110.ass2;
 
 import static comp1110.ass2.Azul.getRandomElement;
 
