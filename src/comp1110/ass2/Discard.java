@@ -1,5 +1,6 @@
 package comp1110.ass2;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Discard {
@@ -40,11 +41,14 @@ public class Discard {
 
     @Override
     public String toString() {
-        return "Discard " +
-                isValid +
-                " gameStr= " + gameStr;
-
+        StringBuilder retString= new StringBuilder();
+        DecimalFormat formatter = new DecimalFormat("00");
+        for(Integer i:TileCount)
+            retString.append(formatter.format(i));
+       retString.insert(0,"D");
+        return retString.toString();
     }
+
 
 
 }

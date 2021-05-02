@@ -46,7 +46,6 @@ public class Factory {
 
     /**
      * Check if a substring is ordered
-     *
      * @return true if ordered , false otherwise
      * @author Mukund Balaji Srinivas
      */
@@ -69,9 +68,18 @@ public class Factory {
         isValid = tiles.size() == 4 && Number <= 8 && isOrdered();
     }
 
+    public String move(){
+        return Tiles.B.encode;
+    }
+
     @Override
     public String toString() {
-        return "" + Number + tileStr.substring(1) + "\n";
+        StringBuilder retString = new StringBuilder();
+        for(Tiles t:tiles){
+            retString.append(t.encode);
+        }
+        retString.insert(0,Number);
+        return retString.toString();
     }
 
 }
