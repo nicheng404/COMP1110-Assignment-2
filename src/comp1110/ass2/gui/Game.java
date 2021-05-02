@@ -79,7 +79,7 @@ public class Game extends Application {
         dropShadow = new DropShadow();
         dropShadow.setOffsetX(2.0);
         dropShadow.setOffsetY(2.0);
-        dropShadow.setColor(Tiles);
+   //     dropShadow.setColor(Tiles);
 
     }
 

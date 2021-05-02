@@ -8,5 +8,9 @@ public class GameTile {
 
     public GameTile(String placement) {
     }
+
+    public Location getLocation() {
+        return null;
+    }
 }
 
