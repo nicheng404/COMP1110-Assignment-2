@@ -32,8 +32,6 @@ public class Viewer extends Application {
      * @author Yanyan-Lui
      */
     void displayState(String[] state) {
-        String playerState = playerTextField.getText();
-        String boardState = boardTextField.getText();
         StringBuilder stateVal = new StringBuilder();
         for(String s:state){
             stateVal.append(s);
