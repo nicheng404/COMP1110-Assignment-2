@@ -23,6 +23,7 @@ public class Mosaic {
 
     public static boolean mosaicTilesWellFormed(String mosaicTilesString) {
 
+
         // mosaic -> char[]
         int mosaicLength = mosaicTilesString.length();
         char[] mosaicArray = new char[mosaicLength];
