@@ -140,7 +140,7 @@ This is a suggested mosaic pattern. It obeys all the rules of the variant mosaic
 1. Go through your storage rows from row 0 to row 4 and move the **rightmost** tile of each **complete** row to the space
    of the same colour in the corresponding row of the mosaic. The pattern can be seen in the image below.
 
-<img src="assets/beginner_mosaic_pattern.PNG" width="250"> 
+<img src="assets/blue-a%20tile.PNG" width="250"> 
 
 *Each time you move a tile, score points **immediately***.
 

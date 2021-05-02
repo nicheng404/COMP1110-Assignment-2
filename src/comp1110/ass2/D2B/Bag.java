@@ -1,6 +1,8 @@
 package comp1110.ass2.D2B;
 
 
+import comp1110.ass2.Tiles;
+
 import java.util.Random;
 
 public class Bag {
