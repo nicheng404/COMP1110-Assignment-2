@@ -136,7 +136,7 @@ public class SharedBoard {
     }
 
     /**
-     * get a string that retpresents the sharedstate with delimiters
+     * get a string that represents the sharedstate with delimiters
      *
      * @return Shared State [Factories][Centre][Bag][Discard]
      */
