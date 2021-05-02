@@ -4,6 +4,8 @@ Reviewed by: Ke Ning, u7175553
 
 Reviewing code written by: Mukund Balaji Srinivas, u7274095
 
+Component: Factory.java
+
     public class Factory {
         public ArrayList<Tiles> tiles = new ArrayList<>();
         public int Number;
