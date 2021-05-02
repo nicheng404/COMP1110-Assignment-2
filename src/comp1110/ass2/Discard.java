@@ -1,8 +1,12 @@
 package comp1110.ass2;
 
+<<<<<<< HEAD
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+=======
+import java.util.ArrayList;
+>>>>>>> origin/developmentbranchqw
 
 public class Discard {
     public static final Tiles[] names = {Tiles.B, Tiles.G, Tiles.O, Tiles.P, Tiles.R};
@@ -42,6 +46,7 @@ public class Discard {
 
     @Override
     public String toString() {
+<<<<<<< HEAD
         StringBuilder retString= new StringBuilder();
         DecimalFormat formatter = new DecimalFormat("00");
         for(Integer i:TileCount)
@@ -93,3 +98,13 @@ public class Discard {
 
 
 }
+=======
+        return "Discard " +
+                isValid +
+                " gameStr= " + gameStr;
+
+    }
+
+
+}
+>>>>>>> origin/developmentbranchqw
