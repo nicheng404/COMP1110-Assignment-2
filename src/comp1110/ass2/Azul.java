@@ -1,6 +1,6 @@
 package comp1110.ass2;
 
-import comp1110.ass2.D2B.*;
+import comp1110.ass2.*;
 
 import java.util.Random;
 import static comp1110.ass2.ValidStates.*;
