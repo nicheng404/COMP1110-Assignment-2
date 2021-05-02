@@ -18,20 +18,25 @@ public class Centre {
      * Takes a string and splits it into all the tiles
      */
     public void setCentreTiles() {
-        for (int i = 0; i < tileStr.length(); i++) {
-            for (Tiles Tile : Tiles.values()) {
-                if (tileStr.charAt(i) == Tile.symbol)
-                    tiles.add(Tile);
+        try {
+            for (int i = 0; i < tileStr.length(); i++) {
+                for (Tiles Tile : Tiles.values()) {
+                    if (tileStr.charAt(i) == Tile.symbol)
+                        tiles.add(Tile);
+                }
             }
+            isValid = isOrdered();
+        } catch (Exception e) {
+            isValid = false;
         }
-        isValid=isOrdered() ;
+
     }
 
 
     /**
+     * @return true if ordered , false otherwise
      * @author Mukund Balaji Srinivas
      * Check if a substring is ordered
-     * @return true if ordered , false otherwise
      */
     public boolean isOrdered() {
         char[] nString = tileStr.toCharArray();
@@ -39,14 +44,14 @@ public class Centre {
         StringBuilder t = new StringBuilder();
         for (char c : nString)
             t.append(c);
-        return (t.toString().compareTo(tileStr)) == 0 ;
+        return (t.toString().compareTo(tileStr)) == 0;
     }
 
 
     @Override
     public String toString() {
         StringBuilder retString = new StringBuilder();
-        for(Tiles t:tiles){
+        for (Tiles t : tiles) {
             retString.append(t.encode);
         }
         return retString.toString();

@@ -27,33 +27,25 @@ public class SharedBoard {
         public SharedBoardBagDiscard(String inP) {
             super(inP);
             super.setDelAddr();
-            setBag();
-            setDiscard();
-            setValidity();
+            setBagDiscard();
         }
 
         /**
          * Set the contents of bag
          */
-        public void setBag() {
-            int stBag = getDelAddr()[2];
-            int eBag = getDelAddr()[3];
-            bag = new Bag(super.SharedState.substring(stBag, eBag).substring(1));
-
+        public void setBagDiscard() {
+            try {
+                int stBag = getDelAddr()[2];
+                int eBag = getDelAddr()[3];
+                int stDis = getDelAddr()[3];
+                bag = new Bag(super.SharedState.substring(stBag, eBag).substring(1));
+                discard = new Discard(super.SharedState.substring(stDis + 1));
+                isValid = bag.isValid && discard.isValid;
+            } catch (Exception e) {
+                isValid = false;
+            }
         }
 
-        /**
-         * Set the contents of Discard
-         */
-        public void setDiscard() {
-            int stDis = getDelAddr()[3];
-            discard = new Discard(super.SharedState.substring(stDis + 1));
-        }
-
-
-        public void setValidity() {
-            isValid = bag.isValid && discard.isValid;
-        }
 
         @Override
         public String toString() {
@@ -72,60 +64,51 @@ public class SharedBoard {
         public SharedBoardFacCentre(String inP) {
             super(inP);
             super.setDelAddr();
-            setFac();
-            setCentre();
-            setValidity();
+            setFacCentre();
+
         }
 
         /**
          * Set all the fields associated with a given factory
          * number and tiles
          */
-        public void setFac() {
-            int stF = getDelAddr()[0];
-            int endF = getDelAddr()[1];
-            String Facs = super.SharedState;
-            ArrayList<Integer> FacAddr = new ArrayList<>();
-            for (int c = stF; c < endF; c++) {
-                if (Facs.charAt(c) >= '0' && Facs.charAt(c) <= '8') {
-                    FacAddr.add(c);
+        public void setFacCentre() {
+            try {
+                int stF = getDelAddr()[0];
+                int endF = getDelAddr()[1];
+                int stCentre = getDelAddr()[1];
+                int endCentre = getDelAddr()[2];
+                String Facs = super.SharedState;
+                ArrayList<Integer> FacAddr = new ArrayList<>();
+                for (int c = stF; c < endF; c++) {
+                    if (Facs.charAt(c) >= '0' && Facs.charAt(c) <= '8') {
+                        FacAddr.add(c);
+                    }
+
                 }
-
+                FacAddr.add(endF);
+                ArrayList<String> FacStrings = new ArrayList<>();
+                for (int i = 0; i < FacAddr.size() - 1; i++) {
+                    FacStrings.add(super.SharedState.substring(FacAddr.get(i), FacAddr.get(i + 1)));
+                }
+                for (String s : FacStrings) {
+                    Factory f = new Factory(s);
+                    factories.add(f);
+                }
+                centre = new Centre(SharedState.substring(stCentre, endCentre));
+                boolean[] refValFac = new boolean[factories.size()];
+                boolean refValCentre = centre.isValid;
+                for (int i = 0; i < factories.size(); i++) {
+                    refValFac[i] = factories.get(i).isValid;
+                }
+                boolean[] chkValFac = new boolean[factories.size()];
+                Arrays.fill(chkValFac, true);
+                isValid = Arrays.equals(chkValFac, refValFac) && refValCentre;
             }
-            FacAddr.add(endF);
-            ArrayList<String> FacStrings = new ArrayList<>();
-            for (int i = 0; i < FacAddr.size() - 1; i++) {
-                FacStrings.add(super.SharedState.substring(FacAddr.get(i), FacAddr.get(i + 1)));
+            catch (Exception e){
+                isValid = false;
             }
-            for (String s : FacStrings) {
-                Factory f = new Factory(s);
-                factories.add(f);
-            }
-        }
 
-        /**
-         * Set the validity of the [factory][centre]
-         */
-        public void setValidity() {
-            boolean[] refValFac = new boolean[factories.size()];
-            boolean refValCentre = centre.isValid;
-            for (int i = 0; i < factories.size(); i++) {
-                refValFac[i] = factories.get(i).isValid;
-            }
-            boolean[] chkValFac = new boolean[factories.size()];
-            Arrays.fill(chkValFac, true);
-            isValid = Arrays.equals(chkValFac, refValFac) && refValCentre ;
-
-        }
-
-        /**
-         * @author Mukund Balaji Srinivas
-         * Set the Centre Tiles
-         */
-        public void setCentre() {
-            int stCentre = getDelAddr()[1];
-            int endCentre = getDelAddr()[2];
-            centre = new Centre(SharedState.substring(stCentre, endCentre));
 
         }
 
@@ -163,12 +146,5 @@ public class SharedBoard {
         return retString;
     }
 
-    public static void main(String[] args) {
-        String[] InVal = {"AF0cdde1bbbe2abde3cdee4bcceCfB1915161614D0000000000", "AFCB1915161614D0000000000"};
-        SharedBoard shBd = new SharedBoard(InVal[0]);
-        System.out.println(shBd.toString());
-        System.out.println(shBd.getValidity());
-
-    }
 }
 
