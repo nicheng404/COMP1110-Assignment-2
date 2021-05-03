@@ -1,19 +1,10 @@
 package comp1110.ass2;
 
 
-<<<<<<< HEAD
-import comp1110.ass2.Tiles;
 
-import java.util.Random;
-
-public class Bag {
-    public static String[] tiles;
-    public static final Tiles FirstPlayer = Tiles.FP;
-    public int bagTiles;
-    private static final int NUMBER_OF_TILES = 100;
-=======
 import java.util.ArrayList;
 import java.util.Random;
+
 
 public class Bag {
     public static final Tiles[] names = {Tiles.B, Tiles.G, Tiles.O, Tiles.P, Tiles.R};
@@ -26,14 +17,11 @@ public class Bag {
         this.gameStr = gameStr;
         setBag();
     }
->>>>>>> origin/developmentbranchqw
 
     /**
      * Given the gameState, draw a *random* tile from the bag.
      * If the bag is empty, refill the the bag with the discard pile and then draw a tile.
      * If the discard pile is also empty, return 'Z'.
-<<<<<<< HEAD
-     *
      * @param gameState the current game state
      * @return the tile drawn from the bag, or 'Z' if the bag and discard pile are empty.
      */
@@ -73,11 +61,6 @@ public class Bag {
 
 
 
-=======
-     * Why not randomize the draw itself ??
-     *
-     * @return the tile drawn from the bag, or 'Z' if the bag and discard pile are empty.
-     */
 
     public Tiles getTilesFromBag() {
         Random rand = new Random();
@@ -134,5 +117,5 @@ public class Bag {
                 " gameStr= " + gameStr;
 
     }
->>>>>>> origin/developmentbranchqw
+
 }
