@@ -205,7 +205,6 @@ public class Factory {
         // number of factories = 2*number of player+1;
         int numberOfFactories = 2 * numberOfPlayer + 1;
 
-//__________________________________________________________________________________________________________________//
 
 
         int numberOfTileInFactory = numberOfFactories * 4;
