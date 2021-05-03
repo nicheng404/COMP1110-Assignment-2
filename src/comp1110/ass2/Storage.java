@@ -9,12 +9,12 @@ public class Storage {
 
     /**
      * Check whether storage for a certain player is well formed with
-     *  a given certain player storage string in state1 without 'S'.
+     * a given certain player storage string in state1 without 'S'.
      *
      * @param storageTilesString storage string for a certain player in state1 without 'S'.
      * @return true/false. whether storage for a certain player is well formed.
      */
-    public static boolean storageTilesWellFormed(String storageTilesString){
+    public static boolean storageTilesWellFormed(String storageTilesString) {
         // storage -> char[]
         int storageLength = storageTilesString.length();
         char[] storageArray = new char[storageLength];
@@ -62,7 +62,7 @@ public class Storage {
                     storageChar13Well = false;
                 }
             }
-    }
+        }
         if (storageLength <= 15 && storagelengthIs3
                 && storageOrderWell && storageChar13Well && storageChar2Well) {
             return true;
@@ -70,7 +70,4 @@ public class Storage {
             return false;
         }
 
-}
-
-
-}
+    }
