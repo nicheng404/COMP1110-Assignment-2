@@ -1,15 +1,18 @@
 package comp1110.ass2;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Mosaic {
-    public ArrayList<ArrayList<Tiles>> mosaic = new ArrayList<ArrayList<Tiles>>();
+    public ArrayList<ArrayList<Tiles>> mosaic = new ArrayList<>();
     public boolean isValid;
     public String inString;
+    Mosaic(String inString){
+        this.inString=inString;
+        setMosaic();
+    }
 
-    public void setMosaic(String inString) {
+    public void setMosaic() {
         //Get the address of these tiles and check if they are valid by checking for their lengths
         ArrayList<Integer> tileAddr = new ArrayList<>();
         for (int i = 0; i < inString.length(); i++) {
@@ -26,7 +29,7 @@ public class Mosaic {
         boolean[] trueArray = new boolean[checkVal.length];
         Arrays.fill(trueArray, true);
         isValid = Arrays.equals(trueArray, checkVal);
-        Integer row = 0, col = 0;
+        int row , col ;
         if (isValid) {
             for (int i = 0; i < tileAddr.size(); i++) {
                 row = Integer.parseInt(inString.substring(tileAddr.get(i + 1), tileAddr.get(i + 2)));
