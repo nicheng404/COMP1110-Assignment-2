@@ -115,64 +115,7 @@ public class Azul {
      * TASK 3
      */
     public static boolean isPlayerStateWellFormed(String playerState) {
-        // FIXME Task 3
-        // [player][score][mosaic][storage][floor]
-        // [A][20][M a02 a13 b00 e42][S 2a1 3e4 4a1][F aabbe]
-
-
-        int numberOfPlayer = Player.getNUmberOfPlayer(playerState);
-        String[] playerStringArray;
-        playerStringArray = Player.getEachPlayerStateString(playerState);
-
-        //key result
-        int wellFormedPlayer = 0;
-//____________________________________________________________________________________________________//
-        for (String playerString : playerStringArray) {
-
-            int indexM = playerString.indexOf("M");
-            int indexS = playerString.indexOf("S");
-            int indexF = playerString.indexOf("F");
-            // check [player]&& M S F
-            if ((playerString.charAt(0) == 'A' || playerString.charAt(0) == 'B'
-                    || playerString.charAt(0) == 'C'
-                    || playerString.charAt(0) == 'D')
-                    && (indexM != -1) && (indexS != -1) && (indexF != -1)) {
-                // check [score]
-                // before that, get the substring before M and check value
-                //int indexM = playerString.indexOf("M");
-                String playerScore = playerString.substring(1, indexM);
-                int value = Integer.parseInt(playerScore);
-                if (value >= 0 && value <= 999) {
-
-                    // check [mosaic]
-                    // before that, get the substring before Storage
-                    //int indexS = playerString.indexOf("S");
-                    String playerMosaic = playerString.substring(indexM + 1, indexS);
-                    if (Mosaic.mosaicTilesWellFormed(playerMosaic)) {
-
-                        // check [storage]
-                        //得到 storage的substring
-                        //int indexF = playerString.indexOf("F");
-                        String playerStorage = playerString.substring(indexS + 1, indexF);
-                        if (Storage.storageTilesWellFormed(playerStorage)) {
-                            // check [floor]
-                            //得到 floor substring
-                            String playerFloor = playerString.substring(indexF + 1);
-                            //check criteria
-                            if (Floor.floorTilesWellFormed(playerFloor)) {
-                                wellFormedPlayer++;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        if (numberOfPlayer == wellFormedPlayer) {
-            return true;
-        } else {
-            return false;
-        }
+        return true;
     }
 
     /**
@@ -647,59 +590,8 @@ public class Azul {
      * TASK 8
      */
     public static String[] nextRound(String[] gameState) {
-        // FIXME TASK 8
-        // FIXME TASK 8
-
-        String str0 = gameState[0];
-        String str1 = gameState[1];
-        //get number of players
-        int numberOfPlayer = Player.getNUmberOfPlayer(str1);
-
-        //get discard string(without 'D')
-        String originalDiscard = Discard.getDiscardString(str0);
-        //get centre string(without 'S')
-
-        //string discard -> int[] discardArr
-
-
-        int discardOfa = Integer.parseInt(originalDiscard.substring(0, 2));
-        int discardOfb = Integer.parseInt(originalDiscard.substring(2, 4));
-        int discardOfc = Integer.parseInt(originalDiscard.substring(4, 6));
-        int discardOfd = Integer.parseInt(originalDiscard.substring(6, 8));
-        int discardOfe = Integer.parseInt(originalDiscard.substring(8));
-        int[] discardArr = {discardOfa, discardOfb, discardOfc, discardOfd, discardOfe};
-
-        //Split the playerState for each.
-        String[] allPlayerState = Player.getEachPlayerStateString(str1);
-
-        //get all scores[] for now
-        int[] allPlayerScore = new int[numberOfPlayer];
-        for (int i = 0; i < allPlayerScore.length; i++) {
-            allPlayerScore[i] = Score.getScore(allPlayerState[i]);
-        }
-
-        //Get all floor strings[].If a floor is empty, allFloors[i]="".
-        String[] allFloors = new String[numberOfPlayer];
-        for (int i = 0; i < allFloors.length; i++) {
-            if (!(Floor.floorIsEmpty(allPlayerState[i]))) {
-                allFloors[i] = Floor.getFloorString(allPlayerState[i]);
-            } else {
-                allFloors[i] = "";
-            }
-        }
-
-        // lose marks from floor.-> new allPlayerScore[]
-        for (int i = 0; i < allFloors.length; i++) {
-            if (allFloors[i].equals("")) {
-            } else {
-                allPlayerScore[i] = allPlayerScore[i] + Floor.getMarksFromFloor(allFloors[i]);
-            }
-        }
-
-        // Empty floor->centre/discard
-
-
-        return null;
+        String [] retval = {"G","H"};
+        return retval;
     }
 
     /**
