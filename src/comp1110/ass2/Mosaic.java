@@ -3,6 +3,7 @@ package comp1110.ass2;
 public class Mosaic {
 
 
+
     public static final char HEAD = 'M';
     public String mosaicTilesString; // mosaic string in state1 without 'M'
 
