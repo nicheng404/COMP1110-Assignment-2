@@ -47,23 +47,18 @@ public class Mosaic {
                     }
                 }
             }
-
         }
     }
 
     public static final char HEAD = 'M';
     public String mosaicTilesString; // mosaic string in state1 without 'M'
 
-
-
-
     /**
-     * @author Ke Ning
-     * Check whether mosaic for a certain player is well formed with
-     *  a given certain player mosaic string in state1 without 'M'.
-     *
      * @param mosaicTilesString mosaic string for a certain player in state1 without 'M'.
      * @return true/false. whether mosaic for a certain player is well formed.
+     * @author Ke Ning
+     * Check whether mosaic for a certain player is well formed with
+     * a given certain player mosaic string in state1 without 'M'.
      */
     public static boolean mosaicTilesWellFormed(String mosaicTilesString) {
 
@@ -120,7 +115,6 @@ public class Mosaic {
     }
 
 
-
     /**
      * An entire playerState for 2 players might look like this:
      * "A20 Ma02a13b00e42 S2a13e44a1 Faabbe B30 Mc01b11d21 S0e12b2F"
@@ -142,16 +136,14 @@ public class Mosaic {
         int index0M = plyst0.indexOf("M", index0A);
         int index0S = plyst0.indexOf("S", index0M);
         int index0F = plyst0.indexOf("F", index0S);
-        return plyst0.substring(index0M+1, index0S);
+        return plyst0.substring(index0M + 1, index0S);
     }
 
     // arrange tiles to place in the mosaic (incomplete function)
-    public void arrangeMosaicTo2DArray(String [] tiles){
-        String [][] string_mosaic = new String [5] [5];
-        for(int j = 0; j < 5; j++)
-        {
-            for(int i = 0; i < 5; i++)
-            {
+    public void arrangeMosaicTo2DArray(String[] tiles) {
+        String[][] string_mosaic = new String[5][5];
+        for (int j = 0; j < 5; j++) {
+            for (int i = 0; i < 5; i++) {
                 string_mosaic[j][i] = null;
             }
         }
