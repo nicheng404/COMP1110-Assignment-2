@@ -1,4 +1,8 @@
 package comp1110.ass2.gui;
+/**
+ * Make all the components of Board into a single and Bring them together
+ * Make the Mosaic and Storage functionalities
+ */
 
 import comp1110.ass2.*;
 import javafx.application.Application;
