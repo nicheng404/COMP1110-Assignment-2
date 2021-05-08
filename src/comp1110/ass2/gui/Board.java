@@ -10,7 +10,7 @@ import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-
+//A Class that will Set the Board Gui Including Storage,Mosaic and factory
 public class Board extends Application {
     private static final int BOARD_WIDTH = 1200;
     private static final int BOARD_HEIGHT = 700;
@@ -30,6 +30,7 @@ public class Board extends Application {
 
     }
 
+    //Arrange the mosaic without Using TilePane. This is done because I wanna use the same method for making Storage tiles
     class arrangeMosaic extends Pane {
         public int nTiles;
         public ArrayList<Tile> tiles = new ArrayList<>();
