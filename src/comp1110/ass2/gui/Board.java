@@ -1,65 +1,59 @@
 package comp1110.ass2.gui;
 
 import comp1110.ass2.*;
-import javafx.scene.layout.Pane;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
+import javafx.stage.Stage;
 
-public class Board extends Pane {
+import java.util.ArrayList;
+//A Class that will Set the Board Gui Including Storage,Mosaic and factory
+public class Board extends Application {
     private static final int BOARD_WIDTH = 1200;
     private static final int BOARD_HEIGHT = 700;
-    private Rectangle[][] board;
-    private Tiles color;
 
-    public Board() {
-        board = new Rectangle[BOARD_WIDTH][BOARD_HEIGHT];
+    class Tile extends Rectangle {
+        public int colorVal;
 
-        for (int x = 0; x < BOARD_WIDTH; x++) {
-            for (int y = 0; y < BOARD_HEIGHT; y++) {
-                board[x][y] = new Rectangle();
-                board[x][y].setWidth(50);
-                board[x][y].setHeight(50);
-                board[x][y].setStroke(Color.TRANSPARENT);
-                board[x][y].setStrokeType(StrokeType.INSIDE);
-                board[x][y].setStrokeWidth(1);
+        Tile(int colorVal, int x, int y) {
+            setWidth(50);
+            setHeight(50);
+            setX(x);
+            setY(y);
+            setFill(Color.rgb(colorVal * 5, (colorVal * 5) + 50, (colorVal * 5) + 80));
+            setStroke(Color.BLACK);
+            setStrokeType(StrokeType.OUTSIDE);
+        }
+
+    }
+
+    //Arrange the mosaic without Using TilePane. This is done because I wanna use the same method for making Storage tiles
+    class arrangeMosaic extends Pane {
+        public int nTiles;
+        public ArrayList<Tile> tiles = new ArrayList<>();
+
+        arrangeMosaic(int nTiles) {
+            this.nTiles = nTiles;
+            Tile TempTile;
+            for (int i = 1; i <= (int) Math.sqrt(nTiles); i++) {
+                for (int j = 1; j <= (int) Math.sqrt(nTiles); j++) {
+                    TempTile = new Tile(i, 50 * i, 50 * j);
+                    tiles.add(TempTile);
+                }
             }
+            this.getChildren().addAll(tiles);
         }
     }
 
-   public Tiles getColor(){
-        return color;
-   }
-
-    private Discard[][] discardTiles = new Discard[4][4];
-    private Bag[][] bagTiles = new Bag[4][4];
-    private Centre[][] centreTiles = new Centre[4][4];
-
-    private Factory[][] factoryTiles = new Factory[1][9];
-
-
-
-private void addTileToMosaic(String placement){
-    GameTile tile = new GameTile(placement);
-
-}
-
-private void allTileToBag(String placement){
-
-}
-
-private void addTileToStorage(String placement){
-
-}
-
-private void updateTiles(GameTile tile) {
-    Location location = tile.getLocation();
-}
-
-
-
-
-
-
+    public void start(Stage stage){
+        arrangeMosaic mosTiles = new arrangeMosaic(25);
+        Scene scene = new Scene(mosTiles,BOARD_WIDTH,BOARD_HEIGHT);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
 
 }
