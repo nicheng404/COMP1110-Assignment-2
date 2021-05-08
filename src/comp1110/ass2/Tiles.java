@@ -7,7 +7,8 @@ public enum Tiles {
     O("Orange", "c", 'c'),
     P("Purple", "d", 'd'),
     R("Red", "e", 'e'),
-    FP("First Player", "f", 'f');
+    FP("First Player", "f", 'f'),
+    E("*","*",'*');
     public String longName;
     public String encode;
     public char symbol;
