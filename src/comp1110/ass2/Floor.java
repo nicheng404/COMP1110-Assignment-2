@@ -137,41 +137,43 @@ public class Floor {
     public int getMarksFromFloor() {
         int marks = 0;
 
-        if (this.isValid) {// check validity
-            if (this.isEmpty) { //floor 空？
-            } else {
-                int number = this.tiles.size();
-                if (number >= 7) {// check size
-                    marks = -14;
+        try {
+            if (this.isValid) {// check validity
+                if (this.isEmpty) { //floor 空？
                 } else {
-                    switch (number) {
-                        case 1:
-                            marks = -1;
-                            break;
-                        case 2:
-                            marks = -2;
-                            break;
-                        case 3:
-                            marks = -4;
-                            break;
-                        case 4:
-                            marks = -6;
-                            break;
-                        case 5:
-                            marks = -8;
-                            break;
-                        case 6:
-                            marks = -11;
-                            break;
+                    int number = this.tiles.size();
+                    if (number >= 7) {// check size
+                        marks = -14;
+                    } else {
+                        switch (number) {
+                            case 1:
+                                marks = -1;
+                                break;
+                            case 2:
+                                marks = -2;
+                                break;
+                            case 3:
+                                marks = -4;
+                                break;
+                            case 4:
+                                marks = -6;
+                                break;
+                            case 5:
+                                marks = -8;
+                                break;
+                            case 6:
+                                marks = -11;
+                                break;
+                        }
                     }
                 }
             }
-        } else {// how to write an exception
-            System.out.println("This Floor's tiles are not well formed, please check");
-            marks = 999;
+            return marks;
+        } catch (Exception e) {// how to write an exception
+            System.out.println("The floor can not be scored , please check.");
+            System.out.println("0 is returned as scored mark from floor.");
+            return 0;
         }
-
-        return marks;
     }
 
     /**
