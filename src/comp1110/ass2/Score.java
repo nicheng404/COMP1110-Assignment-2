@@ -4,6 +4,8 @@ public class Score {
 
     public static final char HEAD = 'S';
     public int inputScore;
+    public int processScore;
+    public int finalScoreThisRound;
 
     public Score (String singlePlayerState){
         this.inputScore=getScore(singlePlayerState);
