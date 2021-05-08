@@ -47,6 +47,7 @@ public class Mosaic {
                         || mosaicArray[i] == 'c' || mosaicArray[i] == 'd' || mosaicArray[i] == 'e') {
                 } else {
                     mosaicChar1Well = false;
+
                 }
             }
             //mosaic criteria 3 : 2nd well
