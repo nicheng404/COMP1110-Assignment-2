@@ -6,12 +6,12 @@ public class Player {
 
     public static final String[] Names = {"A", "B", "C", "D"};
     public Player nextPlayer;
-    public String pName;
+    public String playerName;
     public boolean isFirstPlayer;
     public boolean isTurn;
-    public Mosaic playerMosaic;
-    public Storage PlayerStorage;
-    public Floor playerFloor;
+    public Mosaic playerXMosaic;
+    public Storage PlayerXStorage;
+    public Floor playerXFloor;
 
 
 
@@ -30,7 +30,7 @@ public class Player {
      * @return The name of this player from "A-D"
      */
     public String getpName() {
-        return this.pName;
+        return this.playerName;
     }
 
 
