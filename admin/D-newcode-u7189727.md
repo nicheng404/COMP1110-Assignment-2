@@ -17,5 +17,5 @@ For Deliverable D2D, I contributed the following new statements of original code
 - Added [GetTilesFromBagTest](https://gitlab.cecs.anu.edu.au/u7274095/comp1110-ass2-tue12t/-/tree/master/tests/comp1110/ass2/GetTilesFromBagTest.java) to the test file.
 - Added [CheckBagIsEmptyTest](https://gitlab.cecs.anu.edu.au/u7274095/comp1110-ass2-tue12t/-/tree/master/tests/comp1110/ass2/CheckBagIsEmptyTest.java) to the test file.
 - Added [GetRandomElementTest](https://gitlab.cecs.anu.edu.au/u7274095/comp1110-ass2-tue12t/-/tree/master/tests/comp1110/ass2/GetRandomElementTest.java) to the test file.
-- Added [GetTilesFromMosaicTest](https://gitlab.cecs.anu.edu.au/u7274095/comp1110-ass2-tue12t/-/tree/master/tests/comp1110/ass2/GetTilesFromMosaicTest.java) to the test file.
+
 

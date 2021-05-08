@@ -1,7 +1,7 @@
 package comp1110.ass2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+        import java.util.ArrayList;
+        import java.util.Arrays;
 
 /**
  * @author Mukund Balaji Srinivas
@@ -17,6 +17,8 @@ public class Factory {
     public int Number;
     public boolean isValid;
     public String tileStr;
+
+
 
     Factory(String tileStr) {
         this.tileStr = tileStr;
@@ -203,7 +205,6 @@ public class Factory {
         // number of factories = 2*number of player+1;
         int numberOfFactories = 2 * numberOfPlayer + 1;
 
-//__________________________________________________________________________________________________________________//
 
 
         int numberOfTileInFactory = numberOfFactories * 4;

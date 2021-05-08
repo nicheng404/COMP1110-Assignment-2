@@ -2,6 +2,7 @@ package comp1110.ass2;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Discard {
     public static final Tiles[] names = {Tiles.B, Tiles.G, Tiles.O, Tiles.P, Tiles.R};
@@ -49,6 +50,43 @@ public class Discard {
         return retString.toString();
     }
 
+    public Tiles[] dTiles;
+    public static final char HEAD = 'D';
+    public String discardString; // discard string in state0 without 'D'
+
+    /**
+     * Get all the tiles in Discard
+     *
+     * @return dTiles
+     */
+    public Tiles[] getdTiles() {
+        return dTiles;
+    }
 
 
+    /**
+     * Push tiles to discard at the end of the array
+     *
+     * @param pushTiles
+     */
+    public void pushToDiscard(Tiles[] pushTiles) {
+        Tiles[] newArr = Arrays.copyOf(dTiles, dTiles.length + pushTiles.length);
+        int j = 0;
+        for (int i = dTiles.length; i < newArr.length && j < pushTiles.length; i++) {
+            newArr[i] = pushTiles[j];
+            j++;
+        }
+    }
+
+    /**
+     * Get string of discard from a given sharedState string.
+     *
+     * @param sharedState A given sharedState string.
+     * @return string of discard(without 'D').
+     */
+    public static String getDiscardString(String sharedState) {
+        int indexOfD = sharedState.indexOf('D');
+        String result = sharedState.substring(indexOfD + 1);
+        return result;
+    }
 }
