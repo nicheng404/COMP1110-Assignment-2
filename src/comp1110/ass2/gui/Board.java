@@ -30,7 +30,7 @@ public class Board extends Application {
 
     }
 
-    class arrangeMosaic extends TilePane {
+    class arrangeMosaic extends Pane {
         public int nTiles;
         public ArrayList<Tile> tiles = new ArrayList<>();
 
