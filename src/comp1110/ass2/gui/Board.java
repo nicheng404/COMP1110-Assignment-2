@@ -1,8 +1,5 @@
+//Bring the various components of Board together
 package comp1110.ass2.gui;
-/**
- * Make all the components of Board into a single and Bring them together
- * Make the Mosaic and Storage functionalities
- */
 
 import comp1110.ass2.*;
 import javafx.application.Application;
@@ -20,9 +17,12 @@ public class Board extends Application {
     private static final int BOARD_WIDTH = 1200;
     private static final int BOARD_HEIGHT = 700;
 
+
     class Tile extends Rectangle {
         public int colorVal;
-
+        /**
+         * A tiles that  Inherits from Rectangle and sets the colour and position
+         */
         Tile(int colorVal, int x, int y) {
             setWidth(50);
             setHeight(50);
@@ -53,10 +53,15 @@ public class Board extends Application {
         }
     }
 
+
     class arrangeStorage extends Pane {
         public static final int nRows = 5;
         public ArrayList<Tile> tiles = new ArrayList<>();
 
+        /**
+         *  A class for arranging tiles in the given pattern like the storage
+         * @author Mukund Balaji Srinivas
+         */
         arrangeStorage() {
             Tile TempTile;
             for (int i = 1; i <= nRows; i++) {
