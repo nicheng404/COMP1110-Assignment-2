@@ -1,3 +1,4 @@
+//Bring the various components of Board together
 package comp1110.ass2.gui;
 
 import comp1110.ass2.*;
@@ -10,14 +11,18 @@ import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+
 //A Class that will Set the Board Gui Including Storage,Mosaic and factory
 public class Board extends Application {
     private static final int BOARD_WIDTH = 1200;
     private static final int BOARD_HEIGHT = 700;
 
+
     class Tile extends Rectangle {
         public int colorVal;
-
+        /**
+         * A tiles that  Inherits from Rectangle and sets the colour and position
+         */
         Tile(int colorVal, int x, int y) {
             setWidth(50);
             setHeight(50);
@@ -48,9 +53,31 @@ public class Board extends Application {
         }
     }
 
-    public void start(Stage stage){
+
+    class arrangeStorage extends Pane {
+        public static final int nRows = 5;
+        public ArrayList<Tile> tiles = new ArrayList<>();
+
+        /**
+         *  A class for arranging tiles in the given pattern like the storage
+         * @author Mukund Balaji Srinivas
+         */
+        arrangeStorage() {
+            Tile TempTile;
+            for (int i = 1; i <= nRows; i++) {
+                for (int j = 1; j <= i; j++) {
+                    TempTile = new Tile(i, 50 * j, 50 * i);
+                    tiles.add(TempTile);
+                }
+            }
+            this.getChildren().addAll(tiles);
+        }
+    }
+
+    public void start(Stage stage) {
         arrangeMosaic mosTiles = new arrangeMosaic(25);
-        Scene scene = new Scene(mosTiles,BOARD_WIDTH,BOARD_HEIGHT);
+        arrangeStorage storageTiles = new arrangeStorage();
+        Scene scene = new Scene(storageTiles, BOARD_WIDTH, BOARD_HEIGHT);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
