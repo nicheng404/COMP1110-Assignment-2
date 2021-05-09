@@ -13,6 +13,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 //A Class that will Set the Board Gui Including Storage,Mosaic and factory
@@ -20,7 +21,6 @@ public class Board extends Application {
     private static final int BOARD_WIDTH = 1200;
     private static final int BOARD_HEIGHT = 700;
     private static final String BASE_URI = "assets/";
-//    private static final String tilesURI = Board.class.getResource(BASE_URI+"tiling_a.png").toString();
     private static final int TILE_HEIGHT = 50;
     private static final int TILE_WIDTH = 50;
 
@@ -83,21 +83,44 @@ public class Board extends Application {
         }
     }
 
-//    class playerTile extends ImageView {
-//        playerTile(){
-//            setFitHeight(TILE_HEIGHT);
-//            setFitWidth(TILE_WIDTH);
-//            setImage(new Image(tilesURI));
-//        }
-//    }
+    class playerTile extends ImageView {
+        public Tiles tile;
+        public Image Image;
+
+        playerTile(Tiles tile) {
+            setFitHeight(TILE_HEIGHT);
+            setFitWidth(TILE_WIDTH);
+            this.tile = tile;
+            setImg();
+        }
+
+        public void setImg() {
+            StringBuilder tileName = new StringBuilder();
+            FileInputStream fileURI=null;
+            for (Tiles t : Tiles.values()) {
+                if (tile.equals(t)) {
+                    tileName.append(t.longName+"-"+t.encode+"_tile.png");
+                }
+            }
+            try{
+                fileURI = new FileInputStream(BASE_URI+tileName.toString());
+            }
+            catch (Exception e){
+                System.out.println("This file does not exist");
+            }
+            Image = new Image(fileURI);
+            setImage(Image);
+        }
+
+    }
 
     public void start(Stage stage) {
         arrangeMosaic mosTiles = new arrangeMosaic(25);
         arrangeStorage storageTiles = new arrangeStorage();
-//        playerTile pTile = new playerTile();
+        playerTile pTile = new playerTile(Tiles.G);
         Group group = new Group();
         group.getChildren().add(storageTiles);
-//        group.getChildren().add(pTile);
+        group.getChildren().add(pTile);
         Scene scene = new Scene(group, BOARD_WIDTH, BOARD_HEIGHT);
         stage.setScene(scene);
         stage.setResizable(false);
