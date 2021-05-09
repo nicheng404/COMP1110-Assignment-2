@@ -25,7 +25,7 @@ public class Board extends Application {
     private static final int TILE_WIDTH = 50;
 
 
-    class Tile extends Rectangle {
+    static class Tile extends Rectangle {
         public int colorVal;
 
         /**
@@ -44,7 +44,7 @@ public class Board extends Application {
     }
 
     //Arrange the mosaic without Using TilePane. This is done because I wanna use the same method for making Storage tiles
-    class arrangeMosaic extends Pane {
+    static class arrangeMosaic extends Pane {
         public int nTiles;
         public ArrayList<Tile> tiles = new ArrayList<>();
 
@@ -62,7 +62,7 @@ public class Board extends Application {
     }
 
 
-    class arrangeStorage extends Pane {
+    static class arrangeStorage extends Pane {
         public static final int nRows = 5;
         public ArrayList<Tile> tiles = new ArrayList<>();
 
@@ -83,10 +83,16 @@ public class Board extends Application {
         }
     }
 
-    class playerTile extends ImageView {
+
+    static class playerTile extends ImageView {
         public Tiles tile;
         public Image Image;
 
+        /**
+         * This constructor takes the input as Tile and represents it in the game
+         * @param tile An object of the type Tiles that represents a tile
+         * @author Mukund Balaji Srinivas
+         */
         playerTile(Tiles tile) {
             setFitHeight(TILE_HEIGHT);
             setFitWidth(TILE_WIDTH);
@@ -96,16 +102,16 @@ public class Board extends Application {
 
         public void setImg() {
             StringBuilder tileName = new StringBuilder();
-            FileInputStream fileURI=null;
+            FileInputStream fileURI = null;
             for (Tiles t : Tiles.values()) {
                 if (tile.equals(t)) {
-                    tileName.append(t.longName+"-"+t.encode+"_tile.png");
+                    tileName.append(t.longName).append("-").append(t.encode)
+                            .append("_tile.png");
                 }
             }
-            try{
-                fileURI = new FileInputStream(BASE_URI+tileName.toString());
-            }
-            catch (Exception e){
+            try {
+                fileURI = new FileInputStream(BASE_URI + tileName.toString());
+            } catch (Exception e) {
                 System.out.println("This file does not exist");
             }
             Image = new Image(fileURI);
