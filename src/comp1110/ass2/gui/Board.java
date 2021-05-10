@@ -18,11 +18,13 @@ import java.util.ArrayList;
 
 //A Class that will Set the Board Gui Including Storage,Mosaic and factory
 public class Board extends Application {
-    private static final int BOARD_WIDTH = 1200;
-    private static final int BOARD_HEIGHT = 700;
+    private static final int BOARD_WIDTH = 1400;
+    private static final int BOARD_HEIGHT = 1000;
     private static final String BASE_URI = "assets/";
     private static final int TILE_HEIGHT = 50;
     private static final int TILE_WIDTH = 50;
+    private static final int MARGIN_X = 50;
+    private static final int MARGIN_Y = 50;
 
 
     static class Tile extends Rectangle {
@@ -90,6 +92,7 @@ public class Board extends Application {
 
         /**
          * This constructor takes the input as Tile and represents it in the game
+         *
          * @param tile An object of the type Tiles that represents a tile
          * @author Mukund Balaji Srinivas
          */
@@ -118,15 +121,46 @@ public class Board extends Application {
             setImage(Image);
         }
 
+
+    }
+
+    class DTile extends playerTile {
+        int homeX, homeY;
+        double mouseX, mouseY;
+
+        public DTile(Tiles tile) {
+            super(tile);
+            homeX = MARGIN_X;
+            homeY = MARGIN_Y;
+            setOnMouseClicked(e -> {
+                mouseX = e.getSceneX();
+                mouseY = e.getSceneY();
+            });
+            setOnMouseDragged(e -> {
+                double movementX = e.getSceneX() - mouseX;
+                double movementY = e.getSceneY() - mouseY;
+                setLayoutX(getLayoutX() + movementX);
+                setLayoutY(getLayoutY() + movementY);
+                mouseX = e.getSceneX();
+                mouseY = e.getSceneY();
+                e.consume();
+            });
+        }
+
     }
 
     public void start(Stage stage) {
         arrangeMosaic mosTiles = new arrangeMosaic(25);
         arrangeStorage storageTiles = new arrangeStorage();
-        playerTile pTile = new playerTile(Tiles.G);
         Group group = new Group();
-        group.getChildren().add(storageTiles);
-        group.getChildren().add(pTile);
+        HBox hbox = new HBox();
+        DTile dragT = new DTile(Tiles.G);
+        group.getChildren().add(dragT);
+        hbox.setLayoutY(MARGIN_Y);
+        hbox.setLayoutX(MARGIN_X);
+        hbox.getChildren().add(storageTiles);
+        hbox.getChildren().add(mosTiles);
+        group.getChildren().add(hbox);
         Scene scene = new Scene(group, BOARD_WIDTH, BOARD_HEIGHT);
         stage.setScene(scene);
         stage.setResizable(false);
