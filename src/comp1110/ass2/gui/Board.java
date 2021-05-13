@@ -2,34 +2,33 @@
 package comp1110.ass2.gui;
 
 import comp1110.ass2.*;
-import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
-import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
 
 //A Class that will Set the Board Gui Including Storage,Mosaic and factory
-public class Board extends Application {
-    private static final int BOARD_WIDTH = 1400;
-    private static final int BOARD_HEIGHT = 1000;
+public class Board extends Pane {
+
     private static final String BASE_URI = "assets/";
     private static final int TILE_HEIGHT = 50;
     private static final int TILE_WIDTH = 50;
     private static final int MARGIN_X = 50;
     private static final int MARGIN_Y = 50;
 
+    //Graphical elements
+    arrangeMosaic mosaic;
+    arrangeStorage storage;
 
     static class Tile extends Rectangle {
         public int colorVal;
-
         /**
          * A tiles that  Inherits from Rectangle and sets the colour and position
          */
@@ -64,6 +63,7 @@ public class Board extends Application {
     }
 
 
+
     static class arrangeStorage extends Pane {
         public static final int nRows = 5;
         public ArrayList<Tile> tiles = new ArrayList<>();
@@ -82,6 +82,26 @@ public class Board extends Application {
                 }
             }
             this.getChildren().addAll(tiles);
+        }
+
+        /**
+         * Get the x co-ordinates of the tile nearest to the corresponding mouse pointer
+         *
+         * @param mouseX The present x position of the mouse pointer
+         * @return The getlayoutX value of the tile corresponding to the mouse pointer.
+         */
+        public double getXbounds(double mouseX) {
+            double retVal = 0;
+            try {
+                for (int i = 0; i < tiles.size(); i++) {
+                    if (tiles.get(i).getLayoutX() >= mouseX && tiles.get(i + 1).getLayoutX() < mouseX) {
+                        retVal = tiles.get(i).getLayoutX();
+                    }
+                }
+            } catch (Exception e) {
+                retVal = tiles.get(tiles.size() - 1).getLayoutX();
+            }
+            return retVal;
         }
     }
 
@@ -120,9 +140,8 @@ public class Board extends Application {
             Image = new Image(fileURI);
             setImage(Image);
         }
-
-
     }
+
 
     class DTile extends playerTile {
         int homeX, homeY;
@@ -137,34 +156,19 @@ public class Board extends Application {
                 mouseY = e.getSceneY();
             });
             setOnMouseDragged(e -> {
+                toFront();
                 double movementX = e.getSceneX() - mouseX;
                 double movementY = e.getSceneY() - mouseY;
                 setLayoutX(getLayoutX() + movementX);
                 setLayoutY(getLayoutY() + movementY);
                 mouseX = e.getSceneX();
                 mouseY = e.getSceneY();
+
                 e.consume();
             });
         }
 
     }
 
-    public void start(Stage stage) {
-        arrangeMosaic mosTiles = new arrangeMosaic(25);
-        arrangeStorage storageTiles = new arrangeStorage();
-        Group group = new Group();
-        HBox hbox = new HBox();
-        DTile dragT = new DTile(Tiles.G);
-        group.getChildren().add(dragT);
-        hbox.setLayoutY(MARGIN_Y);
-        hbox.setLayoutX(MARGIN_X);
-        hbox.getChildren().add(storageTiles);
-        hbox.getChildren().add(mosTiles);
-        group.getChildren().add(hbox);
-        Scene scene = new Scene(group, BOARD_WIDTH, BOARD_HEIGHT);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-    }
 
 }
