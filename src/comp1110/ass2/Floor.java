@@ -1,7 +1,6 @@
 package comp1110.ass2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * @author Ke Ning
@@ -10,53 +9,27 @@ import java.util.Arrays;
  */
 
 public class Floor {
-    public static final char HEAD = 'F';
+    public static final char HEADCHAR = 'F';
     public ArrayList<Tiles> tiles = new ArrayList<>();
-    public boolean isValid;
-    public String tileStr;
-    public boolean isEmpty;
 
-    Floor(String tileString) {
-        //check whether the floor is empty
-        if (tileString.equals("")) {
-            this.isEmpty = true;
-            this.tileStr = "";
-            this.isValid = true;
+    Floor(String floorString) {
+        //check whether the given floorstring is empty
+        if (floorString.equals("")) {
         } else {
-            //order the given string first.
-            this.tileStr = orderingString(tileString);
-            setIsValid();
-            this.isEmpty = false;
+            setFloorTiles(floorString);
         }
-
-
     }
 
     /**
      * @author Ke Ning
      * Takes a string and splits it into all the tiles
      */
-    public void setFloorTiles() {
-        for (int i = 0; i < tileStr.length(); i++)
+    public void setFloorTiles(String floorString) {
+        for (int i = 0; i < floorString.length(); i++)
             for (Tiles t : Tiles.values())
-                if (tileStr.charAt(i) == t.symbol)
+                if (floorString.charAt(i) == t.symbol)
                     tiles.add(t);
     }
-
-    /**
-     * @return true if ordered , false otherwise
-     * @author Ke Ning
-     * Check if a floor is ordered
-     */
-    public boolean isOrdered() {
-        char[] arr = tileStr.toCharArray();
-        Arrays.sort(arr);
-        StringBuilder t = new StringBuilder();
-        for (char c : arr)
-            t.append(c);
-        return tileStr.compareTo(t.toString()) == 0;
-    }
-
 
     /**
      * @author Ke Ning
@@ -90,9 +63,13 @@ public class Floor {
     /**
      * Set the validity of a given Floor
      */
-    public void setIsValid() {
-        setFloorTiles();
-        isValid = (tiles.size() == 7 && isOrdered() && atMost1f());
+    public boolean isValid() {
+        boolean result = (this.tiles.size() <= 7 && atMost1f());
+        return result;
+    }
+
+    public boolean floorIsFull() {
+        return this.tiles.size() == 7;
     }
 
     /**
@@ -102,13 +79,119 @@ public class Floor {
      */
 
     public boolean floorIsEmpty() {
-        boolean output = false;
-        if (this.tileStr.equals("")) {
-            output = true;
-        }
-        return output;
+        return this.tiles.isEmpty();
     }
 
+
+    /**
+     * use the size of tiles Arraylist to get the lost marks.
+     *
+     * @return marks lost due to floor.
+     */
+    public int loseMarks() {
+        int mark = 0;
+        switch (this.tiles.size()) {
+            case 0:
+                mark = 0;
+                break;
+            case 1:
+                mark = -1;
+                break;
+            case 2:
+                mark = -2;
+                break;
+            case 3:
+                mark = -4;
+                break;
+            case 4:
+                mark = -6;
+                break;
+            case 5:
+                mark = -8;
+                break;
+            case 6:
+                mark = -11;
+                break;
+            default:
+                mark = -14;
+                break;
+        }
+        return mark;
+    }
+
+    /**
+     * Empty the floor, move floor's tiles to discard.
+     *
+     * @return A map<tile,number of that tile in floor> to be moved to discard.
+     */
+
+    public Map<Tiles, Integer> emptyFloorToDiscard() {
+        Map<Tiles, Integer> tilesFromFloor = new HashMap<>();
+        for (Tiles t : Tiles.values()) {
+            if (t.symbol != '*') {
+                tilesFromFloor.put(t, 0);
+            }
+        }
+        for (Tiles t : tiles) {
+            int newnum = tilesFromFloor.get(t) + 1;
+            tilesFromFloor.replace(t, newnum);
+        }
+        tilesFromFloor.remove(Tiles.FP);
+        tiles.clear();
+        return tilesFromFloor;
+    }
+
+    /**
+     * if the floor has First player tile, return true.
+     *
+     * @return
+     */
+    public boolean firstPlayerIsInFloor() {
+        for (Tiles t : this.tiles) {
+            if (this.tiles.size() != 0 && t.symbol == 'f') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * First let the floor accept the tiles (even >7), then trim
+     * the overflowed tiles(which should be moved to the discard) into a hashmap.
+     * *Swap the first player tile with the 7th tile in floor if Fp is in the overflowed part.
+     *
+     * @param tilesList given tiles in list.
+     * @return A hashmap of tiles to be move into discard.
+     */
+
+    public Map<Tiles, Integer> acceptTilesAndSkim(List<Tiles> tilesList) {
+        Map<Tiles, Integer> overflowTiles = new HashMap<>();
+        this.tiles.addAll(tilesList);
+        if (this.tiles.size() > 7) {
+            for (int i = this.tiles.size() - 1; i >= 7; i--) {
+                Tiles t = this.tiles.get(i);
+                // check first player
+                if (t == Tiles.FP) {
+                    this.tiles.set(i, this.tiles.get(6));
+                    this.tiles.set(6, Tiles.FP);
+                    t = this.tiles.get(i);
+                }
+                // move overflowed tiles into Map
+                if (overflowTiles.get(t) == null) {
+                    overflowTiles.put(t, 1);
+                } else {
+                    overflowTiles.replace(t, overflowTiles.get(t) + 1);
+                }
+                this.tiles.remove(i);
+            }
+        }
+        Collections.sort(this.tiles);
+        return overflowTiles;
+    }
+
+
+//-------------------------------------------------------old------------------------------------------------------------------------------------------------------
 
     /**
      * @param singlePlayerState A PlayerState String for a single player.
@@ -128,53 +211,6 @@ public class Floor {
         return output;
     }
 
-    /**
-     * @return the marks of floor, marks <=0
-     * @author Ke Ning
-     * Get how many marks player will lose due to the floor.
-     * If the playerfloor is not well formed, 999 will be returned.
-     */
-    public int getMarksFromFloor() {
-        int marks = 0;
-
-        try {
-            if (this.isValid) {// check validity
-                if (this.isEmpty) { //floor 空？
-                } else {
-                    int number = this.tiles.size();
-                    if (number >= 7) {// check size
-                        marks = -14;
-                    } else {
-                        switch (number) {
-                            case 1:
-                                marks = -1;
-                                break;
-                            case 2:
-                                marks = -2;
-                                break;
-                            case 3:
-                                marks = -4;
-                                break;
-                            case 4:
-                                marks = -6;
-                                break;
-                            case 5:
-                                marks = -8;
-                                break;
-                            case 6:
-                                marks = -11;
-                                break;
-                        }
-                    }
-                }
-            }
-            return marks;
-        } catch (Exception e) {// how to write an exception
-            System.out.println("The floor can not be scored , please check.");
-            System.out.println("0 is returned as scored mark from floor.");
-            return 0;
-        }
-    }
 
     /**
      * Empty the floor and adjust the discard/center with following rules:

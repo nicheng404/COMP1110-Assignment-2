@@ -20,6 +20,20 @@ public enum Tiles {
 
     }
 
+
+    public Tiles getTileByCharSymbol(char symbol){
+        Tiles output=null;
+        switch (symbol) {
+            case 'a': output=B; break;
+            case 'b': output=G; break;
+            case 'c': output=O; break;
+            case 'd': output=P; break;
+            case 'e': output=R; break;
+            case 'f': output=FP; break;
+        }
+        return output;
+    }
+
     @Override
     public String toString() {
         return "" + encode;

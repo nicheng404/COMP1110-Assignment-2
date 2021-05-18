@@ -29,7 +29,7 @@ public class Mosaic {
         //Get the address of these tiles and check if they are valid by checking for their lengths
         ArrayList<Integer> tileAddr = new ArrayList<>();
         for (int i = 0; i < inString.length(); i++) {
-            if (inString.charAt(i) >= 'a' && inString.charAt(i) <= 'd') {
+            if (inString.charAt(i) >= 'a' && inString.charAt(i) <= 'e') {
                 tileAddr.add(i);
             }
         }
