@@ -21,7 +21,7 @@ public enum Tiles {
     }
 
 
-    public Tiles getTileByCharSymbol(char symbol){
+    public static Tiles getTileByCharSymbol(char symbol){
         Tiles output=null;
         switch (symbol) {
             case 'a': output=B; break;

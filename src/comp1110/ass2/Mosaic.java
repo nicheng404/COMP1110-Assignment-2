@@ -1,15 +1,73 @@
 package comp1110.ass2;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Mosaic {
-    public ArrayList<ArrayList<Tiles>> mosaic = new ArrayList<>();
+    public ArrayList<ArrayList<Tiles>> mosaic2D = new ArrayList<>();
     public boolean isValid;
-    public String inString;
+    public String inString;// b00a02a13e42 (without 'M')
 
     Mosaic(String inString) {
         this.inString = inString;
         setMosaic();
+    }
+
+    public boolean setValid(){
+        // mosaic -> char[]
+        int mosaicLength = this.inString.length();
+        char[] mosaicArray = this.inString.toCharArray();
+
+        //criteria : lengthIs3, mosaicChar1Well, mosaicChar2Well, mosaicChar3Well, mosaicOrderWell
+        boolean mosaiclengthWell = false;
+        boolean mosaicChar1Well = true;
+        boolean mosaicChar2Well = true;
+        boolean mosaicChar3Well = true;
+        boolean mosaicRowOrderWell = true;
+        boolean mosaicColumnOrderWell = true;
+
+        //mosaic criteria 1 : check length
+        if (mosaicLength % 3 == 0) {
+            mosaiclengthWell = true;
+
+            //mosaic criteria 2 :1st well
+            for (int i = 0; i < mosaicLength; i = i + 3) {
+                if (this.inString.charAt(i) >= 'a' && this.inString.charAt(i) <= 'e') {
+                } else {
+                    mosaicChar1Well = false;
+
+                }
+            }
+            //mosaic criteria 3 : 2nd well
+            for (int i = 1; i < mosaicLength; i = i + 3) {
+                if (this.inString.charAt(i) >= '0' && this.inString.charAt(i) <= '4') {
+                } else {
+                    mosaicChar2Well = false;
+                }
+            }
+            //mosaic criteria 4 : 3rd well
+            for (int i = 2; i < mosaicLength; i = i + 3) {
+                if (this.inString.charAt(i) >= '0' && this.inString.charAt(i) <= '4') {
+                } else {
+                    mosaicChar3Well = false;
+                }
+            }
+            //mosaic criteria 5 : order well
+            for (int i = 1; i + 3 < mosaicLength; i = i + 3) {
+                if (this.inString.charAt(i) > this.inString.charAt(i+3)) {
+                    mosaicRowOrderWell = false;
+                }
+                if (this.inString.charAt(i)==this.inString.charAt(i+3)){
+                    if(this.inString.charAt(i+1)>this.inString.charAt(i+4)){
+                        mosaicColumnOrderWell=false;
+                    }
+                }
+            }
+        }
+        if (mosaicLength <= 75 && mosaiclengthWell && mosaicChar1Well && mosaicChar2Well
+                && mosaicChar3Well && mosaicRowOrderWell && mosaicColumnOrderWell) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -23,34 +81,21 @@ public class Mosaic {
         //initialise all the mosaics to "*" in the beginning
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                mosaic.get(i).add(j, Tiles.E);
+                mosaic2D.get(i).add(j, Tiles.E);
             }
         }
         //Get the address of these tiles and check if they are valid by checking for their lengths
-        ArrayList<Integer> tileAddr = new ArrayList<>();
-        for (int i = 0; i < inString.length(); i++) {
-            if (inString.charAt(i) >= 'a' && inString.charAt(i) <= 'e') {
-                tileAddr.add(i);
-            }
-        }
-        boolean[] checkVal = new boolean[tileAddr.size() - 1];
-        for (int j = 0; j < tileAddr.size() - 1; j++) {
-            if (tileAddr.get(j + 1) - tileAddr.get(j) == 3) {
-                checkVal[j] = true;
-            }
-        }
-        boolean[] trueArray = new boolean[checkVal.length];
-        Arrays.fill(trueArray, true);
-        isValid = Arrays.equals(trueArray, checkVal);
+
+        isValid = setValid();
         int row, col;
         if (isValid) {
-            for (int i = 0; i < tileAddr.size(); i++) {
-                row = Integer.parseInt(inString.substring(tileAddr.get(i + 1), tileAddr.get(i + 2)));
-                col = Integer.parseInt(inString.substring(tileAddr.get(i + 2), tileAddr.get(i + 3)));
-                for (Tiles s : Tiles.values()) {
-                    if (s.symbol == inString.charAt(tileAddr.get(i))) {
-                        mosaic.get(row).add(col, s);
-                    }
+            for (int i = 0; i < this.inString.length(); i++) {
+
+                if (this.inString.charAt(i)>='a' && this.inString.charAt(i)<='e'){
+                    row=this.inString.charAt(i+1)-'0';
+                    col=this.inString.charAt(i+2)-'0';
+                    Tiles t = Tiles.getTileByCharSymbol(this.inString.charAt(i));
+                    mosaic2D.get(row).set(col,t);
                 }
             }
 
