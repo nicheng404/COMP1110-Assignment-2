@@ -181,6 +181,21 @@ public class Mosaic {
         return result;
     }
 
+    /**
+     * check whether the game is end.
+     * @return
+     */
+    public boolean endOfGame() {
+        for (Tiles[] tiles :mosaic2D) {
+            int row = 0;
+            for (Tiles t : tiles) {
+                if (t != Tiles.E) row++;
+            }
+            if (row == 5) return true;
+        }
+        return false;
+    }
+
 
     /**
      * After moving a tile into mosaic, score points immediately.(with the moved tile's current location)

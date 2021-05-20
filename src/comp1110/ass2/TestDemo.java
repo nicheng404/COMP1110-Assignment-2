@@ -1,5 +1,7 @@
 package comp1110.ass2;
 
+import static comp1110.ass2.Factory.refillFactories;
+
 public class TestDemo {
 
     public static String[] nextRound(String[] gameState) {
@@ -44,9 +46,16 @@ public class TestDemo {
         return result;
     }
     public static void main(String[] args) {
-        String[] a = nextRound(new String[]{"AFCB0712090708D0000000000", "A36Mb01d03e04e10a11c13d14d20a22b23c24e32a33b34d42e43S0a11b22e33c3FeeeB25Ma00b01e10a11b12d14d20e21c24c30b40c41a44S0c11c22a33d4Faaadddf"});
+        String[] input = new String[]{"AFCB0712090708D0000000000", "A36Mb01d03e04e10a11c13d14d20a22b23c24e32a33b34d42e43S0a11b22e33c3FeeeB25Ma00b01e10a11b12d14d20e21c24c30b40c41a44S0c11c22a33d4Faaadddf"};
+        String[] a = nextRound(input);
 
         System.out.println(a[0]);
         System.out.println(a[1]);
+
+        String[] b=refillFactories(a);
+        for (String s:b){
+            System.out.println(s);
+        }
+
     }
 }

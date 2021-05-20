@@ -627,8 +627,22 @@ public class Azul {
      * TASK 7
      */
     public static int getBonusPoints(String[] gameState, char player) {
-        // FIXME Task 7
-        return -1;
+        int numOfPlayer = Player.getNumberOfPlayer(gameState[1]);
+        Player[] players = new Player[numOfPlayer];
+        String[] playerStrings = Player.getEachPlayerStateString(gameState[1]);
+        // create Player[]
+        for (int i =0;i<numOfPlayer;i++){
+            players[i]=new Player(playerStrings[i]);
+        }
+
+        int bonusPoint = 0;
+        for (Player p: players){
+            if (player==p.playerName.nameChar){
+                bonusPoint=p.getBonusPoint();
+            }
+        }
+
+        return bonusPoint;
     }
 
     /**
@@ -648,8 +662,8 @@ public class Azul {
      */
     public static String[] nextRound(String[] gameState) {
         // FIXME TASK 8
+        String[] result = new String[2];
         SharedBoard sharedBoard = new SharedBoard(gameState[0]);
-        StringBuilder nextShareState = new StringBuilder();
         // if center/fac not empty
         if (!sharedBoard.facIsEmpty()||!sharedBoard.centIsEmpty()){
             return gameState;
@@ -673,16 +687,57 @@ public class Azul {
             }
             //set score
             p.score+=p.floor.loseMarks();
+            if (p.score<0){
+                p.score=0;
+            }
             //empty floor to discard
             sharedBoard.bagDiscard.discard.acceptTiles(p.floor.emptyFloorToDiscard());
             newPlayerStates.append(p.toString());
         }
 
+        /*
+        for (Player p : players) {
+            // Check if the game is end
+            if (p.getMosaic().endOfGame()) {
+                sharedBoard.setCentre(new Centre());
+                newGameState[0] = sharedBoard.toString();
+                newGameState[1] = builder.toString();
+                StringBuilder overBuilder = new StringBuilder();
+                // Adding bonus points
+                for (Player over : players) {
+                    over.addScore(getBonusPoints(newGameState, over.getPlayer()));
+                    overBuilder.append(over);
+                }
+                newGameState[1] = overBuilder.toString();
+                // Set the Game State over
+                return newGameState;
+            }
+            // Check if there exists full row
+            if (p.getStorage().hasRowFull()) {
+                newGameState[0] = gameState[0];
+                newGameState[1] = builder.toString();
+                return newGameState;
+            }
+        }
+        sharedBoard.setCentre(new Centre());
+        newGameState[0] = sharedBoard.toString();
+        newGameState[1] = builder.toString();
+        newGameState = refillFactories(newGameState);
+        return newGameState;
+         */
+
+        /*
+        String[] beforeRefillFactory = new String[2];
+        beforeRefillFactory[0]=sharedBoard.toString();
+        beforeRefillFactory[1]=newPlayerStates.toString();
+        //refill fac from bag/discard
+        String[] afterRefillFactory = Factory.refillFactories(beforeRefillFactory);
+        result[0]=afterRefillFactory[0];
+        result[1]=newPlayerStates.toString();
+        */
 
 
-
-
-        return null;
+        return result;
     }
 
     /**

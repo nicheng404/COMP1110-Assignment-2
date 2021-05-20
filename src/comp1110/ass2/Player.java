@@ -211,6 +211,45 @@ public class Player {
         return result;
     }
 
+    /**
+     * get bonus point from mosaic for row, column, set.
+     * @return the bonus pionts.
+     */
+    public int getBonusPoint() {
+        Tiles[][] mosaicTiles = this.mosaic.mosaic2D;
+        int bonusPoint = 0;
+        int[] row = new int[5];
+        int[] col = new int[5];
+        int[] set = new int[5];
+
+        for(int i = 0; i< mosaicTiles.length;i++){
+            for(int j=0;j<mosaicTiles[i].length;j++){
+                if(mosaicTiles[i][j] != Tiles.E){
+                    row[i]++;
+                    col[j]++;
+                    set[mosaicTiles[i][j].ordinal()]++;
+                }
+            }
+        }
+
+        for(int i = 0; i<5;i++){
+            if(row[i]==5) {
+                bonusPoint += 2;
+            }
+        }
+        for(int i =0;i<5;i++){
+            if(col[i]==5){
+                bonusPoint += 7;
+            }
+        }
+        for(int i =0;i<5;i++){
+            if(set[i]==5){
+                bonusPoint += 10;
+            }
+        }
+        return bonusPoint;
+    }
+
     @Override
     public String toString() {
         StringBuilder retString = new StringBuilder();
