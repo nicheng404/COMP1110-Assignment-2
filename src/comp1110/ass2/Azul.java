@@ -803,7 +803,7 @@ public class Azul {
         }
         int[] totalTilesNumber = new int[6];
         for (int i = 0; i < 6; i++) {
-            totalTilesNumber[i] = shareNum[i] + playerNum[6];
+            totalTilesNumber[i] = shareNum[i] + playerNum[i];
         }
         for (int i = 0; i < 6; i++) {
             if (totalTilesNumber[i] > 20) {
@@ -839,30 +839,45 @@ public class Azul {
         }
 //--------------------------------------Floor----------------------------------------------------------------//
         for (Player p : players) {
-            if (p.floor.tiles.size()<=7) {
+            int s = p.floor.tiles.size();
+            if (p.floor.tiles.size() > 7) {
                 return false;
             }
         }
 
 //--------------------------------------Centre----------------------------------------------------------------//
-        int numberOfPlayer= Player.getNumberOfPlayer(gameState[1]);
-        int totalFacNum = 2*numberOfPlayer+1;
+        int numberOfPlayer = Player.getNumberOfPlayer(gameState[1]);
+        int totalFacNum = 2 * numberOfPlayer + 1;
         int realFacNum = sb.facCentre.factories.size();
-        int emptyFacNum = totalFacNum-realFacNum;
+        int emptyFacNum = totalFacNum - realFacNum;
 
         int[] tilesNumInCenterArray = sb.facCentre.centre.getNumberOfTiles();
         int tilesNumInCenter = Arrays.stream(tilesNumInCenterArray).sum();
 
-        if (tilesNumInCenter>3*emptyFacNum){
-             return false;
+        if (tilesNumInCenter > 3 * emptyFacNum && emptyFacNum != 0) {
+            return false;
         }
 
 //--------------------------------------Factories----------------------------------------------------------------//
 
+        int numberOfUnfullFac = 0;
+        for (int i = 0; i < sb.facCentre.factories.size(); i++) {
+            int f = sb.facCentre.factories.get(i).tiles.size();
+            if (f < 4 && f > 0) {
+                numberOfUnfullFac++;
+
+                int s = sb.facCentre.factories.get(i).Number;
+                if (s != sb.facCentre.factories.size() - 1) {
+                    return false;
+                }
+            }
+        }
+        if (numberOfUnfullFac > 1) {
+            return false;
+        }
 
 
-
-        return false;
+        return true;
     }
 
 

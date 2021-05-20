@@ -79,5 +79,10 @@ public class TestDemo {
         int tilesNumInCenter = Arrays.stream(tilesNumInCenterArray).sum();
         System.out.println(tilesNumInCenter);
 
+        String[] input1 = new String[]{"AF0acde2cdde3acde4aadeCccefB1215131109D0002000304", "A0Me04b11S2c13a34a1FB1Mc02d33S1b12e13b1F"};
+
+        boolean bool = Azul.isStateValid(input1);
+        System.out.println(bool);
+
     }
 }
