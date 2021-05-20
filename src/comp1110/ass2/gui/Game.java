@@ -1,14 +1,13 @@
 package comp1110.ass2.gui;
 
 import comp1110.ass2.Azul;
+import comp1110.ass2.Storage;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.effect.DropShadow;
 import javafx.stage.Stage;
 
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 
 public class Game extends Application {
     /* board layout */
@@ -29,6 +28,7 @@ public class Game extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //  FIXME Task 12: Implement a basic playable Azul game in JavaFX that only allows tiles to be placed in valid places=
+        StorageMosaic StMos = new StorageMosaic();
 
 
 

@@ -1,114 +1,67 @@
 package comp1110.ass2.gui;
+
+import comp1110.ass2.Tiles;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+
 public class Viewer extends Application {
+
     private static final int VIEWER_WIDTH = 1200;
     private static final int VIEWER_HEIGHT = 700;
-    private final Group root = new Group();
-    private final Group controls = new Group();
-    Button button = new Button("Refresh");
-    TextArea textArea = new TextArea();
-    private TextField playerTextField;
-    private TextField boardTextField;
-    /**
-     * Draw a placement in the window, removing any previously drawn placements
-     *
-     * @param state an array of two strings, representing the current game state
-     *              TASK 4
-     */
-    void displayState(String[] state) {
-        // FIXME Task 4: implement the simple state viewer
-        /**
-         * @author Yanyan-Lui
-         */
-
-            StringBuilder stateVal = new StringBuilder();
-            for(String s:state){
-                stateVal.append(s);
-            }
-            textArea.appendText(stateVal.toString());}
 
 
-            //creating the image object
-    /**    try{
-     Image image = this.drawImage("assets/drafting_c.png");
-     displayImage(image);
-     }catch (FileNotFoundException e) {
-     e.printStackTrace();
-     }
-     }
-     private Image drawImage(String imagePath) throws FileNotFoundException {
-     InputStream stream = new FileInputStream(imagePath);
-     Image image = new Image(stream);
-     return image;
-     }
-     private void displayImage(Image image) throws FileNotFoundException {
-     ImageView imageView = new ImageView();
-     imageView.setImage(image);
-     //Setting the image view parameters
-     imageView.setX(10);
-     imageView.setY(10);
-     imageView.setFitWidth(100);
-     imageView.setPreserveRatio(true);
-     controls.getChildren().add(imageView);
-     }*/
-    /**
-     * Create a basic text field for input and a refresh button.
-     */
-    private void makeControls() {
-        try
-        {
-            Label playerLabel = new Label("Player State:");
-            playerTextField = new TextField();
-            playerTextField.setPrefWidth(100);
-            Label boardLabel = new Label("Board State:");
-            boardTextField = new TextField();
-            boardTextField.setPrefWidth(100);
-            HBox hb = new HBox();
-            BorderPane bp = new BorderPane();
-            bp.setBottom(hb);
-            bp.setCenter(textArea);
-            hb.getChildren().addAll(playerLabel, playerTextField, boardLabel,
-                    boardTextField, button);
-            hb.setSpacing(10);
-            hb.setLayoutX(50);
-            hb.setLayoutY(VIEWER_HEIGHT - 50);
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent e) {
-                    displayState(new String[]{playerTextField.getText(),
-                            boardTextField.getText()});
-                }
+    static class DTile extends playerTile {
+        public StorageMosaic stoMos;
+        double mouseX, mouseY;
+
+        DTile(Tiles t) {
+            super(t);
+            stoMos = new StorageMosaic();
+            setOnMouseClicked(event -> {
+                mouseX = event.getSceneX();
+                mouseY = event.getSceneY();
             });
-            controls.getChildren().add(bp);
+            setOnMouseDragged(event -> {
+                toFront();
+                double movementX = event.getSceneX() - mouseX;
+                double movementY = event.getSceneY() - mouseY;
+                setLayoutX(getLayoutX() + movementX);
+                setLayoutY(getLayoutY() + movementY);
+                mouseX = event.getSceneX();
+                mouseY = event.getSceneY();
+                event.consume();
+
+            });
+            setOnMouseReleased(event -> {
+                double getmouseX = stoMos.retX(mouseX);
+                double getmouseY = stoMos.retY(mouseY);
+                setLayoutX(getmouseX);
+                setLayoutY(getmouseY);
+                event.consume();
+            });
         }
-        catch (Exception e){
-            e.printStackTrace();
+        public StorageMosaic getStoMos(){
+            return stoMos;
         }
+
+
     }
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Azul Viewer");
-        Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
-        root.getChildren().add(controls);
-        makeControls();
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void start(Stage stage) throws Exception {
+        DTile d = new DTile(Tiles.O);
+        Group group = new Group();
+        group.getChildren().add(d);
+        group.getChildren().add(d.getStoMos());
+        Scene scene = new Scene(group,VIEWER_WIDTH,VIEWER_HEIGHT);
+        scene.setFill(Color.BEIGE);
+        stage.setScene(scene);
+        stage.show();
     }
 }
+
+
