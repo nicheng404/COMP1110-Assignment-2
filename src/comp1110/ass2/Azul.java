@@ -805,8 +805,8 @@ public class Azul {
         for (int i = 0; i < 6; i++) {
             totalTilesNumber[i] = shareNum[i] + playerNum[i];
         }
-        for (int i = 0; i < 6; i++) {
-            if (totalTilesNumber[i] > 20) {
+        for (int i = 0; i < 5; i++) {
+            if (totalTilesNumber[i] !=20) {
                 return false;
             }
         }
@@ -854,7 +854,7 @@ public class Azul {
         int[] tilesNumInCenterArray = sb.facCentre.centre.getNumberOfTiles();
         int tilesNumInCenter = Arrays.stream(tilesNumInCenterArray).sum();
 
-        if (tilesNumInCenter > 3 * emptyFacNum && emptyFacNum != 0) {
+        if (tilesNumInCenter > 3 * emptyFacNum+1 && emptyFacNum != 0 ) {
             return false;
         }
 
@@ -875,6 +875,8 @@ public class Azul {
         if (numberOfUnfullFac > 1) {
             return false;
         }
+
+
 
 
         return true;

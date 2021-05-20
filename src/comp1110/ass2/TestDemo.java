@@ -79,7 +79,10 @@ public class TestDemo {
         int tilesNumInCenter = Arrays.stream(tilesNumInCenterArray).sum();
         System.out.println(tilesNumInCenter);
 
-        String[] input1 = new String[]{"AF0acde2cdde3acde4aadeCccefB1215131109D0002000304", "A0Me04b11S2c13a34a1FB1Mc02d33S1b12e13b1F"};
+        //[Centre]
+        //     * 1. The number of tiles in the centre is no greater than 3 * the number of empty factories.
+
+        String[] input1 = new String[]{"BF0cdee1bdde3bcde4aaaeCbbefB1616181614D0000000000", "A0MS4a1FB0MSF"};
 
         boolean bool = Azul.isStateValid(input1);
         System.out.println(bool);
