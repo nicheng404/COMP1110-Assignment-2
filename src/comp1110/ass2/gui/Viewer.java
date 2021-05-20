@@ -41,37 +41,11 @@ public class Viewer extends Application {
                 event.consume();
 
             });
-            setOnMouseReleased(event -> {
-                double snapX, snapY;
-                snapX = getStoMo().retX(getLayoutX());
-                snapY = getStoMo().retY(getLayoutY());
-                System.out.println(snapX);
-                System.out.println(snapY);
-            });
         }
 
 
         public StorageMosaic getStoMo() {
             return stoMo;
-        }
-
-        /**
-         * Snap to grid
-         */
-        public void snapToGrid() {
-            double snapX, snapY;
-            if (OnBoard()) {
-                snapX = getStoMo().retX(getLayoutX());
-                snapY = getStoMo().retY(getLayoutY());
-
-            }
-        }
-
-
-        public boolean OnBoard() {
-            return getLayoutX() >= MARGIN_X + PLAY_AREA_X + GAP_BW && getX() < MARGIN_X + PLAY_AREA_X + GAP_BW + 250
-                    && getY() >= 350 && getY() < 350 + 250;
-
         }
 
     }

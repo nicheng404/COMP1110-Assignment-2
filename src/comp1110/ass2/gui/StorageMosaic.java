@@ -55,23 +55,6 @@ class StorageMosaic extends Pane {
         storagePane.setLayoutY(350);
     }
 
-    public double retX(double mouse_X) {
-        for (int i = 0; i < mosaicTiles.size() - 1; i++) {
-            if (mouse_X >= mosaicTiles.get(i).getX() && mouse_X < mosaicTiles.get(i + 1).getX()) {
-                return mosaicTiles.get(i).getX();
-            }
-        }
-        return 0;
-    }
-
-    public double retY(double mouse_Y) {
-        for (int i = 0; i < mosaicTiles.size() - 1; i++) {
-            if (mouse_Y >= mosaicTiles.get(i).getY() && mouse_Y < mosaicTiles.get(i + 1).getY()) {
-                return mosaicTiles.get(i).getY();
-            }
-        }
-        return 0;
-    }
 
 
 }
