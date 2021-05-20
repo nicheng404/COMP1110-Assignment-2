@@ -208,9 +208,18 @@ public class Player {
         return result;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder retString = new StringBuilder();
+        retString.append(playerName.name);
+        retString.append(score);
+        retString.append(mosaic.toString());
+        retString.append(storage.toString());
+        retString.append(floor.toString());
+        return retString.toString();
+    }
 
-
-//--------------------------------------------old-------------------------------------------------------------------------//
+    //--------------------------------------------old-------------------------------------------------------------------------//
     /**
      * @param intBagTiles
      * @return
@@ -271,4 +280,8 @@ public class Player {
     */
 
 
+    public static void main(String[] args) {
+        Player p = new Player("A0MS0d11c22b33e44e1Fef");
+        System.out.println(p.toString());
+    }
 }
