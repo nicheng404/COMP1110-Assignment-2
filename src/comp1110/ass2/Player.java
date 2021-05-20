@@ -232,18 +232,18 @@ public class Player {
             }
         }
 
-        for(int i = 0; i<5;i++){
-            if(row[i]==5) {
+        for(int i:row){
+            if(i==5) {
                 bonusPoint += 2;
             }
         }
-        for(int i =0;i<5;i++){
-            if(col[i]==5){
+        for(int i:col){
+            if(i==5){
                 bonusPoint += 7;
             }
         }
-        for(int i =0;i<5;i++){
-            if(set[i]==5){
+        for(int i:set){
+            if(i==5){
                 bonusPoint += 10;
             }
         }

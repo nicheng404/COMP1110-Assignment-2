@@ -777,6 +777,7 @@ public class Azul {
         return false;
     }
 
+
     /**
      * Given a valid gameState and a move, determine whether the move is valid.
      * A Drafting move is a 4-character String.
