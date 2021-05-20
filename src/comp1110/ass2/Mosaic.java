@@ -2,12 +2,21 @@ package comp1110.ass2;
 
 import java.util.ArrayList;
 
+/**
+ * @author Ke Ning
+ * <p>Each instance of this class consists of one part</p>
+ * <p> The input tileString is a reprentation of tiles in mosaic
+ */
+
 public class Mosaic {
     public Tiles[][] mosaic2D;
     public boolean isValid;
     public String inString;// Mb00a02a13e42
 
-    Mosaic(String inString) {
+    public Mosaic() {
+    }
+
+    Mosaic(String inString) { // Mb00a02a13e42
         this.inString = inString;
         setMosaic();
     }
@@ -19,7 +28,8 @@ public class Mosaic {
      */
     public boolean checkIsValid() {
         // mosaic -> char[]
-        int mosaicLength = this.inString.length() - 1;
+        int mosaicLengthWithM = this.inString.length();
+        int mosaicLengthNoM = this.inString.length() - 1;
 
         //criteria : lengthIs3, mosaicChar1Well, mosaicChar2Well,
         //          mosaicChar3Well, mosaicOrderWell,mosaicOverlapping, mosaicColorWell.
@@ -33,11 +43,11 @@ public class Mosaic {
         boolean mosaicColorWell = true;
 
         //mosaic criteria 1 : check length
-        if (mosaicLength % 3 == 0) {
+        if (mosaicLengthNoM % 3 == 0) {
             mosaiclengthWell = true;
 
             //mosaic criteria 2 :1st well
-            for (int i = 1; i < mosaicLength + 1; i = i + 3) {
+            for (int i = 1; i <mosaicLengthWithM; i = i + 3) {
                 if (this.inString.charAt(i) >= 'a' && this.inString.charAt(i) <= 'e') {
                 } else {
                     mosaicChar1Well = false;
@@ -45,21 +55,21 @@ public class Mosaic {
                 }
             }
             //mosaic criteria 3 : 2nd well
-            for (int i = 2; i < mosaicLength + 1; i = i + 3) {
+            for (int i = 2; i <mosaicLengthWithM; i = i + 3) {
                 if (this.inString.charAt(i) >= '0' && this.inString.charAt(i) <= '4') {
                 } else {
                     mosaicChar2Well = false;
                 }
             }
             //mosaic criteria 4 : 3rd well
-            for (int i = 3; i < mosaicLength + 1; i = i + 3) {
+            for (int i = 3; i < mosaicLengthWithM; i = i + 3) {
                 if (this.inString.charAt(i) >= '0' && this.inString.charAt(i) <= '4') {
                 } else {
                     mosaicChar3Well = false;
                 }
             }
             //mosaic criteria 5 : order well
-            for (int i = 2; i + 3 < mosaicLength + 1; i = i + 3) {
+            for (int i = 2; i + 3 < mosaicLengthWithM; i = i + 3) {
                 if (this.inString.charAt(i) > this.inString.charAt(i + 3)) {
                     mosaicRowOrderWell = false;
                 }
@@ -99,9 +109,13 @@ public class Mosaic {
 
 
         }
-        return mosaicLength <= 75 && mosaiclengthWell && mosaicChar1Well && mosaicChar2Well
+        return mosaicLengthNoM <= 75 && mosaiclengthWell && mosaicChar1Well && mosaicChar2Well
                 && mosaicChar3Well && mosaicRowOrderWell && mosaicColumnOrderWell
                 && mosaicOverlappingWell && mosaicColorWell ;
+    }
+
+    public Tiles[][] getTiles(){
+        return mosaic2D;
     }
 
     /**
@@ -124,7 +138,7 @@ public class Mosaic {
         this.isValid = checkIsValid();
         int row, col;
         if (isValid) {
-            for (int i = 0; i < this.inString.length(); i++) {
+            for (int i = 0; i < this.inString.length(); i++) { //Ma02a13b00e42
 
                 if (this.inString.charAt(i) >= 'a' && this.inString.charAt(i) <= 'e') {
                     row = this.inString.charAt(i + 1) - '0';

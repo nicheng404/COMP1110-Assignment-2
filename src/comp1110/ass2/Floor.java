@@ -12,12 +12,11 @@ public class Floor {
     public static final char HEADCHAR = 'F';
     public ArrayList<Tiles> tiles = new ArrayList<>();
 
-    Floor(String floorString) {
-        //check whether the given floorstring is empty
-        if (floorString.equals("")) {
-        } else {
+    public Floor() {
+    }
+
+    public Floor(String floorString) {
             setFloorTiles(floorString);
-        }
     }
 
     /**
@@ -25,10 +24,11 @@ public class Floor {
      * Takes a string and splits it into all the tiles
      */
     public void setFloorTiles(String floorString) {
-        for (int i = 0; i < floorString.length(); i++)
-            for (Tiles t : Tiles.values())
-                if (floorString.charAt(i) == t.symbol)
-                    tiles.add(t);
+        for (int i = 1; i < floorString.length(); i++) {
+            char c = floorString.charAt(i);
+            Tiles t = Tiles.getTileByCharSymbol(c);
+            tiles.add(t);
+        }
     }
 
     /**
@@ -73,7 +73,7 @@ public class Floor {
     }
 
     /**
-     * @return If == "" return true, otherwise return false.
+     * @return If empty return true, otherwise return false.
      * @author Ke Ning
      * Check whether the floor is empty by checking whether floor.tileStr == ""
      */

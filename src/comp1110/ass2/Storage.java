@@ -2,6 +2,11 @@ package comp1110.ass2;
 
 import java.util.*;
 
+/**
+ * @author Ke Ning
+ * <p>Each instance of this class consists of one part</p>
+ * <p> The input tileString is a reprentation of tiles in storage
+ */
 public class Storage {
 
     public String storageTilesString; // storage string in state1 with 'M'
@@ -17,6 +22,8 @@ public class Storage {
         }
     }
 
+    public Storage() {
+    }
 
     public Storage(String storageString) {
         if (storageTilesStringWellFormed(storageString)) {
@@ -47,7 +54,8 @@ public class Storage {
      */
     public static boolean storageTilesStringWellFormed(String storageTilesString) {// isValid()
         // storage -> char[]
-        int storageLength = storageTilesString.length() - 1;
+        int storageLengthWithS = storageTilesString.length();
+        int storageLengthNoS = storageTilesString.length() - 1;
         //char[] storageArray= storageTilesString.toCharArray();
 
         // [storage] criteria:
@@ -62,11 +70,11 @@ public class Storage {
         boolean storageChar2Well = true;
 
         //storage criteria 1 : check length 是3的倍数
-        if (storageLength % 3 == 0) {
+        if (storageLengthNoS % 3 == 0) {
             storagelengthIs3 = true;
 
             //storage criteria 4.中间2 a-e
-            for (int i = 2; i < storageLength; i = i + 3) {
+            for (int i = 2; i < storageLengthWithS; i = i + 3) {
                 if (storageTilesString.charAt(i) >= 'a' && storageTilesString.charAt(i) <= 'e') {
                 } else {
                     storageChar2Well = false;
@@ -74,14 +82,14 @@ public class Storage {
             }
 
             //storage criteria 2.row顺序
-            for (int i = 1; i + 3 < storageLength; i = i + 3) {
+            for (int i = 1; i + 3 < storageLengthWithS; i = i + 3) {
                 if (storageTilesString.charAt(i) > storageTilesString.charAt(i + 3)) {
                     storageOrderWell = false;
                 }
             }
 
             //storage criteria 3.char 3rd <=char 1st +1
-            for (int i = 1; i < storageLength; i = i + 3) {
+            for (int i = 1; i < storageLengthWithS; i = i + 3) {
                 if ((storageTilesString.charAt(i) >= '0' && storageTilesString.charAt(i) <= '4')
                         && (storageTilesString.charAt(i + 2) >= '0' && storageTilesString.charAt(i + 2) <= '5')
                         && (storageTilesString.charAt(i + 2) <= storageTilesString.charAt(i) + 1)) {
@@ -90,7 +98,7 @@ public class Storage {
                 }
             }
         }
-        return storageLength <= 15 && storagelengthIs3
+        return storageLengthNoS <= 15 && storagelengthIs3
                 && storageOrderWell && storageChar13Well && storageChar2Well;
 
     }
