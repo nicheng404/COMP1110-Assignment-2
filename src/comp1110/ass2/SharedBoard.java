@@ -104,8 +104,7 @@ public class SharedBoard {
                 boolean[] chkValFac = new boolean[factories.size()];
                 Arrays.fill(chkValFac, true);
                 isValid = Arrays.equals(chkValFac, refValFac) && refValCentre;
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 isValid = false;
             }
 
@@ -118,6 +117,7 @@ public class SharedBoard {
             StringBuilder retString = new StringBuilder();
             for (Factory f : factories)
                 retString.append(f.toString());
+            retString.append("C");
             retString.append(centre);
             retString.insert(0, "F");
             return retString.toString();
@@ -145,6 +145,47 @@ public class SharedBoard {
         retString = facCentre.toString() + bagDiscard.toString();
         return retString;
     }
+
+    /**
+     * check whether the whole fac is empty
+     *
+     * @return true if the whole fac is empty.
+     */
+    public boolean facIsEmpty() {
+        return (this.facCentre.factories.size() == 0);
+    }
+
+    public boolean centIsEmpty() {
+        if (this.facCentre.centre.tiles.size() == 0) return true;
+        if (this.facCentre.centre.tiles.size() == 1) {
+            boolean isFP = this.isFPinCenter();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isFPinCenter() {
+        boolean result = false;
+        for (Tiles t : this.facCentre.centre.tiles) {
+            if (t == Tiles.FP) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {//0cdde1bbbe2abde3cdee4bcce
+        String[] Input = {"AF0cdde1bbbe2abde3cdee4bcceCfB1519161614D0000000000"};
+        SharedBoard shBd = new SharedBoard(Input[0]);
+        System.out.println(shBd.toString());
+        int numOfSize = 0;
+        numOfSize = shBd.facCentre.centre.tiles.size();
+        System.out.println(numOfSize);
+
+        System.out.println(shBd.centIsEmpty());
+
+    }
+
 
 }
 
