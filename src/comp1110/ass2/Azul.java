@@ -664,7 +664,11 @@ public class Azul {
         }
 
         for (Player p: players){
+            Floor pFloor = p.getFloor();
+            //set next player (set turn)
+            if (pFloor.firstPlayerIsInFloor()){
 
+            }
 
         }
 

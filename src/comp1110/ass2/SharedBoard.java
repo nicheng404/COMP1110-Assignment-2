@@ -9,6 +9,7 @@ import java.util.Arrays;
 public class SharedBoard {
     public SharedBoardBagDiscard bagDiscard;
     public SharedBoardFacCentre facCentre;
+    public String nextPlayer;
     public boolean isValid;
 
 
@@ -16,6 +17,7 @@ public class SharedBoard {
         this.bagDiscard = new SharedBoardBagDiscard(inP);
         this.facCentre = new SharedBoardFacCentre(inP);
         this.isValid = bagDiscard.isValid && facCentre.isValid;
+        this.nextPlayer = inP.substring(0, 1);
 
     }
 
@@ -142,7 +144,7 @@ public class SharedBoard {
      */
     public String toString() {
         String retString;
-        retString = facCentre.toString() + bagDiscard.toString();
+        retString = nextPlayer+facCentre.toString() + bagDiscard.toString();
         return retString;
     }
 

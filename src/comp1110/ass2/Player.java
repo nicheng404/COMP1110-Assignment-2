@@ -14,7 +14,7 @@ public class Player {
 
 
     public static final String[] Names = {"A", "B", "C", "D"};
-    public Player nextPlayer;
+    //public Player nextPlayer;
 
 
     public Player(char c) {
@@ -70,10 +70,11 @@ public class Player {
      *
      * @param nPlayer Player that has to be set as the next player
      */
+    /*
     void setNextPlayer(Player nPlayer) {
         this.nextPlayer = nPlayer;
     }
-
+    */
 
     /**
      * Split the total combined state string of all players into a String[]. The members in String[]
@@ -111,16 +112,17 @@ public class Player {
 
     /**
      * Get Player[] using total-player-state String.
+     *
      * @param totalPlayerState "A20Ma02a13b00e42S2a13e44a1FaabbeB30Mc01b11d21S0e12b2F"
      * @return Player[]
      */
-    public static Player[] getPlayers(String totalPlayerState){
+    public static Player[] getPlayers(String totalPlayerState) {
         String[] playerStringArray = getEachPlayerStateString(totalPlayerState);
         int playerNum = playerStringArray.length;
         Player[] result = new Player[playerNum];
 
-        for (int i =0; i<playerNum;i++){
-            result[i]=new Player(playerStringArray[i]);
+        for (int i = 0; i < playerNum; i++) {
+            result[i] = new Player(playerStringArray[i]);
         }
 
         return result;
@@ -171,18 +173,19 @@ public class Player {
 
     /**
      * get bonus points
+     *
      * @return
      */
-    public int scoringBonusPoint(){
+    public int scoringBonusPoint() {
         Tiles[][] tiles = this.mosaic.getTiles();
-        int result =0;
-        int[] row = new int [5];
-        int []col =new int [5];
-        int set[] = new int [5];
+        int result = 0;
+        int[] row = new int[5];
+        int[] col = new int[5];
+        int set[] = new int[5];
 
-        for (int i =0; i<5;i++){
-            for(int j=0; j<5;j++){
-                if (tiles[i][j]!=Tiles.E){
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (tiles[i][j] != Tiles.E) {
                     row[i]++;
                     col[j]++;
                     set[tiles[i][j].ordinal()]++;
@@ -190,18 +193,18 @@ public class Player {
             }
         }
 
-        for(int i = 0; i<5;i++){
-            if(row[i]==5) {
+        for (int i = 0; i < 5; i++) {
+            if (row[i] == 5) {
                 result += 2;
             }
         }
-        for(int i =0;i<5;i++){
-            if(col[i]==5){
+        for (int i = 0; i < 5; i++) {
+            if (col[i] == 5) {
                 result += 7;
             }
         }
-        for(int i =0;i<5;i++){
-            if(set[i]==5){
+        for (int i = 0; i < 5; i++) {
+            if (set[i] == 5) {
                 result += 10;
             }
         }
@@ -220,6 +223,7 @@ public class Player {
     }
 
     //--------------------------------------------old-------------------------------------------------------------------------//
+
     /**
      * @param intBagTiles
      * @return
