@@ -128,6 +128,18 @@ public class Player {
         return result;
     }
 
+    public int[] getNumberOfTiles() {
+        int[] result = new int[6];
+
+        int[] mosaicNum = this.mosaic.getNumberOfTiles();
+        int[] storageNum = this.storage.getNumberOfTiles();
+        int[] floorNum = this.floor.getNumberOfTiles();
+        for (int i = 0; i < 6; i++) {
+            result[i] = mosaicNum[i] + storageNum[i] + floorNum[i];
+        }
+        return result;
+    }
+
 
     /**
      * check get the number of players with the given combined total playerState string for all players.
@@ -213,6 +225,7 @@ public class Player {
 
     /**
      * get bonus point from mosaic for row, column, set.
+     *
      * @return the bonus pionts.
      */
     public int getBonusPoint() {
@@ -222,9 +235,9 @@ public class Player {
         int[] col = new int[5];
         int[] set = new int[5];
 
-        for(int i = 0; i< mosaicTiles.length;i++){
-            for(int j=0;j<mosaicTiles[i].length;j++){
-                if(mosaicTiles[i][j] != Tiles.E){
+        for (int i = 0; i < mosaicTiles.length; i++) {
+            for (int j = 0; j < mosaicTiles[i].length; j++) {
+                if (mosaicTiles[i][j] != Tiles.E) {
                     row[i]++;
                     col[j]++;
                     set[mosaicTiles[i][j].ordinal()]++;
@@ -232,18 +245,18 @@ public class Player {
             }
         }
 
-        for(int i:row){
-            if(i==5) {
+        for (int i : row) {
+            if (i == 5) {
                 bonusPoint += 2;
             }
         }
-        for(int i:col){
-            if(i==5){
+        for (int i : col) {
+            if (i == 5) {
                 bonusPoint += 7;
             }
         }
-        for(int i:set){
-            if(i==5){
+        for (int i : set) {
+            if (i == 5) {
                 bonusPoint += 10;
             }
         }

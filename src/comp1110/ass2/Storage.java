@@ -149,6 +149,35 @@ public class Storage {
         return false;
     }
 
+    /**
+     * get number of tiles in storage.
+     * @return int[6]
+     */
+    public int[] getNumberOfTiles(){
+        int[] result = new int[6];
+        for (int i=0;i<storageTiles.length;i++){
+            switch (storageTiles[i].tile.symbol) {
+                case 'a':
+                    result[0]+=storageTiles[i].number;
+                    break;
+                case 'b':
+                    result[1]+=storageTiles[i].number;
+                    break;
+                case 'c':
+                    result[2]+=storageTiles[i].number;
+                    break;
+                case 'd':
+                    result[3]+=storageTiles[i].number;
+                    break;
+                case 'e':
+                    result[4]+=storageTiles[i].number;
+                    break;
+
+            }
+        }
+        return result;
+    }
+
 
     /**
      * The colour of tile stored in a row must not be the same as a colour

@@ -631,14 +631,14 @@ public class Azul {
         Player[] players = new Player[numOfPlayer];
         String[] playerStrings = Player.getEachPlayerStateString(gameState[1]);
         // create Player[]
-        for (int i =0;i<numOfPlayer;i++){
-            players[i]=new Player(playerStrings[i]);
+        for (int i = 0; i < numOfPlayer; i++) {
+            players[i] = new Player(playerStrings[i]);
         }
 
         int bonusPoint = 0;
-        for (Player p: players){
-            if (player==p.playerName.nameChar){
-                bonusPoint=p.getBonusPoint();
+        for (Player p : players) {
+            if (player == p.playerName.nameChar) {
+                bonusPoint = p.getBonusPoint();
             }
         }
 
@@ -665,7 +665,7 @@ public class Azul {
         String[] result = new String[2];
         SharedBoard sharedBoard = new SharedBoard(gameState[0]);
         // if center/fac not empty
-        if (!sharedBoard.facIsEmpty()||!sharedBoard.centIsEmpty()){
+        if (!sharedBoard.facIsEmpty() || !sharedBoard.centIsEmpty()) {
             return gameState;
         }
 
@@ -675,20 +675,20 @@ public class Azul {
         Player[] players = new Player[numOfPlayer];
         String[] playerStrings = Player.getEachPlayerStateString(gameState[1]);
         // create Player[]
-        for (int i =0;i<numOfPlayer;i++){
-            players[i]=new Player(playerStrings[i]);
+        for (int i = 0; i < numOfPlayer; i++) {
+            players[i] = new Player(playerStrings[i]);
         }
 
-        for (Player p: players){
+        for (Player p : players) {
             //set next player (set turn) / add Fp into center
-            if (p.floor.firstPlayerIsInFloor()){
-                sharedBoard.nextPlayer=p.playerName.name;
+            if (p.floor.firstPlayerIsInFloor()) {
+                sharedBoard.nextPlayer = p.playerName.name;
                 sharedBoard.facCentre.centre.tiles.add(Tiles.FP);
             }
             //set score
-            p.score+=p.floor.loseMarks();
-            if (p.score<0){
-                p.score=0;
+            p.score += p.floor.loseMarks();
+            if (p.score < 0) {
+                p.score = 0;
             }
             //empty floor to discard
             sharedBoard.bagDiscard.discard.acceptTiles(p.floor.emptyFloorToDiscard());
@@ -704,7 +704,7 @@ public class Azul {
                 StringBuilder ender = new StringBuilder();
                 // check bonus point
                 for (Player en : players) {
-                    en.score = en.score+getBonusPoints(result, en.playerName.nameChar);
+                    en.score = en.score + getBonusPoints(result, en.playerName.nameChar);
                     ender.append(en);
                 }
                 result[1] = ender.toString();
@@ -773,7 +773,15 @@ public class Azul {
      * TASK 9
      */
     public static boolean isStateValid(String[] gameState) {
-        // FIXME Task 9
+        if (!isSharedStateWellFormed(gameState[0]) || !isPlayerStateWellFormed(gameState[1])) {
+            return false;
+        }
+
+        SharedBoard sb = new SharedBoard(gameState[0]);
+        Player[] players = Player.getPlayers(gameState[1]);
+
+
+
         return false;
     }
 

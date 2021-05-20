@@ -46,6 +46,7 @@ public class SharedBoard {
             } catch (Exception e) {
                 isValid = false;
             }
+
         }
 
 
@@ -125,6 +126,55 @@ public class SharedBoard {
             return retString.toString();
         }
 
+    }
+
+    /**
+     * get number of tiles in the sharedboard.
+     * @return int[6]
+     */
+    public int[] getNumberOfTiles(){
+        int[] result = new int[6];
+
+        int[] bagNum=this.bagDiscard.bag.getNumberOfTiles();
+        int[] centerNum=this.facCentre.centre.getNumberOfTiles();
+        int[] discardNum=this.bagDiscard.discard.getNumberOfTiles();
+
+        // List<list> factories -> string
+        StringBuilder retString = new StringBuilder();
+        for (Factory f : this.facCentre.factories){
+            retString.append(f.toString());
+        }
+        String fac = retString.toString();
+
+        int[] facNum =new int[6];
+        for(int i=0;i<fac.length();i++){
+            if (fac.charAt(i)>='a' && fac.charAt(i)<='f'){
+                switch(fac.charAt(i)){
+                    case 'a':
+                        facNum[0]++;
+                        break;
+                    case 'b':
+                        facNum[1]++;
+                        break;
+                    case 'c':
+                        facNum[2]++;
+                        break;
+                    case 'd':
+                        facNum[3]++;
+                        break;
+                    case 'e':
+                        facNum[4]++;
+                        break;
+
+                }
+            }
+        }
+
+        for(int i=0;i<6;i++){
+            result[i]=bagNum[i]+centerNum[i]+discardNum[i]+facNum[i];
+        }
+
+        return result;
     }
 
 

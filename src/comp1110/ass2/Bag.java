@@ -110,6 +110,18 @@ public class Bag {
         }
     }
 
+    /**
+     * get the number of tiles in bag as an array[]
+     * @return
+     */
+    public int[] getNumberOfTiles(){
+        int[] result=new int[6];
+        for(int i=0;i<TileCount.size();i++){
+            result[i]=TileCount.get(i);
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuilder retString= new StringBuilder();

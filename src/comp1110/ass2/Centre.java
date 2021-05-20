@@ -57,4 +57,35 @@ public class Centre {
         return retString.toString();
     }
 
+    /**
+     * get number of tiles in centre and return as an int[].
+     * @return an int[]
+     */
+    public int[] getNumberOfTiles() {
+        int[] result = new int[6];
+        for (int i = 0; i < tiles.size(); i++) {
+            switch (tiles.get(i).symbol) {
+                case 'a':
+                    result[0]++;
+                    break;
+                case 'b':
+                    result[1]++;
+                    break;
+                case 'c':
+                    result[2]++;
+                    break;
+                case 'd':
+                    result[3]++;
+                    break;
+                case 'e':
+                    result[4]++;
+                    break;
+                case 'f':
+                    result[5]++;
+                    break;
+            }
+        }
+        return result;
+    }
+
 }

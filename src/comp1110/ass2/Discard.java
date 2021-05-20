@@ -118,5 +118,17 @@ public class Discard {
         }
     }
 
+    /**
+     * get the number of tiles in discard as an array[]
+     * @return
+     */
+    public int[] getNumberOfTiles(){
+        int[] result=new int[6];
+        for(int i=0;i<TileCount.size();i++){
+            result[i]=TileCount.get(i);
+        }
+        return null;
+    }
+
 
 }

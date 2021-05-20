@@ -248,6 +248,36 @@ public class Mosaic {
         }
     }
 
+    /**
+     * get get number of tiles in mosaic.
+     * @return int[6]
+     */
+    public int[] getNumberOfTiles(){
+        int[] result = new int[6];
+        for(int i=0;i<5;i++){
+            for(int j=0;j<5;j++){
+                switch (mosaic2D[i][j].symbol){
+                    case 'a':
+                        result[0]++;
+                        break;
+                    case 'b':
+                        result[1]++;
+                        break;
+                    case 'c':
+                        result[2]++;
+                        break;
+                    case 'd':
+                        result[3]++;
+                        break;
+                    case 'e':
+                        result[4]++;
+                        break;
+                }
+            }
+        }
+        return result;
+    }
+
 
     public static boolean mosaicTilesWellFormed(String mosaicTilesString) {
 
