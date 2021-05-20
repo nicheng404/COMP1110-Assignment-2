@@ -695,36 +695,34 @@ public class Azul {
             newPlayerStates.append(p.toString());
         }
 
-        /*
+
         for (Player p : players) {
             // Check if the game is end
             if (p.getMosaic().endOfGame()) {
-                sharedBoard.setCentre(new Centre());
-                newGameState[0] = sharedBoard.toString();
-                newGameState[1] = builder.toString();
-                StringBuilder overBuilder = new StringBuilder();
-                // Adding bonus points
-                for (Player over : players) {
-                    over.addScore(getBonusPoints(newGameState, over.getPlayer()));
-                    overBuilder.append(over);
+                result[0] = sharedBoard.toString();
+                result[1] = newPlayerStates.toString();
+                StringBuilder ender = new StringBuilder();
+                // check bonus point
+                for (Player en : players) {
+                    en.score = en.score+getBonusPoints(result, en.playerName.nameChar);
+                    ender.append(en);
                 }
-                newGameState[1] = overBuilder.toString();
+                result[1] = ender.toString();
                 // Set the Game State over
-                return newGameState;
+                return result;
             }
-            // Check if there exists full row
-            if (p.getStorage().hasRowFull()) {
-                newGameState[0] = gameState[0];
-                newGameState[1] = builder.toString();
-                return newGameState;
+            // Check full rows
+            if (p.getStorage().hasFullRow()) {
+                result[0] = gameState[0];
+                result[1] = newPlayerStates.toString();
+                return result;
             }
         }
-        sharedBoard.setCentre(new Centre());
-        newGameState[0] = sharedBoard.toString();
-        newGameState[1] = builder.toString();
-        newGameState = refillFactories(newGameState);
-        return newGameState;
-         */
+        result[0] = sharedBoard.toString();
+        result[1] = newPlayerStates.toString();
+        result = Factory.refillFactories(result);
+
+
 
         /*
         String[] beforeRefillFactory = new String[2];
