@@ -55,33 +55,22 @@ class StorageMosaic extends Pane {
         storagePane.setLayoutY(350);
     }
 
-    /**
-     * find the nearest grid value of the given mouse pointer
-     * @param mouse_x The present value of the mouse pointer
-     * @return The Layout x of the given mouse pointer
-     */
-    public double retX(double mouse_x) {
-        double retVal = 0;
+    public double retX(double mouse_X) {
         for (int i = 0; i < mosaicTiles.size() - 1; i++) {
-            if (mouse_x >= mosaicTiles.get(i).getLayoutX() && mouse_x < mosaicTiles.get(i + 1).getLayoutX()) {
-                retVal = mosaicTiles.get(i).getLayoutX();
+            if (mouse_X >= mosaicTiles.get(i).getX() && mouse_X < mosaicTiles.get(i + 1).getX()) {
+                return mosaicTiles.get(i).getX();
             }
         }
-        return retVal;
+        return 0;
     }
-    /**
-     * find the nearest grid value of the given mouse pointer
-     * @param mouse_y The present value of the mouse pointer
-     * @return The Layout x of the given mouse pointer
-     */
-    public double retY(double mouse_y) {
-        double retVal = 0;
+
+    public double retY(double mouse_Y) {
         for (int i = 0; i < mosaicTiles.size() - 1; i++) {
-            if (mouse_y >= mosaicTiles.get(i).getLayoutY() && mouse_y < mosaicTiles.get(i + 1).getLayoutY()) {
-                retVal = mosaicTiles.get(i).getLayoutY();
+            if (mouse_Y >= mosaicTiles.get(i).getY() && mouse_Y < mosaicTiles.get(i + 1).getY()) {
+                return mosaicTiles.get(i).getY();
             }
         }
-        return retVal;
+        return 0;
     }
 
 
