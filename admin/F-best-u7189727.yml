@@ -1,0 +1,83 @@
+# IMPORTANT: It is very important that you correctly complete this originality
+# statement.
+#
+# This is your statement of your submitted work being your own.
+# Incorrectly filling out this statement could lead to charges
+# of academic misconduct.
+# 
+# For information on how to fill this out correctly, see
+# https://cs.anu.edu.au/courses/comp1110/help/faq/09-originality/
+#
+
+declaration: >-
+  I submit the work below for assessment as my best work. I declare that this
+  is entirely my own work, with the following documented exceptions:
+
+# Use this to list names of people who you collaborated with, and a
+# comment about what you collaborated on.
+#
+# Add as many "name+comment" entries as necessary
+# (or remove it altogether if you haven't collaborated with anyone)#
+#collaboration:
+#  - name:
+#    comment: >-
+
+# Use this to list any code that you used that you did not write,
+# aside from code provided by the lecturer.  Provide a comment
+# explaining your use and the URL to that code and the licence for
+# that code
+#
+# Add as many "url+licence+comment" entries as necessary
+# (or remove it altogether if you haven't used any external code)
+#code:
+#  - comment:
+#    url:
+#    licence:
+
+# I wish to submit the following classes as entirely my own (remove this if
+# you want to just submit methods):
+
+# I wish to submit the following methods as entirely my own (remove this if
+# you want to just submit classes):
+method:
+   - public static char getReasonableRandomTile(int[] intBagTiles) { // from int[5]
+     // do - while
+     char wanted = '!';
+     boolean bagHasNot = true;
+     do {
+     char x = getRandomElement();
+     int index = 999;
+     //get index of x
+     switch (x) {
+     case 'a':
+       index = 0;
+       break;
+     case 'b':
+       index = 1;
+       break;
+     case 'c':
+       index = 2;
+       break;
+     case 'd':
+       index = 3;
+       break;
+     case 'e':
+       index = 4;
+       break;
+}
+  //check bag with x
+  int numberOfx = intBagTiles[index];
+
+  if (numberOfx != 0) {
+  bagHasNot = false;
+  wanted = x;
+}
+} while (bagHasNot);
+
+  // char x-> wanted
+  return wanted;
+}
+
+# sign *your* name and uid here
+name: Yanyan Liu
+uid: u7189727
