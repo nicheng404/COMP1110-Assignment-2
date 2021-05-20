@@ -1157,10 +1157,17 @@ public class Azul {
 
         }
 
+String res = "";
+        for (Player p: players){
+            res+=p.toString();
+        }
+
+        String [] result =new String[2];
+        result[0]=sb.toString();
+        result[1]=res;
 
 
-
-        return null;
+        return result;
     }
 
     /**
