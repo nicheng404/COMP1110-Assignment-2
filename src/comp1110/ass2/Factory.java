@@ -19,6 +19,8 @@ public class Factory {
     public String tileStr;
 
 
+    public Factory() {
+    }
 
     Factory(String tileStr) {
         this.tileStr = tileStr;

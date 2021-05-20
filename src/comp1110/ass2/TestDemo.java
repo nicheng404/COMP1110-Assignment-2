@@ -87,5 +87,13 @@ public class TestDemo {
         boolean bool = Azul.isStateValid(input1);
         System.out.println(bool);
 
+
+        System.out.println("-----------task 10------------");
+        //task 10
+        String[] input2 = new String[]{"AFCB1213121310D0102000003", "A4Mc02c13b23d31a34c40S3c44e5FfB1Mb01e10c24d31e43S1a22b33a44d5F"};
+        String inMove =  "A0F";
+        boolean task10 = Azul.isMoveValid(input2,inMove);
+        System.out.println(task10);
+
     }
 }

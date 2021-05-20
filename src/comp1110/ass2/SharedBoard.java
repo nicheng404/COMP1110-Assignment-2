@@ -178,6 +178,7 @@ public class SharedBoard {
     }
 
 
+
     /**
      * Get the validity of the shared State
      *

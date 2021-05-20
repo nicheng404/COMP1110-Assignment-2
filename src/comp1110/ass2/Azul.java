@@ -806,7 +806,7 @@ public class Azul {
             totalTilesNumber[i] = shareNum[i] + playerNum[i];
         }
         for (int i = 0; i < 5; i++) {
-            if (totalTilesNumber[i] !=20) {
+            if (totalTilesNumber[i] != 20) {
                 return false;
             }
         }
@@ -854,7 +854,7 @@ public class Azul {
         int[] tilesNumInCenterArray = sb.facCentre.centre.getNumberOfTiles();
         int tilesNumInCenter = Arrays.stream(tilesNumInCenterArray).sum();
 
-        if (tilesNumInCenter > 3 * emptyFacNum+1 && emptyFacNum != 0 ) {
+        if (tilesNumInCenter > 3 * emptyFacNum + 1 && emptyFacNum != 0) {
             return false;
         }
 
@@ -877,8 +877,6 @@ public class Azul {
         }
 
 
-
-
         return true;
     }
 
@@ -888,6 +886,13 @@ public class Azul {
      * A Drafting move is a 4-character String.
      * A Drafting move is valid if it satisfies the following conditions:
      * <p>
+     * first character is 'A' to 'B' and represents the player making the move.
+     * second character is '0' to '4' or 'C' and represents the factory (0-4) or centre (C) from which the player is picking tiles.
+     * third character is 'a' to 'e' representing the colour of tile selected.
+     * fourth character is '0' to '4' or 'F' and represents the row (0-4) or floor (F) where the tiles are to be placed.
+     * <p>
+     * For example: "B1aF" means "player B removed all the a tiles from factory 1 and placed them on the floor".
+     * <p>
      * 1. The specified factory/centre contains at least one tile of the specified colour.
      * 2. The storage row the tile is being placed in does not already contain a different colour.
      * 3. The corresponding mosaic row does not already contain a tile of that colour.
@@ -896,6 +901,14 @@ public class Azul {
      * <p>
      * A Tiling move is a 3-character String.
      * A Tiling move is valid if it satisfies the following conditions:
+     * <p>
+     * first character is 'A' to 'B' and represents the player making the move.
+     * second character is '0' to '4' and represents the row from which a tile is being moved from the storage to the mosaic.
+     * third character is '0' to '4' or 'F' and represents the column of the mosaic the tile will be placed in, or the floor.
+     * <p>
+     * For example: "A03" means "player A moves the rightmost tile from storage row 0 into the mosaic at row 0, column 3".
+     * "A2F" means "player A moves all tiles from storage row 2 into the floor".
+     * <p>
      * 1. The specified row in the Storage area is full.
      * 2. The specified column does not already contain a tile of the same colour.
      * 3. The specified location in the mosaic is empty.
@@ -910,8 +923,128 @@ public class Azul {
      */
     public static boolean isMoveValid(String[] gameState, String move) {
         // FIXME Task 10
-        return false;
+        SharedBoard sb = new SharedBoard(gameState[0]);
+        Player[] players = Player.getPlayers(gameState[1]);
+        Player chosenPlayer = null;
+        char playerChar = move.charAt(0);
+        if (playerChar != sb.nextPlayer.charAt(0)) {
+            return false;
+        }
+        // get chosen player
+        for (Player p : players) {
+            if (playerChar == p.playerName.nameChar) {
+                chosenPlayer = p;
+            }
+        }
+
+        // Drafting move.
+        if (move.length() == 4) {
+            // Drafting move 1. get the chosen tile and its ordinal()
+            char tileSymbol = move.charAt(2);
+            char originChar = move.charAt(1);
+
+            // take from center
+            if (originChar == 'C') {
+                int sizeOfCenter = sb.facCentre.centre.tiles.size();
+                int cnt = 0;
+                for (Tiles t : sb.facCentre.centre.tiles) {
+                    if (t.symbol != tileSymbol) {
+                        cnt++;
+                    }
+                }
+                if (cnt == sizeOfCenter) {
+                    return false;
+                }
+            }
+            // take from fac
+            if (originChar >= '0' && originChar <= '4') {
+                int facName = move.charAt(1) - '0';
+                Factory chosenFac = new Factory();
+
+                for (Factory f : sb.facCentre.factories) {
+                    if (f.Number == facName) {
+                        chosenFac = f;
+                    }
+                }
+                int sizeOfChosenFac = chosenFac.tiles.size();
+                int cnt = 0;
+                for (Tiles t : chosenFac.tiles) {
+                    if (t.symbol != tileSymbol) {
+                        cnt++;
+                    }
+                }
+                if (cnt == sizeOfChosenFac) {
+                    return false;
+                }
+            }
+
+
+            //Drafting move 2. destination storage row is valid
+            char destination = move.charAt(3);
+
+            if (destination >= '0' && destination <= '4') {// make sure tile will be placed into mosaic
+
+                //check his storage
+                int destinationRow = destination - '0';
+                if (chosenPlayer.storage.storageTiles[destinationRow].tile != Tiles.E &&
+                        chosenPlayer.storage.storageTiles[destinationRow].tile.symbol != tileSymbol) {
+                    return false;
+                }
+
+                //Drafting move 3. mosaic hsa no same color for this row
+                for (int i = 0; i < 5; i++) {
+                    if (tileSymbol == chosenPlayer.mosaic.mosaic2D[destinationRow][i].symbol) {
+                        return false;
+                    }
+                }
+
+            }
+        }
+
+        // Tilling move.
+        if (move.length() == 3) {
+            int originalRow = move.charAt(1) - '0';
+            char destination = move.charAt(2);
+            Tiles t = chosenPlayer.storage.storageTiles[originalRow].tile;
+
+
+            if (destination >= '0' && destination <= '4') {// make sure tile will be placed into storage
+                int destinationCol = destination - '0';
+
+                // Tilling move 1. original row is full in storage
+                if (chosenPlayer.storage.storageTiles[originalRow].number != originalRow + 1) {
+                    return false;
+                }
+
+                //Tilling move 2. destination Column does not have a same color
+                for (int i = 0; i < 5; i++) {
+                    if (chosenPlayer.mosaic.mosaic2D[i][destinationCol] == t) {
+                        return false;
+                    }
+                }
+
+                // Tilling move 3. destination in mosaic is empty
+                if (chosenPlayer.mosaic.mosaic2D[originalRow][destinationCol] != Tiles.E) {
+                    return false;
+                }
+            }
+            // Tilling move 4. has to be placed into floor ( cannot be moved into mosaic)
+            if (move.charAt(2) == 'F') {
+                //can make the move into mosaic
+                for (int i = 0; i < 5; i++) {
+                    if (chosenPlayer.mosaic.moveIsValid(originalRow, i, t.symbol)) {
+                        return false;
+                    }
+                }
+
+            }
+
+
+        }
+
+        return true;
     }
+
 
     /**
      * Given a gameState and a move, apply the move to the gameState.
@@ -950,3 +1083,4 @@ public class Azul {
         // FIXME Task 15 Implement a "smart" generateAction()
     }
 }
+
