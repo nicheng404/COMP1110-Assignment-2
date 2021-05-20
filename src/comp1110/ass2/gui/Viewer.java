@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.scene.robot.Robot;
 import javafx.stage.Stage;
 
 
@@ -43,7 +42,6 @@ public class Viewer extends Application {
             });
         }
 
-
         public StorageMosaic getStoMo() {
             return stoMo;
         }
@@ -54,10 +52,12 @@ public class Viewer extends Application {
     public void start(Stage stage) {
         DTile d = new DTile(Tiles.O);
         Group group = new Group();
+        GroupFactories groupfacs = new GroupFactories(5);
         group.getChildren().add(d.getStoMo());
+        group.getChildren().add(groupfacs);
         group.getChildren().add(d);
         Scene scene = new Scene(group, VIEWER_WIDTH, VIEWER_HEIGHT);
-        scene.setFill(Color.BEIGE);
+        scene.setFill(Color.BISQUE);
         stage.setScene(scene);
         stage.show();
     }
