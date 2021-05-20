@@ -1,6 +1,8 @@
 package comp1110.ass2;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Azul {
@@ -1066,7 +1068,98 @@ public class Azul {
      * TASK 11
      */
     public static String[] applyMove(String[] gameState, String move) {
-        // FIXME Task 11
+        if(Azul.isMoveValid( gameState, move)!=true){
+            return gameState;
+        }
+        SharedBoard sb= new SharedBoard(gameState[0]);
+        Player[] players = Player.getPlayers(gameState[1]);
+        Player chosenPlayer = null;
+        char playerChar = move.charAt(0);
+        // get chosen player
+        for (Player p : players) {
+            if (playerChar == p.playerName.nameChar) {
+                chosenPlayer = p;
+            }
+        }
+
+        if (move.length()==3){// Tilling move
+            int originalRow = move.charAt(1) - '0';
+            char destination = move.charAt(2);
+            Tiles t = chosenPlayer.storage.storageTiles[originalRow].tile;
+
+            if (destination >= '0' && destination <= '4'){ // move to masaic
+                int destinationCol = destination-'0';
+                chosenPlayer.mosaic.mosaic2D[originalRow][destinationCol]=t;
+                chosenPlayer.score+=chosenPlayer.mosaic.scoringFromMosaic(originalRow,destinationCol);
+                Map<Tiles,Integer> restTilesMap =chosenPlayer.storage.cleanRestTiles(originalRow);
+                sb.bagDiscard.discard.acceptTiles(restTilesMap);
+
+            }
+        }
+
+        if (move.length()==4){// Drafting move
+            char originChar = move.charAt(1);
+            char tileSymbol = move.charAt(2);
+            char destinationChar = move.charAt(3);
+
+            //     * first character is 'A' to 'B' and represents the player making the move.
+            //     * second character is '0' to '4' or 'C' and represents the factory (0-4) or centre (C) from which the player is picking tiles.
+            //     * third character is 'a' to 'e' representing the colour of tile selected.
+            //     * fourth character is '0' to '4' or 'F' and represents the row (0-4) or floor (F) where the tiles are to be placed.
+
+            if (originChar>='0'&& originChar<='8'){// pick from fac
+                int originFacNum=originChar-'0';
+                if (destinationChar>='0' && destinationChar<='4'){// move to storage
+                    int destinationRow=destinationChar-'0';
+
+                    // get rest tiles(to be moved into center) as a String
+                    String s = "";
+                    int index =0;
+                    for (int i=0;i<sb.facCentre.factories.size();i++){
+                        if (sb.facCentre.factories.get(i).Number==originFacNum){
+                            index=i;
+                            for (Tiles t:sb.facCentre.factories.get(i).tiles){
+                                if (t.symbol!=tileSymbol && t!=Tiles.E) {
+                                    s = s + t.encode;
+                                }
+                            }
+                        }
+                    }
+                    // clear this fac(with index i)
+                    sb.facCentre.factories.remove(index);
+                    //let center accept these tiles.
+                    char[] tilesToCenterArray=s.toCharArray();
+                    for(char x: tilesToCenterArray){
+                        switch (x){
+                            case 'a':sb.facCentre.centre.tiles.add(Tiles.B);break;
+                            case 'b':sb.facCentre.centre.tiles.add(Tiles.G);break;
+                            case 'c':sb.facCentre.centre.tiles.add(Tiles.O);break;
+                            case 'd':sb.facCentre.centre.tiles.add(Tiles.P);break;
+                            case 'e':sb.facCentre.centre.tiles.add(Tiles.R);break;
+                        }
+                    }
+
+                    // check the storage capacity
+
+
+
+                } else if (destinationChar=='F'){// move to floor
+
+                }
+
+            } else if (originChar=='C'){// pick from center
+                if (destinationChar>='0' && destinationChar<='4'){// move to storage
+
+                } else if (destinationChar=='F'){// move to floor
+
+                }
+            }
+
+        }
+
+
+
+
         return null;
     }
 
