@@ -1,18 +1,68 @@
 package comp1110.ass2;
 
-import static comp1110.ass2.Azul.getRandomElement;
+import java.util.Random;
 
+/**
+ * @author Mukund Balaji Srinivas & Ke Ning
+ **/
 public class Player {
+    public Names playerName;
+    public int score;
+    public Mosaic mosaic;
+    public Storage storage;
+    public Floor floor;
+
 
     public static final String[] Names = {"A", "B", "C", "D"};
     public Player nextPlayer;
-    public String playerName;
-    public boolean isFirstPlayer;
-    public boolean isTurn;
-    public Mosaic playerXMosaic;
-    public Storage PlayerXStorage;
-    public Floor playerXFloor;
 
+
+    public Player(char c) {
+        this.playerName = comp1110.ass2.Names.getNamesByChar(c);
+        this.score = 0;
+        this.mosaic = new Mosaic();
+        this.storage = new Storage();
+        this.floor = new Floor();
+    }
+
+    public Player(String singlePlayerState) {
+        int indexOfM = singlePlayerState.indexOf("M");
+        int indexOfS = singlePlayerState.indexOf("S");
+        int indexOfF = singlePlayerState.indexOf("F");
+        // name and score
+        this.playerName = comp1110.ass2.Names.getNamesByString(singlePlayerState.substring(0, 1));
+        this.score = Integer.parseInt(singlePlayerState.substring(1, indexOfM));
+        // mosaic
+        String givenMosaic = singlePlayerState.substring(indexOfM, indexOfS);
+        this.mosaic = new Mosaic(givenMosaic);
+        //storage
+        String givenStorage = singlePlayerState.substring(indexOfS, indexOfF);
+        this.storage = new Storage(givenStorage);
+        //floor
+        String givenFloor = singlePlayerState.substring(indexOfF);
+        this.floor = new Floor(givenFloor);
+
+    }
+
+    public Names getName() {
+        return playerName;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public Mosaic getMosaic() {
+        return mosaic;
+    }
+
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public Floor getFloor() {
+        return floor;
+    }
 
 
     /**
@@ -23,16 +73,6 @@ public class Player {
     void setNextPlayer(Player nPlayer) {
         this.nextPlayer = nPlayer;
     }
-
-    /**
-     * Get the name of this player
-     *
-     * @return The name of this player from "A-D"
-     */
-    public String getpName() {
-        return this.playerName;
-    }
-
 
 
     /**
@@ -69,6 +109,23 @@ public class Player {
         return playerStringArray;
     }
 
+    /**
+     * Get Player[] using total-player-state String.
+     * @param totalPlayerState "A20Ma02a13b00e42S2a13e44a1FaabbeB30Mc01b11d21S0e12b2F"
+     * @return Player[]
+     */
+    public static Player[] getPlayers(String totalPlayerState){
+        String[] playerStringArray = getEachPlayerStateString(totalPlayerState);
+        int playerNum = playerStringArray.length;
+        Player[] result = new Player[playerNum];
+
+        for (int i =0; i<playerNum;i++){
+            result[i]=new Player(playerStringArray[i]);
+        }
+
+        return result;
+    }
+
 
     /**
      * check get the number of players with the given combined total playerState string for all players.
@@ -76,7 +133,7 @@ public class Player {
      * @param totalPlayerState the total combined player state string for all players, state1
      * @return int numberOfPlayer. return 999 if the number of player >=5.
      */
-    public static int getNUmberOfPlayer(String totalPlayerState) {
+    public static int getNumberOfPlayer(String totalPlayerState) {
         // get number of players -> extend for 4 players
         int numberOfPlayer = 0;
         int indexA = totalPlayerState.indexOf("A");
@@ -87,9 +144,9 @@ public class Player {
 
         int[] player = {indexA, indexB, indexC, indexD};
         if (indexA == -1 && indexB == -1 && indexC == -1 && indexD == -1) {
-            numberOfPlayer=0;
-        } else if (indexE!=-1) {
-            numberOfPlayer=999;
+            numberOfPlayer = 0;
+        } else if (indexE != -1) {
+            numberOfPlayer = 999;
         } else {
             StringBuilder sb = new StringBuilder(totalPlayerState);
             int numberOfOperations = 0;
@@ -112,9 +169,49 @@ public class Player {
         return numberOfPlayer;
     }
 
-
     /**
-     *
+     * get bonus points
+     * @return
+     */
+    public int scoringBonusPoint(){
+        Tiles[][] tiles = this.mosaic.getTiles();
+        int result =0;
+        int[] row = new int [5];
+        int []col =new int [5];
+        int set[] = new int [5];
+
+        for (int i =0; i<5;i++){
+            for(int j=0; j<5;j++){
+                if (tiles[i][j]!=Tiles.E){
+                    row[i]++;
+                    col[j]++;
+                    set[tiles[i][j].ordinal()]++;
+                }
+            }
+        }
+
+        for(int i = 0; i<5;i++){
+            if(row[i]==5) {
+                result += 2;
+            }
+        }
+        for(int i =0;i<5;i++){
+            if(col[i]==5){
+                result += 7;
+            }
+        }
+        for(int i =0;i<5;i++){
+            if(set[i]==5){
+                result += 10;
+            }
+        }
+        return result;
+    }
+
+
+
+//--------------------------------------------old-------------------------------------------------------------------------//
+    /**
      * @param intBagTiles
      * @return
      */
@@ -155,6 +252,23 @@ public class Player {
         // char x-> wanted
         return wanted;
     }
+
+    public static char getRandomElement() {
+        Random rand = new Random();
+        String characters = "abcde";
+        char randomChar = characters.charAt(rand.nextInt(characters.length()));
+        return randomChar;
+    }
+
+    /*
+    public static void main(String[] args) {
+        String[] playerStringArray = getEachPlayerStateString("A20Ma02a13b00e42S2a13e44a1FaabbeB30Mc01b11d21S0e12b2F");
+        int num = getNumberOfPlayer("A20Ma02a13b00e42S2a13e44a1FaabbeB30Mc01b11d21S0e12b2F");
+
+        System.out.println(num);
+        System.out.println(playerStringArray.length);
+    }
+    */
 
 
 }
