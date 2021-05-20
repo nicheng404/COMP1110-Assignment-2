@@ -29,6 +29,7 @@ public class Floor {
             Tiles t = Tiles.getTileByCharSymbol(c);
             tiles.add(t);
         }
+        Collections.sort(tiles);
     }
 
     /**
@@ -190,8 +191,18 @@ public class Floor {
         return overflowTiles;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder retString = new StringBuilder();
+        retString.append("F");
+        for( Tiles t: tiles){
+            retString.append(t.encode);
+        }
 
-//-------------------------------------------------------old------------------------------------------------------------------------------------------------------
+        return retString.toString();
+    }
+
+    //-------------------------------------------------------old------------------------------------------------------------------------------------------------------
 
     /**
      * @param singlePlayerState A PlayerState String for a single player.
@@ -287,7 +298,7 @@ public class Floor {
     }
 
 
-    //----------------------------------------------------------old-----------------------------------------//
+    //----------------------------------------------------------old-------------------------------------------------------------------------------------//
 
     //public String floorTilesString; // floor string in state0 without 'F'
 
@@ -405,5 +416,9 @@ public class Floor {
         return marks;
     }
 
+    public static void main(String[] args) {
+        Floor f = new Floor("Fbbf");
+        System.out.println(f.toString());
+    }
 
 }

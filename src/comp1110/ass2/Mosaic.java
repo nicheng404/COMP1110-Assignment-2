@@ -1,6 +1,7 @@
 package comp1110.ass2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author Ke Ning
@@ -128,6 +129,7 @@ public class Mosaic {
      */
     public void setMosaic() {
         //initialise all the mosaics to "*" in the beginning
+        mosaic2D = new Tiles[5][5];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 mosaic2D[i][j] = Tiles.E;
@@ -288,5 +290,26 @@ public class Mosaic {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder retString = new StringBuilder();
+        retString.append("M");
+        for(int i=0;i<5;i++){
+            for(int j=0;j<5;j++){
+                if (mosaic2D[i][j]!=Tiles.E){
+                    retString.append(mosaic2D[i][j].encode);
+                    retString.append(i);
+                    retString.append(j);
+                }
+            }
+        }
+        return retString.toString();
+    }
+
+    public static void main(String[] args) {
+        Mosaic m= new Mosaic("Mb00a02a13e42");
+        System.out.println(m.toString());
     }
 }

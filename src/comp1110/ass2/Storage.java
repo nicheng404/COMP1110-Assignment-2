@@ -35,11 +35,13 @@ public class Storage {
             }
             //set the StorageTile(t,num) into StorageTiles array.
             for (int i = 1; i < storageTilesString.length(); i++) {
-                int row = storageTilesString.charAt(i) - '0';
-                Tiles t = Tiles.getTileByCharSymbol(storageTilesString.charAt(i + 1));
-                int num = storageTilesString.charAt(i + 2) - '0';
+                if (storageTilesString.charAt(i) >= 'a' && storageTilesString.charAt(i) <= 'e') {
+                    int row = storageTilesString.charAt(i-1) - '0';
+                    Tiles t = Tiles.getTileByCharSymbol(storageTilesString.charAt(i));
+                    int num = storageTilesString.charAt(i + 1) - '0';
 
-                storageTiles[row] = new StorageTileWithNumber(t, num);
+                    storageTiles[row] = new StorageTileWithNumber(t, num);
+                }
             }
         }
     }
@@ -150,7 +152,8 @@ public class Storage {
 
     /**
      * The colour of tile stored in a row must not be the same as a colour
-     *      already found in the corresponding row of the mosaic.
+     * already found in the corresponding row of the mosaic.
+     *
      * @param givenMosaic The given mosaic
      * @return true if no same color as mosaic in same row.
      */
@@ -168,12 +171,13 @@ public class Storage {
 
     /**
      * check whether the destination row of this moving already contained a different color.
-     * @param row destination row
+     *
+     * @param row        destination row
      * @param tileSymbol
      * @return true if there is no different color in that row.
      */
-    public boolean isMoveValid (int row, char tileSymbol){
-        if (storageTiles[row].tile!=Tiles.E && storageTiles[row].tile.symbol!=tileSymbol){
+    public boolean isMoveValid(int row, char tileSymbol) {
+        if (storageTiles[row].tile != Tiles.E && storageTiles[row].tile.symbol != tileSymbol) {
             return false;
         }
         return true;
@@ -181,21 +185,22 @@ public class Storage {
 
     /**
      * clean the rest tiles of that row after moving the rightmost tile of that row into mosaic.
+     *
      * @param row
      * @return a map with cleaned tile and its number.
      */
 
-    public Map<Tiles,Integer> cleanRestTiles(int row){
+    public Map<Tiles, Integer> cleanRestTiles(int row) {
         Map<Tiles, Integer> map = new HashMap<>();
         StorageTileWithNumber tN = storageTiles[row];
-        if (tN.tile!=Tiles.E && tN.number>1){
-            map.put(tN.tile,tN.number-1);
+        if (tN.tile != Tiles.E && tN.number > 1) {
+            map.put(tN.tile, tN.number - 1);
         }
-        storageTiles[row]=new StorageTileWithNumber(Tiles.E,0);
+        storageTiles[row] = new StorageTileWithNumber(Tiles.E, 0);
         return map;
     }
 
-    public static boolean storageTilesWellFormed(String storageTilesString){
+    public static boolean storageTilesWellFormed(String storageTilesString) {
         // storage -> char[]
         int storageLength = storageTilesString.length();
         char[] storageArray = new char[storageLength];
@@ -251,5 +256,24 @@ public class Storage {
             return false;
         }
 
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder retString = new StringBuilder();
+        retString.append("S");
+        for (int i = 0; i < 5; i++) {
+            if (storageTiles[i].tile != Tiles.E) {
+                retString.append(i);
+                retString.append(storageTiles[i].tile.encode);
+                retString.append(storageTiles[i].number);
+            }
+        }
+        return retString.toString();
+    }
+
+    public static void main(String[] args) {
+        Storage s = new Storage("S0b11d23c24a5");
+        System.out.println(s.toString());
     }
 }
