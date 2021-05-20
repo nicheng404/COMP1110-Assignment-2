@@ -5,20 +5,19 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 
 class Tile extends Rectangle {
-    public int colorVal;
+    public static final int SQUARE_SIZE = 50;
 
     /**
      * A tiles that  Inherits from Rectangle and sets the colour and position
      */
     Tile(int colorVal, int x, int y) {
-        setWidth(TILE_WIDTH);
-        setHeight(TILE_HEIGHT);
+        setWidth(SQUARE_SIZE);
+        setHeight(SQUARE_SIZE);
         setX(x);
         setY(y);
         setFill(Color.rgb(colorVal * 5, (colorVal * 5) + 50, (colorVal * 5) + 80));
         setStroke(Color.BLACK);
         setStrokeType(StrokeType.OUTSIDE);
     }
-
 }
 
