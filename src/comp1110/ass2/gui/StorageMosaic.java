@@ -46,7 +46,7 @@ class StorageMosaic extends Pane {
         Tile TempTile;
         for (int i = 1; i <= 5; i++) {
             for (int j = 1; j <= i; j++) {
-                TempTile = new Tile(i, SQUARE_SIZE * j, SQUARE_SIZE * i);
+                TempTile = new Tile(i, 250-(SQUARE_SIZE * j), SQUARE_SIZE * i);
                 storageTiles.add(TempTile);
             }
         }

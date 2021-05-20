@@ -12,7 +12,7 @@ public class Factory extends Pane {
     public static int MARGIN = 50;
     ArrayList<Tile> facs = new ArrayList<>();
 
-    Factory(int x,int y) {
+    Factory() {
         Tile temp;
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
@@ -20,8 +20,6 @@ public class Factory extends Pane {
                 facs.add(temp);
             }
         }
-        this.setLayoutX(x + MARGIN);
-        this.setLayoutY(y);
         this.getChildren().addAll(facs);
     }
 }

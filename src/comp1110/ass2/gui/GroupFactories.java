@@ -15,13 +15,14 @@ public class GroupFactories extends Pane {
 
     public GroupFactories(int nFacs) {
         this.nFacs = nFacs;
-        gaps.set(0, 50);
+        gaps.add(0,50);
         for (int i = 1; i < nFacs; i++) {
             gaps.add(gaps.get(i - 1) + 150);
         }
         Factory t;
         for (int i = 0; i < nFacs; i++) {
-            t = new Factory(gaps.get(i),MARGIN);
+            t = new Factory();
+            t.setLayoutX(gaps.get(i));
             factories.add(t);
         }
         this.getChildren().addAll(factories);
