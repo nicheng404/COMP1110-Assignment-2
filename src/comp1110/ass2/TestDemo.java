@@ -1,5 +1,7 @@
 package comp1110.ass2;
 
+import java.util.Arrays;
+
 import static comp1110.ass2.Factory.refillFactories;
 
 public class TestDemo {
@@ -46,16 +48,36 @@ public class TestDemo {
         return result;
     }
     public static void main(String[] args) {
-        String[] input = new String[]{"AFCB0712090708D0000000000", "A36Mb01d03e04e10a11c13d14d20a22b23c24e32a33b34d42e43S0a11b22e33c3FeeeB25Ma00b01e10a11b12d14d20e21c24c30b40c41a44S0c11c22a33d4Faaadddf"};
-        String[] a = nextRound(input);
+        String[] input = new String[]{"BF0bcdd1bbbc2aaad3acde4abceCfB0000000000D1110100612", "A31Mb01d03e04e10c13d14d20a22b23c24e32a33b34e43S4d2FB10Ma00b01e10b12d14d20e21c30c41a44S2c23d3F"};
+        SharedBoard sb = new SharedBoard(input[0]);
+        Player[] players =Player.getPlayers(input[1]);
 
-        System.out.println(a[0]);
-        System.out.println(a[1]);
-
-        String[] b=refillFactories(a);
-        for (String s:b){
-            System.out.println(s);
+        int[] shareNum=sb.getNumberOfTiles();
+        for(int i:shareNum){
+            System.out.println(i);
         }
+
+        System.out.println("-----------------");
+
+        int[][] playerNumDemo = new int[Player.getNumberOfPlayer(input[1])][6];
+        for(int i=0;i<Player.getNumberOfPlayer(input[1]);i++){
+            playerNumDemo[i]=players[i].getNumberOfTiles();
+        }
+
+        int[] playerNum = new int[6];
+        for (int i=0;i<6;i++){
+            for (int j=0;j<Player.getNumberOfPlayer(input[1]);j++){
+                playerNum[i]+=playerNumDemo[j][i];
+            }
+        }
+
+        for(int i:playerNum){
+            System.out.println(i);
+        }
+
+        int[] tilesNumInCenterArray = sb.facCentre.centre.getNumberOfTiles();
+        int tilesNumInCenter = Arrays.stream(tilesNumInCenterArray).sum();
+        System.out.println(tilesNumInCenter);
 
     }
 }

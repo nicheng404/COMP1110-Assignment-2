@@ -127,7 +127,7 @@ public class Discard {
         for(int i=0;i<TileCount.size();i++){
             result[i]=TileCount.get(i);
         }
-        return null;
+        return result;
     }
 
 

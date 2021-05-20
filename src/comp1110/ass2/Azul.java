@@ -1,5 +1,6 @@
 package comp1110.ass2;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Azul {
@@ -779,6 +780,85 @@ public class Azul {
 
         SharedBoard sb = new SharedBoard(gameState[0]);
         Player[] players = Player.getPlayers(gameState[1]);
+//--------------------------------------General----------------------------------------------------------------//
+        // General //
+        //General 2.tiles number<=20
+        int[] shareNum = sb.getNumberOfTiles();
+        //for(int i:shareNum){
+        //   System.out.println(i);
+        //}
+
+        //System.out.println("-----------------");
+
+        int[][] playerNumDemo = new int[Player.getNumberOfPlayer(gameState[1])][6];
+        for (int i = 0; i < Player.getNumberOfPlayer(gameState[1]); i++) {
+            playerNumDemo[i] = players[i].getNumberOfTiles();
+        }
+
+        int[] playerNum = new int[6];
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < Player.getNumberOfPlayer(gameState[1]); j++) {
+                playerNum[i] += playerNumDemo[j][i];
+            }
+        }
+        int[] totalTilesNumber = new int[6];
+        for (int i = 0; i < 6; i++) {
+            totalTilesNumber[i] = shareNum[i] + playerNum[6];
+        }
+        for (int i = 0; i < 6; i++) {
+            if (totalTilesNumber[i] > 20) {
+                return false;
+            }
+        }
+
+        //General 3. first player=1
+        if (totalTilesNumber[5] != 1) {
+            return false;
+        }
+
+//--------------------------------------Mosaic----------------------------------------------------------------//
+
+        for (Player p : players) {
+            if (!p.mosaic.checkIsValid()) {
+                return false;
+            }
+        }
+
+//--------------------------------------Storage----------------------------------------------------------------//
+        // Storage 1
+        for (Player p : players) {
+            if (!p.storage.storageTilesStringWellFormed()) {
+                return false;
+            }
+        }
+        // Storage 2
+        for (Player p : players) {
+            if (!p.storageIsValidForMosaic()) {
+                return false;
+            }
+        }
+//--------------------------------------Floor----------------------------------------------------------------//
+        for (Player p : players) {
+            if (p.floor.tiles.size()<=7) {
+                return false;
+            }
+        }
+
+//--------------------------------------Centre----------------------------------------------------------------//
+        int numberOfPlayer= Player.getNumberOfPlayer(gameState[1]);
+        int totalFacNum = 2*numberOfPlayer+1;
+        int realFacNum = sb.facCentre.factories.size();
+        int emptyFacNum = totalFacNum-realFacNum;
+
+        int[] tilesNumInCenterArray = sb.facCentre.centre.getNumberOfTiles();
+        int tilesNumInCenter = Arrays.stream(tilesNumInCenterArray).sum();
+
+        if (tilesNumInCenter>3*emptyFacNum){
+             return false;
+        }
+
+//--------------------------------------Factories----------------------------------------------------------------//
+
 
 
 

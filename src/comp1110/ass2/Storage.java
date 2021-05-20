@@ -49,7 +49,7 @@ public class Storage {
 
     /**
      * Check whether storage for a certain player is well formed with
-     * a given certain player storage string in state1 with 'S'.
+     * a given certain player storage string in state1 with 'S'. Dont forget to use the Player.storageIsValidForMosaic().
      *
      * @param storageTilesString storage string for a certain player in state1 with 'S'.
      * @return true/false. whether storage for a certain player is well formed.
@@ -105,6 +105,62 @@ public class Storage {
 
     }
 
+
+    /**
+     * check storage is valid in a OO-way. Dont forget to use the Player.storageIsValidForMosaic().
+     * @return
+     */
+    public boolean storageTilesStringWellFormed() {// isValid()
+        // storage -> char[]
+        int storageLengthWithS = storageTilesString.length();
+        int storageLengthNoS = storageTilesString.length() - 1;
+        //char[] storageArray= storageTilesString.toCharArray();
+
+        // [storage] criteria:
+        // 1.length 是3的倍数，0<=length <=15
+        // 2.row顺序
+        // 3.char 3rd 最大=char 1st +1
+        // 4.中间2 a-e
+
+
+        boolean storagelengthIs3 = false;
+        boolean storageOrderWell = true;
+        boolean storageChar13Well = true;
+        boolean storageChar2Well = true;
+
+        //storage criteria 1 : check length 是3的倍数
+        if (storageLengthNoS % 3 == 0) {
+            storagelengthIs3 = true;
+
+            //storage criteria 4.中间2 a-e
+            for (int i = 2; i < storageLengthWithS; i = i + 3) {
+                if (storageTilesString.charAt(i) >= 'a' && storageTilesString.charAt(i) <= 'e') {
+                } else {
+                    storageChar2Well = false;
+                }
+            }
+
+            //storage criteria 2.row顺序
+            for (int i = 1; i + 3 < storageLengthWithS; i = i + 3) {
+                if (storageTilesString.charAt(i) > storageTilesString.charAt(i + 3)) {
+                    storageOrderWell = false;
+                }
+            }
+
+            //storage criteria 3.char 3rd <=char 1st +1
+            for (int i = 1; i < storageLengthWithS; i = i + 3) {
+                if ((storageTilesString.charAt(i) >= '0' && storageTilesString.charAt(i) <= '4')
+                        && (storageTilesString.charAt(i + 2) >= '0' && storageTilesString.charAt(i + 2) <= '5')
+                        && (storageTilesString.charAt(i + 2) <= storageTilesString.charAt(i) + 1)) {
+                } else {
+                    storageChar13Well = false;
+                }
+            }
+        }
+        return storageLengthNoS <= 15 && storagelengthIs3
+                && storageOrderWell && storageChar13Well && storageChar2Well;
+
+    }
 
     /**
      * Accept the tile from factory and centre(using a hashmap) first, then check the destinationRow's capacity.

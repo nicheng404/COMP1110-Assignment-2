@@ -128,6 +128,10 @@ public class Player {
         return result;
     }
 
+    /**
+     * get number of tiles for a single player.
+     * @return int[6]
+     */
     public int[] getNumberOfTiles() {
         int[] result = new int[6];
 
@@ -221,6 +225,23 @@ public class Player {
             }
         }
         return result;
+    }
+
+    /**
+     * checj whether the storage has the same color with mosaic in the same row.
+     * @return true if they dont (is valid).
+     */
+    public boolean storageIsValidForMosaic(){
+        Mosaic pm = this.mosaic;
+        Storage ps = this.storage;
+
+        for (int row = 0; row <ps.storageTiles.length; row++){
+            Tiles t = ps.storageTiles[row].tile;
+            for (Tiles tile : pm.mosaic2D[row]) {
+                if (t != Tiles.E && t == tile) return false;
+            }
+        }
+        return true;
     }
 
     /**
