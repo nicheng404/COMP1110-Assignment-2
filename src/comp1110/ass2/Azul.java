@@ -658,10 +658,16 @@ public class Azul {
         int numOfPlayer = Player.getNumberOfPlayer(gameState[1]);
         Player[] players = new Player[numOfPlayer];
         String[] playerStrings = Player.getEachPlayerStateString(gameState[1]);
-
+        // create Player[]
         for (int i =0;i<numOfPlayer;i++){
             players[i]=new Player(playerStrings[i]);
         }
+
+        for (Player p: players){
+
+
+        }
+
 
 
 

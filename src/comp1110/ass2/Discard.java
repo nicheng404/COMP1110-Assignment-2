@@ -3,6 +3,7 @@ package comp1110.ass2;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 public class Discard {
     public static final Tiles[] names = {Tiles.B, Tiles.G, Tiles.O, Tiles.P, Tiles.R};
@@ -11,8 +12,8 @@ public class Discard {
     public boolean isValid;
     public String gameStr;
 
-    Discard(String gameStr){
-        this.gameStr=gameStr;
+    Discard(String gameStr) {
+        this.gameStr = gameStr;
         setDiscard();
     }
 
@@ -20,9 +21,9 @@ public class Discard {
      * Set the elements of the bag from its gamestate
      */
     public void setDiscard() {
-        isValid = gameStr.length()==10;
+        isValid = gameStr.length() == 10;
         if (isValid) {
-            for (int i = 0; i < gameStr.length() ; i += 2) {
+            for (int i = 0; i < gameStr.length(); i += 2) {
                 TileCount.add(Integer.parseInt(gameStr.substring(i, i + 2)));
             }
         }
@@ -42,11 +43,11 @@ public class Discard {
 
     @Override
     public String toString() {
-        StringBuilder retString= new StringBuilder();
+        StringBuilder retString = new StringBuilder();
         DecimalFormat formatter = new DecimalFormat("00");
-        for(Integer i:TileCount)
+        for (Integer i : TileCount)
             retString.append(formatter.format(i));
-       retString.insert(0,"D");
+        retString.insert(0, "D");
         return retString.toString();
     }
 
@@ -89,4 +90,33 @@ public class Discard {
         String result = sharedState.substring(indexOfD + 1);
         return result;
     }
+
+    /**
+     * accept tiles into discard by a Hashmap <tile, number of that tile>.
+     * Discard Arraylist[index]++
+     * @param tilesToDiscard
+     */
+    public void acceptTiles(Map<Tiles, Integer> tilesToDiscard) {
+        for (Tiles t : tilesToDiscard.keySet()) {
+            int index = 0;
+            switch(t.symbol){
+                case 'a':
+                    index=0;break;
+                case 'b':
+                    index=1;break;
+                case 'c':
+                    index=2;break;
+                case'd':
+                    index=3;
+                    break;
+                case 'e':
+                    index =4;
+                    break;
+            }
+            int initial= TileCount.get(index);
+            TileCount.set(index,initial+tilesToDiscard.get(t));
+        }
+    }
+
+
 }
