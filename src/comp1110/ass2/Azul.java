@@ -649,6 +649,7 @@ public class Azul {
     public static String[] nextRound(String[] gameState) {
         // FIXME TASK 8
         SharedBoard sharedBoard = new SharedBoard(gameState[0]);
+        StringBuilder nextShareState = new StringBuilder();
         // if center/fac not empty
         if (!sharedBoard.facIsEmpty()||!sharedBoard.centIsEmpty()){
             return gameState;
@@ -656,6 +657,7 @@ public class Azul {
 
         // center/ fac both are empty.
         int numOfPlayer = Player.getNumberOfPlayer(gameState[1]);
+        StringBuilder newPlayerStates = new StringBuilder();
         Player[] players = new Player[numOfPlayer];
         String[] playerStrings = Player.getEachPlayerStateString(gameState[1]);
         // create Player[]
@@ -664,13 +666,18 @@ public class Azul {
         }
 
         for (Player p: players){
-            Floor pFloor = p.getFloor();
-            //set next player (set turn)
-            if (pFloor.firstPlayerIsInFloor()){
-
+            //set next player (set turn) / add Fp into center
+            if (p.floor.firstPlayerIsInFloor()){
+                sharedBoard.nextPlayer=p.playerName.name;
+                sharedBoard.facCentre.centre.tiles.add(Tiles.FP);
             }
-
+            //set score
+            p.score+=p.floor.loseMarks();
+            //empty floor to discard
+            sharedBoard.bagDiscard.discard.acceptTiles(p.floor.emptyFloorToDiscard());
+            newPlayerStates.append(p.toString());
         }
+
 
 
 
