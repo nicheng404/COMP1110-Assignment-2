@@ -2,12 +2,13 @@ package comp1110.ass2;
 
 //Define a class Tiles that can be used by all the classes
 public enum Tiles {
-    B("Blue", "a", 'a'),
-    G("Green", "b", 'b'),
-    O("Orange", "c", 'c'),
-    P("Purple", "d", 'd'),
-    R("Red", "e", 'e'),
-    FP("First Player", "f", 'f');
+    B("blue", "a", 'a'),
+    G("green", "b", 'b'),
+    O("orange", "c", 'c'),
+    P("purple", "d", 'd'),
+    R("red", "e", 'e'),
+    FP("First Player", "f", 'f'),
+    E("*","*",'*');
     public String longName;
     public String encode;
     public char symbol;
@@ -19,8 +20,24 @@ public enum Tiles {
 
     }
 
+
+    public static Tiles getTileByCharSymbol(char symbol){
+        Tiles output=null;
+        switch (symbol) {
+            case 'a': output=B; break;
+            case 'b': output=G; break;
+            case 'c': output=O; break;
+            case 'd': output=P; break;
+            case 'e': output=R; break;
+            case 'f': output=FP; break;
+        }
+        return output;
+    }
+
     @Override
     public String toString() {
         return "" + encode;
     }
+
+
 }
