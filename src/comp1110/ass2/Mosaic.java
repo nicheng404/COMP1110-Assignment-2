@@ -1,144 +1,234 @@
 package comp1110.ass2;
 
+import java.util.ArrayList;
+
+/**
+ * @author Ke Ning
+ * <p>Each instance of this class consists of one part</p>
+ * <p> The input tileString is a reprentation of tiles in mosaic
+ */
+
 public class Mosaic {
+    public Tiles[][] mosaic2D;
+    public boolean isValid;
+    public String inString;// Mb00a02a13e42
 
+    public Mosaic() {
+    }
 
-
-    public static final char HEAD = 'M';
-    public String mosaicTilesString; // mosaic string in state1 without 'M'
-
-
-
-
-
-
+    Mosaic(String inString) { // Mb00a02a13e42
+        this.inString = inString;
+        setMosaic();
+    }
 
 
     /**
-     * Check whether mosaic for a certain player is well formed with
-     *  a given certain player mosaic string in state1 without 'M'.
-     *
-     * @param mosaicTilesString mosaic string for a certain player in state1 without 'M'.
-     * @return true/false. whether mosaic for a certain player is well formed.
+     * check whether the inString is valid.
+     * @return
      */
-
-    public static boolean mosaicTilesWellFormed(String mosaicTilesString) {
-
-
+    public boolean checkIsValid() {
         // mosaic -> char[]
-        int mosaicLength = mosaicTilesString.length();
-        char[] mosaicArray = new char[mosaicLength];
-        mosaicArray = mosaicTilesString.toCharArray();
+        int mosaicLengthWithM = this.inString.length();
+        int mosaicLengthNoM = this.inString.length() - 1;
 
-        //criteria : lengthIs3, mosaicChar1Well, mosaicChar2Well, mosaicChar3Well, mosaicOrderWell
-        boolean mosaiclengthIs3 = false;
+        //criteria : lengthIs3, mosaicChar1Well, mosaicChar2Well,
+        //          mosaicChar3Well, mosaicOrderWell,mosaicOverlapping, mosaicColorWell.
+        boolean mosaiclengthWell = false;
         boolean mosaicChar1Well = true;
         boolean mosaicChar2Well = true;
         boolean mosaicChar3Well = true;
-        boolean mosaicOrderWell = true;
+        boolean mosaicRowOrderWell = true;
+        boolean mosaicColumnOrderWell = true;
+        boolean mosaicOverlappingWell = true;
+        boolean mosaicColorWell = true;
 
-        //mosaic criteria 1 : check length 是3的倍数
-        if (mosaicLength % 3 == 0) {
-            mosaiclengthIs3 = true;
+        //mosaic criteria 1 : check length
+        if (mosaicLengthNoM % 3 == 0) {
+            mosaiclengthWell = true;
 
             //mosaic criteria 2 :1st well
-            for (int i = 0; i < mosaicLength; i = i + 3) {
-                if (mosaicArray[i] == 'a' || mosaicArray[i] == 'b'
-                        || mosaicArray[i] == 'c' || mosaicArray[i] == 'd' || mosaicArray[i] == 'e') {
+            for (int i = 1; i <mosaicLengthWithM; i = i + 3) {
+                if (this.inString.charAt(i) >= 'a' && this.inString.charAt(i) <= 'e') {
                 } else {
                     mosaicChar1Well = false;
 
                 }
             }
             //mosaic criteria 3 : 2nd well
-            for (int i = 1; i < mosaicLength; i = i + 3) {
-                if (mosaicArray[i] == '0' || mosaicArray[i] == '1'
-                        || mosaicArray[i] == '2' || mosaicArray[i] == '3' || mosaicArray[i] == '4') {
+            for (int i = 2; i <mosaicLengthWithM; i = i + 3) {
+                if (this.inString.charAt(i) >= '0' && this.inString.charAt(i) <= '4') {
                 } else {
                     mosaicChar2Well = false;
                 }
             }
             //mosaic criteria 4 : 3rd well
-            for (int i = 2; i < mosaicLength; i = i + 3) {
-                if (mosaicArray[i] == '0' || mosaicArray[i] == '1'
-                        || mosaicArray[i] == '2' || mosaicArray[i] == '3' || mosaicArray[i] == '4') {
+            for (int i = 3; i < mosaicLengthWithM; i = i + 3) {
+                if (this.inString.charAt(i) >= '0' && this.inString.charAt(i) <= '4') {
                 } else {
                     mosaicChar3Well = false;
                 }
             }
             //mosaic criteria 5 : order well
-            for (int i = 1; i + 3 < mosaicLength; i = i + 3) {
-                if (mosaicArray[i] > mosaicArray[i + 3]) {
-                    mosaicOrderWell = false;
+            for (int i = 2; i + 3 < mosaicLengthWithM; i = i + 3) {
+                if (this.inString.charAt(i) > this.inString.charAt(i + 3)) {
+                    mosaicRowOrderWell = false;
+                }
+                if (this.inString.charAt(i) == this.inString.charAt(i + 3)) {
+                    if (this.inString.charAt(i + 1) > this.inString.charAt(i + 4)) {
+                        mosaicColumnOrderWell = false;
+                    }
                 }
             }
+            //mosaic criteria 6 : no overlapping
+            Tiles[][] t2DArray = new Tiles[5][5];
+            for (int i = 1; i < this.inString.length(); i += 3) {
+                char tileSymbol = this.inString.charAt(i);
+                int row = this.inString.charAt(i + 1) - '0';
+                int column = this.inString.charAt(i + 2) - '0';
+                if (t2DArray[row][column] != null) {
+                    mosaicOverlappingWell = false;
+                }
+                t2DArray[row][column] = Tiles.getTileByCharSymbol(tileSymbol);
+            }
+            //mosaic criteria 7 : only 1 of each color on each row/column
+            int[][] rowColor = new int[5][5];
+            int[][] colColor = new int[5][5];
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+                    Tiles tile = t2DArray[i][j];
+                    if (tile == null) {
+                        break;
+                    }
+                    if (rowColor[i][tile.ordinal()] == 1 || colColor[tile.ordinal()][j] == 1) {
+                        mosaicColorWell = false;
+                    }
+                    rowColor[i][tile.ordinal()]++;
+                    colColor[tile.ordinal()][j]++;
+                }
+            }
+
+
         }
-        if (mosaicLength <= 75 && mosaiclengthIs3
-                && mosaicChar1Well && mosaicChar2Well && mosaicChar3Well && mosaicOrderWell) {
-            return true;
-        } else {
-            return false;
+        return mosaicLengthNoM <= 75 && mosaiclengthWell && mosaicChar1Well && mosaicChar2Well
+                && mosaicChar3Well && mosaicRowOrderWell && mosaicColumnOrderWell
+                && mosaicOverlappingWell && mosaicColorWell ;
+    }
+
+    public Tiles[][] getTiles(){
+        return mosaic2D;
+    }
+
+    /**
+     * Check weather the given Mosaic is valid and set its validity.
+     * <p>Set the tiles on the mosaic by reading the inString</p>
+     * <p>Set the validity using the isValid field</p>
+     *
+     * @author Ke Ning
+     * @author Mukund Balaji Srinivas
+     */
+    public void setMosaic() {
+        //initialise all the mosaics to "*" in the beginning
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                mosaic2D[i][j] = Tiles.E;
+            }
+        }
+        //Get the address of these tiles and check if they are valid by checking for their lengths
+
+        this.isValid = checkIsValid();
+        int row, col;
+        if (isValid) {
+            for (int i = 0; i < this.inString.length(); i++) { //Ma02a13b00e42
+
+                if (this.inString.charAt(i) >= 'a' && this.inString.charAt(i) <= 'e') {
+                    row = this.inString.charAt(i + 1) - '0';
+                    col = this.inString.charAt(i + 2) - '0';
+                    Tiles t = Tiles.getTileByCharSymbol(this.inString.charAt(i));
+                    mosaic2D[row][col] = t;
+                }
+            }
+
         }
     }
 
-
-
-
-
+    /**
+     * check whether this move with a tile to current mosaic is valid
+     * @param destinationRow
+     * @param destinationColumn
+     * @param tileSymbol a tile to be moved into current mosaic
+     * @return
+     */
+    public boolean moveIsValid (int destinationRow, int destinationColumn, char tileSymbol){
+        boolean result=true;
+        //check whether the destination cube is empty
+        if (this.mosaic2D[destinationRow][destinationColumn] != Tiles.E){
+            result = false;
+        }
+        //check the row color condition
+        for (int i=0;i<5;i++){
+            if (mosaic2D[destinationRow][i]!=Tiles.E && mosaic2D[destinationRow][i].symbol==tileSymbol){
+                result= false;
+            }
+        }
+        //check the column color condition
+        for(int j=0;j<5;j++){
+            if(mosaic2D[j][destinationColumn]!= Tiles.E && mosaic2D[j][destinationColumn].symbol==tileSymbol){
+                result = false;
+            }
+        }
+        return result;
+    }
 
 
     /**
-     * An entire playerState for 2 players might look like this:
-     * "A20 Ma02a13b00e42 S2a13e44a1 Faabbe B30 Mc01b11d21 S0e12b2F"
-     * If we split player A's string into its substrings, we get:
-     * [A][20][Ma02a13b00e42][S2a13e44a1][Faabbe].
-     *
-     * @param playerState the player state string
-     * @return True if the playerState is well-formed,
-     * false if the playerState is not well-formed
+     * After moving a tile into mosaic, score points immediately.(with the moved tile's current location)
+     * @param row the moved tile's current row (0-4)
+     * @param column the moved tile's current column (0-4)
+     * @return The marks after this movement.
      */
-
-
-    // get the tiles in mosaic.
-    public static String getTilesFromMosaic(String[] playerState) {
-        String[] subStrings = new String[2];
-        String plyst0 = playerState[0];
-        String plyst1 = playerState[1];
-
-        //get substrings
-        int index0A = plyst0.indexOf("A", 1);
-        int index0M = plyst0.indexOf("M", index0A);
-        int index0S = plyst0.indexOf("S", index0M);
-        int index0F = plyst0.indexOf("F", index0S);
-        return plyst0.substring(index0M+1, index0S);
-    }
-
-
-
-    // arrange tiles to place in the mosaic (incomplete function)
-    public void arrangeMosaicTo2DArray(String [] tiles){
-        String [][] string_mosaic = new String [5] [5];
-        for(int j = 0; j < 5; j++)
-        {
-            for(int i = 0; i < 5; i++)
-            {
-                string_mosaic[j][i] = null;
+    public int scoringFromMosaic(int row, int column){
+        int mark = 0;
+        int number = 1;
+        // check for column tiles
+        for (int i= row-1;i>=0;i--){
+            if (this.mosaic2D[i][column].symbol=='*'){
+                break;
             }
+            number++;
+        }
+        for (int i=row+1;i<5;i++){
+            if (this.mosaic2D[i][column].symbol=='*'){
+                break;
+            }
+            number++;
+        }
+        if (number>1){
+            mark=mark+number;
         }
 
+        //check for row tiles.
+        number =1;
+        for (int j= column-1;j>=0;j--){
+            if (this.mosaic2D[row][j].symbol=='*'){
+                break;
+            }
+            number++;
+        }
+        for (int j= column+1;j<5;j++){
+            if (this.mosaic2D[row][j].symbol=='*'){
+                break;
+            }
+            number++;
+        }
+        if (number>1){
+            mark=mark+number;
+        }
+
+        if (mark>0){
+            return mark;
+        } else {
+            return 1;
+        }
     }
 
-//[Ma02a13b00e42] -> rowNumber,color of tiles, number of tiles in the row.
-// arrange tiles to place in the storage
-//   public void arrangeStorageTo2DArray(String [] tiles){
-//       String [][] string_storage = new String [5] [5];
-//    }
-
-//        for(int i=0; i< tiles.length;i++){
-//            if(tiles)
-// }
-
-
 }
-
-
