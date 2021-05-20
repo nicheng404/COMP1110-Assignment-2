@@ -120,7 +120,7 @@ public class Azul {
         // [A][20][M a02 a13 b00 e42][S 2a1 3e4 4a1][F aabbe]
 
 
-        int numberOfPlayer = Player.getNUmberOfPlayer(playerState);
+        int numberOfPlayer = Player.getNumberOfPlayer(playerState);
         String[] playerStringArray;
         playerStringArray = Player.getEachPlayerStateString(playerState);
 
@@ -653,7 +653,7 @@ public class Azul {
         String str0 = gameState[0];
         String str1 = gameState[1];
         //get number of players
-        int numberOfPlayer = Player.getNUmberOfPlayer(str1);
+        int numberOfPlayer = Player.getNumberOfPlayer(str1);
 
         //get discard string(without 'D')
         String originalDiscard = Discard.getDiscardString(str0);

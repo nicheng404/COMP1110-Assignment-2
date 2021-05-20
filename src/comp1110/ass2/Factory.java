@@ -85,6 +85,15 @@ public class Factory {
     }
 
     /**
+     * check whether the factory is empty.
+     * @return true if it is empty.
+     */
+    public boolean isEmpty(){
+        boolean result = (tiles.size()==0);
+        return result;
+    }
+
+    /**
      * Get new factory string and new bag string after filling factory from bag (bag is adequate).
      * 2 strings are combined as a new String[].
      * String[0] = new factory string. String[1] = new bag string.
