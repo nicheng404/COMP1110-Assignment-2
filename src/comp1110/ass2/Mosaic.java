@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * @author Ke Ning
- * <p>Each instance of this class consists of one part</p>
- * <p> The input tileString is a reprentation of tiles in mosaic
- */
+ * @author Mukund Balaji Srinivas & Ke Ning
+ **/
 
 public class Mosaic {
     public Tiles[][] mosaic2D;

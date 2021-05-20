@@ -4,7 +4,7 @@ package comp1110.ass2;
         import java.util.Arrays;
 
 /**
- * @author Mukund Balaji Srinivas
+ * @author Mukund Balaji Srinivas & Ke Ning
  * <p>Each instance of this class consists of two parts</p>
  * <p>int Number referring to a particular factory and using number 0-8 </p>
  * <p> The input tileStr is a reprentation of each factory string starting with</p>

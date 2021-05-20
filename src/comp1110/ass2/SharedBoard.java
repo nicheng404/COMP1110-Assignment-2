@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * @author Mukund Balaji Srinivas
+ * @author Mukund Balaji Srinivas & Ke Ning
  **/
 public class SharedBoard {
     public SharedBoardBagDiscard bagDiscard;

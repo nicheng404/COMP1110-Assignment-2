@@ -1,6 +1,9 @@
 package comp1110.ass2;
 
 //Define a class Tiles that can be used by all the classes
+/**
+ * @author Mukund Balaji Srinivas & Ke Ning & Yanyan Liu
+ **/
 public enum Tiles {
     B("blue", "a", 'a'),
     G("green", "b", 'b'),

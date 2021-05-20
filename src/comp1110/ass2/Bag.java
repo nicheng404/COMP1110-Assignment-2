@@ -5,6 +5,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * @author Ke Ning & Mukund Balaji Srinivas
+ */
 
 public class Bag {
     public static final Tiles[] names = {Tiles.B, Tiles.G, Tiles.O, Tiles.P, Tiles.R};

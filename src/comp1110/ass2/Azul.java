@@ -687,7 +687,7 @@ public class Azul {
                 sharedBoard.facCentre.centre.tiles.add(Tiles.FP);
             }
             //set score
-            p.score += p.floor.loseMarks();
+            p.score =p.score+ p.floor.loseMarks();
             if (p.score < 0) {
                 p.score = 0;
             }

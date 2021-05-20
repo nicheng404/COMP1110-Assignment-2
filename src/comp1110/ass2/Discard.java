@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
+/**
+ * @author Ke Ning & Mukund Balaji Srinivas
+ */
+
 public class Discard {
     public static final Tiles[] names = {Tiles.B, Tiles.G, Tiles.O, Tiles.P, Tiles.R};
     public ArrayList<Integer> TileCount = new ArrayList<>();
